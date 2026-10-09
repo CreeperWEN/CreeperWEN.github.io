@@ -1,0 +1,1337 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>寻踪踏迹 · 王文坤作品集</title>
+<meta name="description" content="影像 · 摄影 · 内容 —— 从选题、拍摄、剪辑到成片一个人走完。">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{
+  --ink:#0d1117; --ink-2:#4d5766; --ink-3:#8a909c;
+  --acc:#2f6bff; --acc-2:#7aa2ff;
+  --r-xl:34px; --r-lg:28px; --r-md:22px; --r-sm:14px;
+  --sh:0 8px 30px rgba(16,24,40,.10), 0 2px 8px rgba(16,24,40,.06);
+  --sh-hi:0 18px 50px rgba(16,24,40,.16), 0 4px 14px rgba(16,24,40,.08);
+  --blur:26px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+  color:var(--ink);background:#eef2f9;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(46% 40% at 10% 4%, rgba(120,170,255,.62), transparent 62%),
+    radial-gradient(38% 36% at 90% 10%, rgba(255,168,205,.48), transparent 60%),
+    radial-gradient(52% 44% at 80% 84%, rgba(150,235,225,.55), transparent 62%),
+    radial-gradient(42% 38% at 16% 90%, rgba(255,204,138,.45), transparent 60%),
+    linear-gradient(180deg,#f4f7fc,#eaeff8)}
+body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.g{position:relative;border-radius:var(--r-lg);
+  background:linear-gradient(158deg, rgba(255,255,255,.68), rgba(255,255,255,.40) 52%, rgba(255,255,255,.55));
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(185%) brightness(1.06);
+  backdrop-filter:blur(var(--blur)) saturate(185%) brightness(1.06);
+  box-shadow:var(--sh), inset 0 1px 0 rgba(255,255,255,.92), inset 0 -1px 0 rgba(255,255,255,.32)}
+.g::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,255,255,.08) 34%,
+             rgba(255,255,255,.62) 58%, rgba(255,255,255,.14) 82%, rgba(255,255,255,.8));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite:exclude}
+.g::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(115% 78% at 8% -14%, rgba(255,255,255,.55), rgba(255,255,255,0) 56%)}
+
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.kick{font-size:11px;letter-spacing:.26em;color:var(--acc);font-weight:600}
+.sec-en{font-size:10.5px;letter-spacing:.24em;color:var(--ink-3)}
+
+/* ---------- 顶栏 ---------- */
+/* 首屏满幅后图片会从顶栏底下穿过 → 顶栏玻璃要够实，否则深色照片透上来吃字 */
+.nav{position:sticky;top:12px;z-index:60;width:min(1180px,92vw);margin:12px auto 0;
+  display:flex;align-items:center;gap:18px;padding:10px 14px 10px 12px;border-radius:var(--r-lg);--blur:32px;
+  background:linear-gradient(158deg,rgba(255,255,255,.86),rgba(255,255,255,.66) 52%,rgba(255,255,255,.76));
+  box-shadow:var(--sh-hi), inset 0 1px 0 rgba(255,255,255,.95)}
+/* 滚过首屏后顶栏加厚一档：既要压得住深色照片，又要留住磨砂感 */
+.nav.scrolled{--blur:40px;
+  background:linear-gradient(158deg,rgba(255,255,255,.94),rgba(255,255,255,.86) 52%,rgba(255,255,255,.90));
+  box-shadow:var(--sh-hi), inset 0 1px 0 rgba(255,255,255,.98)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;flex-shrink:0}
+/* 左上角标：头像 */
+.mark{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 22%;display:block;flex:none;
+  background:linear-gradient(150deg,var(--acc-2),var(--acc));
+  box-shadow:0 4px 12px rgba(20,32,60,.28), inset 0 0 0 1px rgba(255,255,255,.9)}
+.bid{font-size:16px;font-weight:700}
+.bid em{display:block;font-style:normal;font-size:9.5px;letter-spacing:.22em;color:var(--ink-3);font-weight:500;margin-top:-2px}
+.navlinks{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.navlinks a{font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 13px;border-radius:999px;transition:.22s;white-space:nowrap}
+.navlinks a:hover{background:rgba(255,255,255,.75);color:var(--ink)}
+.navlinks a.on{background:var(--acc);color:#fff;box-shadow:0 4px 12px rgba(47,107,255,.32)}
+.nav-cta{font-size:13px;font-weight:600;color:#fff;text-decoration:none;padding:8px 16px;border-radius:999px;
+  background:linear-gradient(150deg,var(--acc-2),var(--acc));
+  box-shadow:0 5px 16px rgba(47,107,255,.34), inset 0 1px 0 rgba(255,255,255,.5)}
+
+/* ---------- 首屏（航拍满幅，不再是圆角卡片） ---------- */
+.hero{position:relative;width:100%;margin:-72px 0 0;text-align:center;isolation:isolate;overflow:hidden;
+  padding:158px 0 62px;min-height:min(88vh,760px);
+  display:flex;align-items:center;justify-content:center}
+/* 底边融进浅色页面，避免一整条硬切黑边 */
+.hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:104px;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(238,242,249,0) 0%,rgba(238,242,249,.55) 58%,rgba(238,242,249,.92) 100%)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 46%}
+.hero-scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,12,20,.62) 0%,rgba(8,12,20,.30) 22%,
+             rgba(8,12,20,.24) 40%,rgba(8,12,20,.56) 68%,
+             rgba(8,12,20,.86) 86%,rgba(8,12,20,.92) 100%)}
+/* 首屏数据条要压深玻璃，否则白胶囊叠在亮水面上字全糊 */
+.hero .stats{--blur:20px;
+  background:linear-gradient(158deg,rgba(14,20,32,.50),rgba(14,20,32,.34) 52%,rgba(14,20,32,.46));
+  box-shadow:0 12px 34px rgba(4,8,16,.42), inset 0 1px 0 rgba(255,255,255,.22)}
+.hero .stats::after{background:radial-gradient(115% 78% at 8% -14%, rgba(255,255,255,.16), rgba(255,255,255,0) 56%)}
+.hero .stat b{color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.hero .stat span{color:rgba(255,255,255,.68)}
+.hero .stat + .stat::before{background:rgba(255,255,255,.22)}
+.hero-in{position:relative;z-index:2;width:100%}
+.avatar{display:block;width:88px;height:88px;border-radius:50%;object-fit:cover;margin:0 auto 20px;
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 14px 34px rgba(0,0,0,.42), 0 0 0 6px rgba(255,255,255,.10)}
+.hero .kick{color:#a9c4ff;margin-bottom:16px}
+.hero h1{font-size:clamp(42px,7.4vw,90px);font-weight:800;letter-spacing:.06em;line-height:1.08;
+  background:linear-gradient(180deg,#fff 34%,#bcc8dc);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 20px rgba(0,0,0,.45))}
+.hero h1 .en{display:block;font-size:clamp(11px,1.5vw,15px);letter-spacing:.42em;font-weight:500;
+  -webkit-text-fill-color:rgba(255,255,255,.6);margin-top:14px}
+.hero .tagline{color:rgba(255,255,255,.89);text-shadow:0 2px 14px rgba(0,0,0,.55);max-width:740px}
+
+/* 首屏补的三行小信息（坐标 / 方向 / 签约 / 状态）——深色玻璃，压得住照片亮部 */
+.hmeta{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:26px auto 0;padding:0;list-style:none}
+.hmeta li{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  font-size:12.5px;color:rgba(255,255,255,.90);
+  padding:7px 15px;border-radius:999px;background:rgba(11,17,29,.38);
+  -webkit-backdrop-filter:blur(14px) saturate(165%);backdrop-filter:blur(14px) saturate(165%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.20), 0 6px 18px rgba(4,8,16,.26)}
+.hmeta i{font-style:normal;font-size:10px;letter-spacing:.2em;font-weight:600;color:#a9c4ff}
+/* 首屏下方再给一次标签栏，别让人到了首屏就找不到路 */
+.heronav{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;
+  margin:32px auto 0;padding:6px;border-radius:999px;
+  background:rgba(9,15,26,.42);
+  -webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 12px 36px rgba(4,8,16,.34)}
+.heronav a{font-size:12.5px;color:rgba(255,255,255,.84);text-decoration:none;
+  padding:8px 16px;border-radius:999px;transition:.22s;white-space:nowrap}
+.heronav a:hover{background:rgba(255,255,255,.16);color:#fff}
+.heronav a.hn-cta{color:#fff;font-weight:600;margin-left:4px;
+  background:linear-gradient(150deg,var(--acc-2),var(--acc));
+  box-shadow:0 5px 16px rgba(47,107,255,.42), inset 0 1px 0 rgba(255,255,255,.5)}
+.heronav a.hn-cta:hover{background:linear-gradient(150deg,var(--acc),var(--acc-2))}
+.tagline{margin:26px auto 0;max-width:660px;font-size:clamp(15px,1.7vw,19px);color:var(--ink-2);line-height:1.85}
+.stats{display:flex;justify-content:center;margin:36px auto 0;padding:8px;width:fit-content;border-radius:999px;flex-wrap:wrap}
+.stat{padding:10px 24px;text-align:center;position:relative}
+.stat + .stat::before{content:'';position:absolute;left:0;top:22%;height:56%;width:1px;background:rgba(13,17,23,.10)}
+.stat b{display:block;font-size:22px;font-weight:800}
+.stat span{font-size:11px;color:var(--ink-3);letter-spacing:.08em}
+
+/* ---------- 区块 ---------- */
+section{padding:56px 0;scroll-margin-top:150px}
+.grp{scroll-margin-top:140px}
+/* 分组之间拉开距离，别让上一组最后一支和下一组标题粘在一起 */
+.grp + .grp{margin-top:78px}
+/* 按**文字基线**对齐，不能按盒底对齐：h2 的盒高是 34×1.6=54.4px，
+   而 .num 的 line-height:1 只有 34px，底边对齐会让序号显得低了半个行距（实测 10.4px）。 */
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(24px,3vw,34px);font-weight:800}
+/* 序号与后接标题同号，只靠颜色区分——小号 + 大字母间距那套是配英文标签的，配中文标题不搭 */
+.sec-head .num{font-size:clamp(24px,3vw,34px);color:var(--acc);font-weight:800;line-height:1}
+.sec-sub{color:var(--ink-2);font-size:14px;max-width:760px;margin-bottom:26px}
+
+/* ---------- 分类导航 ---------- */
+.catbar{position:sticky;top:74px;z-index:50;margin:0 0 30px;padding:8px;border-radius:999px;--blur:30px}
+.cat-inner{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.cat-inner::-webkit-scrollbar{display:none}
+.cat{flex:0 0 auto;font-size:13px;color:var(--ink-2);text-decoration:none;padding:9px 17px;border-radius:999px;transition:.22s;white-space:nowrap}
+.cat:hover{background:rgba(255,255,255,.8);color:var(--ink)}
+.cat.on{background:rgba(47,107,255,.14);color:var(--acc);font-weight:600;box-shadow:inset 0 0 0 1px rgba(47,107,255,.22)}
+.grp-t{display:flex;align-items:center;gap:14px;margin:46px 0 20px}
+.grp-t h3{font-size:18px;font-weight:700;white-space:nowrap}
+.grp-t .fl{flex:1;height:1px;background:linear-gradient(90deg,rgba(13,17,23,.16),transparent)}
+.grp-t .n{font-size:10px;letter-spacing:.22em;color:var(--ink-3)}
+/* 分类简介：挂在分类标题下方。空着整段不渲染，所以不会留下空档 */
+.grp-sub{margin:0 0 22px;max-width:760px;font-size:13.5px;color:var(--ink-2);line-height:1.85}
+/* 三处分类标题自带的下边距不一样（影像 20 / 摄影 14 / 实践 18），
+   这里只补差值，让「标题→简介」的视觉间距在三处都落在 12-14px。 */
+.grp-t + .grp-sub{margin-top:-6px}      /* 20-6 = 14 */
+.pcat-h + .grp-sub{margin-top:-2px}     /* 14-2 = 12 */
+.pjgroup-h + .grp-sub{margin-top:-6px}  /* 18-6 = 12 */
+
+/* ---------- 数码内容：账号简介 + 封面卡片墙 ----------
+   这一块只展示「作品量大」，卡面不放标题与正文；左上角标播放量（旧号再带年份），
+   右下角标时长。标题留给 hover 浮出与 title/aria。 */
+.dacct{display:grid;grid-template-columns:88px minmax(0,1fr);gap:24px;align-items:center;
+  margin:22px 0 8px;padding:32px 36px;border-radius:var(--r-lg)}
+.dacct .dava{width:88px;height:88px;border-radius:26px;object-fit:cover;display:block;
+  box-shadow:0 10px 26px rgba(16,24,40,.20), inset 0 0 0 3px rgba(255,255,255,.85)}
+.dacct .dan{display:flex;align-items:last baseline;gap:12px;flex-wrap:wrap}
+.dacct .dan h3{font-size:clamp(22px,2.6vw,30px);font-weight:800;letter-spacing:-.01em}
+.dacct .dan .den{font-size:10.5px;font-weight:700;letter-spacing:.24em;color:var(--ink-3)}
+.dacct .dasub{margin-top:9px;font-size:14px;color:var(--ink-2);line-height:1.85;max-width:800px}
+.dacct .dasub b{color:var(--ink);font-weight:700}
+.dacct .dchips{margin-top:15px;display:flex;gap:9px;flex-wrap:wrap}
+.dacct .dchip{font-size:12px;font-weight:600;color:var(--acc);padding:6px 13px;border-radius:999px;
+  background:rgba(47,107,255,.09);box-shadow:inset 0 0 0 1px rgba(47,107,255,.16)}
+.dacct .dlink{margin-top:17px;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  font-size:13.5px;font-weight:700;color:#fff;padding:11px 20px;border-radius:999px;
+  background:linear-gradient(135deg,var(--acc),#5b8cff);box-shadow:0 8px 22px rgba(47,107,255,.32);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
+.dacct .dlink:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,107,255,.40)}
+
+.hcards{display:grid;gap:14px;margin-top:4px;
+  grid-template-columns:repeat(auto-fill,minmax(212px,1fr))}
+.hc{position:relative;display:block;border-radius:var(--r-md);overflow:hidden;
+  text-decoration:none;color:inherit;background:#dfe6f2;
+  box-shadow:0 6px 18px rgba(16,24,40,.10);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.hc:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(16,24,40,.22)}
+.hc img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  transition:transform .9s cubic-bezier(.2,.7,.3,1)}
+.hc:hover img{transform:scale(1.06)}
+/* 封面底部压一层渐变，让时长角标在任何封面上都读得清 */
+.hc::after{content:'';position:absolute;inset:auto 0 0 0;height:46%;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(10,16,28,.42))}
+.hc .dur{position:absolute;right:9px;bottom:9px;z-index:2;font-size:11px;font-weight:700;color:#fff;
+  padding:3px 9px;border-radius:8px;background:rgba(12,18,30,.62);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  font-variant-numeric:tabular-nums;letter-spacing:.02em}
+/* 左上角：播放量 + 发布年份。两段之间用一条细竖线分隔，年份弱化一点。
+   新号不标年份（都是近两三年），只有旧号有 → 只有播放量时竖线不出现。 */
+.hc .meta-l{position:absolute;left:9px;top:9px;z-index:2;display:flex;align-items:center;
+  gap:7px;font-size:10.5px;font-weight:700;color:#fff;
+  padding:3px 10px;border-radius:999px;background:rgba(12,18,30,.60);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;line-height:1.5}
+.hc .meta-l .play{white-space:nowrap}
+.hc .meta-l .yr{position:relative;padding-left:8px;font-weight:600;opacity:.78}
+.hc .meta-l .yr::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:1px;height:9px;background:rgba(255,255,255,.42)}
+.hc .meta-l .yr:only-child{padding-left:0}
+.hc .meta-l .yr:only-child::before{display:none}
+/* 桌面端鼠标悬停在封面上时，浮出标题（不占版面，只作补充信息） */
+.hc .tp{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:30px 12px 12px;
+  font-size:12.5px;font-weight:700;line-height:1.45;color:#fff;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+@media(hover:hover){
+  .hc:hover .tp{opacity:1;transform:none}
+  .hc:hover .dur{opacity:0;transition:opacity .25s}
+}
+/* 数码分区底部的「更多视频」条 */
+.dmore{margin:34px 0 6px;padding:28px 34px;display:flex;align-items:center;
+  justify-content:space-between;gap:26px;flex-wrap:wrap;border-radius:var(--r-lg)}
+.dmore .mt{font-size:16px;font-weight:800}
+.dmore .ms{font-size:13px;color:var(--ink-2);margin-top:6px}
+.dmore a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;
+  font-weight:700;color:#fff;padding:13px 24px;border-radius:999px;white-space:nowrap;
+  background:linear-gradient(135deg,var(--acc),#5b8cff);
+  box-shadow:0 8px 22px rgba(47,107,255,.30);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
+.dmore a:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(47,107,255,.42)}
+
+/* 「实践经历」按简历逐条搬运后的行式排版：时间 / 头衔 / 主体 / 要点。
+   节奏是「左窄右宽」，窄列放时间，宽列放单位与成果。 */
+.jrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:8px 20px;
+  align-items:baseline;padding:16px 0}
+.jrow + .jrow{border-top:1px solid rgba(13,17,23,.08)}
+.jrow .jt{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;padding-top:3px;white-space:nowrap}
+.jrow .jh{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.5}
+.jrow .jr{font-weight:600;color:var(--ink-2)}
+.jrow .jl{list-style:none;margin:9px 0 0;display:grid;gap:7px}
+.jrow .jl li{position:relative;padding-left:16px;font-size:13.5px;color:var(--ink-2);line-height:1.85}
+.jrow .jl li::before{content:'';position:absolute;left:2px;top:.72em;width:5px;height:5px;border-radius:50%;
+  background:var(--acc-2);box-shadow:0 0 0 3px rgba(122,162,255,.16)}
+/* 数据能力：前面项目的四字摘要表，一行一个项目 */
+.dsum{list-style:none;display:grid;gap:0;margin-top:4px}
+.dsum li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:6px 18px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid rgba(13,17,23,.08)}
+.dsum li:last-child{border-bottom:0}
+.dsum .dn{font-size:12.5px;font-weight:700;color:var(--acc);line-height:1.6}
+.dsum .dt{font-size:13.5px;color:var(--ink-2);line-height:1.8}
+.dsum .dt b{color:var(--ink);font-weight:600}
+@media(max-width:680px){
+  .jrow{grid-template-columns:1fr;gap:4px;padding:14px 0}
+  .jrow .jt{padding-top:0}
+  .dsum li{grid-template-columns:1fr;gap:3px}
+}
+
+
+/* ---------- 只看代表作 ---------- */
+.vfil{flex:none;margin-left:auto;display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+  font-family:inherit;font-size:12.5px;font-weight:600;color:var(--ink-2);
+  padding:8px 15px;border:0;border-radius:999px;white-space:nowrap;
+  background:linear-gradient(158deg,rgba(255,255,255,.84),rgba(255,255,255,.56) 52%,rgba(255,255,255,.72));
+  -webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 6px 20px rgba(16,24,40,.10), inset 0 1px 0 rgba(255,255,255,.95), inset 0 0 0 1px rgba(255,255,255,.62);
+  transition:transform .25s, box-shadow .25s, background .25s, color .25s}
+.vfil:hover{transform:translateY(-1px);
+  box-shadow:0 10px 26px rgba(16,24,40,.15), inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.78)}
+.vfil .st{font-size:13.5px;line-height:1;color:#c9a227;transition:color .25s}
+.vfil .cn{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink-3);transition:color .25s}
+.vfil.on{color:#fff;background:linear-gradient(150deg,#f2b52c,#d68f0e);
+  box-shadow:0 9px 26px rgba(201,140,15,.42), inset 0 1px 0 rgba(255,255,255,.55)}
+.vfil.on .st,.vfil.on .cn{color:rgba(255,255,255,.94)}
+/* 筛选态：没被标的卡、空掉的分组、以及封面墙/数据条/分类条一起收起 */
+#work.star-only .grp{display:none}
+#work.star-only .grp.on{display:block}
+#work.star-only .vcard:not(.star){display:none}
+#work.star-only .subwall,
+#work.star-only .band,
+#work.star-only .catbar{display:none}
+#work.star-only .grp-t .n{display:none}   /* 该组只剩代表作，支数不准了 */
+
+/* ---------- 视频卡：一屏一张 ---------- */
+.flow{display:flex;flex-direction:column;gap:46px}
+.vcard{position:relative;border-radius:var(--r-xl);overflow:hidden;aspect-ratio:16/9;
+  box-shadow:0 14px 44px rgba(16,24,40,.18);background:#dfe6f2;transition:box-shadow .5s}
+.vcard:hover{box-shadow:0 26px 64px rgba(16,24,40,.26)}
+.vcard > img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s cubic-bezier(.2,.7,.3,1)}
+.vcard:hover > img{transform:scale(1.045)}
+.vhit{position:absolute;inset:0;z-index:3}
+.vscrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(to top, rgba(5,9,16,.90) 0%, rgba(5,9,16,.62) 20%, rgba(5,9,16,.26) 40%, rgba(5,9,16,0) 60%),
+    radial-gradient(118% 128% at -2% 102%, rgba(5,9,16,.86) 0%, rgba(5,9,16,.44) 38%, rgba(5,9,16,0) 68%)}
+.vgo{position:absolute;top:20px;right:20px;z-index:4;display:flex;align-items:center;gap:5px;
+  font-size:11.5px;font-weight:600;color:#fff;padding:8px 14px;border-radius:999px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:0 3px 14px rgba(0,0,0,.18);opacity:0;transform:translateY(-6px);transition:.32s}
+.vcard:hover .vgo{opacity:1;transform:none}
+/* 代表作角标：平时挂出来让人一眼看到，切到筛选态就不再重复 */
+.vstar{position:absolute;top:20px;left:20px;z-index:4;display:flex;align-items:center;gap:5px;
+  font-size:11.5px;font-weight:600;color:#fff;padding:7px 13px;border-radius:999px;
+  background:linear-gradient(150deg,rgba(244,183,46,.94),rgba(213,142,12,.94));
+  border:1px solid rgba(255,255,255,.36);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  box-shadow:0 4px 16px rgba(158,104,10,.34), inset 0 1px 0 rgba(255,255,255,.4)}
+#work.star-only .vstar{display:none}
+.vinfo{position:absolute;left:38px;bottom:34px;z-index:5;width:min(62%,640px);color:#fff}
+.vkick{font-size:11px;letter-spacing:.2em;color:#a9c4ff;font-weight:600;margin-bottom:10px}
+.vtitle{font-size:clamp(21px,2.5vw,33px);font-weight:800;line-height:1.28;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.vdesc{font-size:14px;color:rgba(255,255,255,.84);line-height:1.75;margin-top:11px;text-shadow:0 1px 8px rgba(0,0,0,.35);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vduty{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:17px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22)}
+.vduty .dl{font-size:11px;color:rgba(255,255,255,.62);letter-spacing:.14em;margin-right:3px}
+.vduty .dc{font-size:11.5px;font-weight:600;color:#fff;padding:5px 13px;border-radius:999px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34);
+  box-shadow:0 1px 6px rgba(0,0,0,.14);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
+/* 获奖徽章：贴**卡片右下角**，底边与 .vinfo 的底边（= 职务标签行底边）齐平。
+   ⚠️ 历史坑 1：以前挂在 .vinfo 内部（right:0;bottom:0），脱离文档流后
+   .vinfo 里的 .vduty（职务标签行）不知道它占位 → 长奖项名折行时直接压在标签上。
+   改为挂 .vcard 后，与 .vinfo 分属左右两个角，不会再打架。
+   ⚠️ 历史坑 2：挂在 .vinfo 上时 max-width 会被 .vinfo 的 640px 框住，
+   奖状伸不到卡片右侧空白区。挂 .vcard 后按卡片宽度算（46% 上限），能真正贴右。
+   右下角与 .vgo（右上角「观看」）对角，也不冲突。 */
+/* stretch：让一叠奖状取最宽那张的宽度，右边不参差。column-reverse 自下往上排，
+   从对齐线向上生长。 */
+.vawards{position:absolute;right:24px;bottom:34px;width:max-content;max-width:min(300px,46%);
+  display:flex;flex-direction:column-reverse;align-items:stretch;gap:7px;z-index:6}
+/* mini：卡高不够时收缩成小圆角标（只留「奖」圆标）。底边仍与职务标签对齐。 */
+.vawards.mini{right:14px;gap:0}
+.vawards.mini .vaw{padding:5px;border-radius:50%;gap:0}
+.vawards.mini .vaw > span{display:none}
+.vawards.mini .vaw .med{flex:0 0 22px;width:22px;height:22px;font-size:10px}
+.vawards.mini .vaw + .vaw{margin-bottom:-13px}   /* 多个角标叠一点，省纵向空间 */
+.vaw{display:flex;align-items:center;gap:8px;padding:7px 13px 7px 8px;border-radius:12px;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
+  box-shadow:0 6px 18px rgba(0,0,0,.22);color:#fff;line-height:1.35}
+.vaw .med{flex:0 0 19px;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(150deg,#ffe9a8,#e0ab3c);color:#4a3208;font-size:10px;font-weight:800;
+  box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.vaw .at{font-size:12px;font-weight:700;letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+/* 奖项名限两行，超长省略号收尾 —— 防止极端长名把奖状卡撑成三行 */
+.vaw .al{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  font-size:10.5px;color:rgba(255,255,255,.8);margin-top:1px;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.vaw[data-img]{cursor:zoom-in}
+.vaw[data-img]:hover{background:rgba(255,255,255,.21);border-color:rgba(255,255,255,.45)}
+
+/* 无封面卡（广播 / 系列化运营） */
+.vcard.nocover{aspect-ratio:16/9;background:linear-gradient(140deg,#2b3a55,#131a26 70%)}
+.vcard.nocover .vbig{position:absolute;left:38px;top:50%;transform:translateY(-58%);z-index:4;
+  font-size:clamp(34px,5vw,64px);font-weight:800;color:rgba(255,255,255,.16);letter-spacing:.02em}
+.vcard.nocover .vtag{position:absolute;left:40px;top:calc(50% + 34px);z-index:4;font-size:11px;
+  letter-spacing:.2em;color:rgba(255,255,255,.42)}
+.vcard.wide{aspect-ratio:2.35/1}
+.vcard.wide .vinfo{width:min(54%,560px)}
+.vcard.wide .vdesc{-webkit-line-clamp:3}
+
+/* ---------- 专项：首支整屏大卡 + 下方封面墙 ---------- */
+.flow.special{gap:26px}
+/* 组内块与块之间的间距：DOM 是 .flow / .flow.special / .subwall 交替出现，
+   六种相邻关系必须都给到，漏一种就会出现卡片直接粘连
+   （实测：普通 .flow 后面接 .flow.special 时没有任何间距） */
+.flow + .flow,
+.flow + .flow.special,
+.subwall + .flow,
+.subwall + .flow.special{margin-top:72px}
+/* 大卡和它自己的封面墙属于同一支作品，间距收紧，别当成两个作品断开 */
+.flow.special + .subwall{margin-top:26px}
+.subwall{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.subitem{position:relative;display:block;border-radius:var(--r-lg);overflow:hidden;
+  background:rgba(255,255,255,.5);text-decoration:none;
+  box-shadow:0 10px 30px rgba(16,24,40,.13);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.subitem:hover{transform:translateY(-4px);box-shadow:0 22px 46px rgba(16,24,40,.22)}
+.subitem img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  transition:transform .9s cubic-bezier(.2,.7,.3,1)}
+.subitem:hover img{transform:scale(1.05)}
+.submeta{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 16px 15px;background:#fff}
+.subtx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.subttl{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.4;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* 封面墙里的职务也是标签，和卡片里保持同一套语言 */
+.subduty{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.subduty .dc{font-size:10px;font-weight:600;line-height:1.5;color:#3f5b8c;
+  padding:3px 9px;border-radius:999px;background:rgba(47,95,168,.09);
+  box-shadow:inset 0 0 0 1px rgba(47,95,168,.16)}
+.subgo{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;
+  color:#2f5fa8;white-space:nowrap;padding:5px 11px;border-radius:999px;
+  background:rgba(47,95,168,.09);transition:background .3s,color .3s}
+.subitem:hover .subgo{background:#2f5fa8;color:#fff}
+@media(max-width:680px){
+  /* 手机端整体等比缩小：保持三列，缩尺寸而不是堆成三行 */
+  .flow.special{gap:18px}
+  .flow + .flow,
+  .flow + .flow.special,
+  .subwall + .flow,
+  .subwall + .flow.special{margin-top:56px}
+  .flow.special + .subwall{margin-top:18px}
+  .grp + .grp{margin-top:56px}
+  .subwall{grid-template-columns:repeat(3,1fr);gap:9px}
+  .subitem{border-radius:var(--r-sm)}
+  .subitem img{aspect-ratio:1/1}
+  .submeta{flex-direction:column;align-items:flex-start;gap:6px;padding:9px 9px 10px}
+  .subttl{font-size:11px;line-height:1.35;-webkit-line-clamp:2}
+  .subduty{gap:3px}
+  .subduty .dc{font-size:9px;padding:2px 7px}
+  .subgo{font-size:9px;padding:3px 7px;gap:3px}
+}
+@media(max-width:400px){
+  .subwall{gap:7px}
+  .subttl{font-size:10.5px}
+  .subduty .dc{font-size:8.5px;padding:2px 6px}
+  .subgo{font-size:8.5px;padding:3px 6px}
+}
+
+/* ---------- 系列：每期等大横排，不设主次 ---------- */
+.serwall{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.sercard{position:relative;display:flex;flex-direction:column;border-radius:var(--r-lg);overflow:hidden;
+  background:rgba(255,255,255,.66);text-decoration:none;color:inherit;
+  box-shadow:0 10px 30px rgba(16,24,40,.12);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.sercard:hover{transform:translateY(-4px);box-shadow:0 22px 46px rgba(16,24,40,.22)}
+.serimg{position:relative;background:#dfe6f2}
+.serimg img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  transition:transform .9s cubic-bezier(.2,.7,.3,1)}
+.sercard:hover .serimg img{transform:scale(1.04)}
+.serep{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;color:#fff;
+  padding:5px 11px;border-radius:999px;background:rgba(20,28,44,.6);border:1px solid rgba(255,255,255,.32);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.serbody{padding:15px 18px 17px;display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+.serkick{font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);font-weight:600}
+.serttl{font-size:16px;font-weight:800;color:var(--ink);line-height:1.4}
+.serdesc{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+
+/* ---------- 系列排版三型：首视频型 / 竖版罗列型 / 横版展示型 ---------- */
+/* 期数角标（首视频型挂在 vcard 上，竖版横版挂在 sercard 上） */
+.vep{position:absolute;top:14px;right:14px;z-index:6;font-size:11px;font-weight:700;color:#fff;
+  background:rgba(12,18,30,.48);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:5px 11px;border-radius:999px;letter-spacing:.04em;white-space:nowrap}
+/* 竖版罗列型：封面 9:16，窄列密排 */
+.vwall{display:grid;grid-template-columns:repeat(auto-fit,minmax(198px,1fr));gap:18px}
+.vwall .serimg img{aspect-ratio:9/16}
+.vwall .serbody{padding:13px 14px 15px;gap:6px}
+.vwall .serttl{font-size:14.5px;font-weight:700;line-height:1.45}
+.vwall .serdesc{font-size:12px;line-height:1.65;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* 横版展示型：封面 16:9，宽卡一行两张 */
+.hwall{display:grid;grid-template-columns:repeat(auto-fit,minmax(384px,1fr));gap:24px}
+.hwall .serimg img{aspect-ratio:16/9}
+.hwall .serbody{padding:18px 22px 20px}
+.hwall .serttl{font-size:17px}
+/* 只看代表作：系列卡也要能被筛掉 */
+#work.star-only .sercard:not(.star){display:none}
+
+/* ---------- 数据条 / 榜单 ---------- */
+.band{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:34px 40px;flex-wrap:wrap}
+.band .bl{min-width:220px}
+.band .bk{font-size:11px;letter-spacing:.22em;color:var(--acc);font-weight:600}
+.band .bn{font-size:clamp(34px,4.4vw,56px);font-weight:800;line-height:1.1;margin-top:8px}
+.band .bn i{font-style:normal;font-size:.42em;font-weight:600;color:var(--ink-2);margin-left:6px}
+.band .bx{font-size:12px;color:var(--ink-3);margin-top:8px}
+.band .br{display:flex;gap:14px;flex-wrap:wrap}
+.band .bi{padding:14px 20px;border-radius:var(--r-sm);background:rgba(255,255,255,.5);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.7);min-width:104px}
+.band .bi b{display:block;font-size:19px;font-weight:800}
+.band .bi span{font-size:10.5px;color:var(--ink-3)}
+
+.plists{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.plist{padding:26px 26px 20px}
+.plist .ph{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.plist .pn{font-size:17px;font-weight:800}
+.plist .pv{font-size:11.5px;color:var(--ink-3)}
+.plist .pnote{font-size:11.5px;color:var(--ink-3);line-height:1.7;margin-bottom:14px}
+.prow{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid rgba(13,17,23,.08)}
+.prow .no{font-size:11px;color:var(--acc);font-weight:700;width:20px;flex:none}
+.prow .mt{flex:1;font-size:13px;line-height:1.5}
+.prow .mv{font-size:13px;font-weight:800;flex:none}
+.prow .mv em{display:block;font-style:normal;font-size:10px;font-weight:500;color:var(--ink-3);text-align:right}
+
+/* ---------- 摄影 ---------- */
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.pills.g{padding:10px;border-radius:999px}
+.pill{font-size:12.5px;padding:8px 15px;border-radius:999px;border:0;cursor:pointer;
+  background:transparent;color:var(--ink-2);font-family:inherit;transition:.22s}
+.pill .c{font-size:10.5px;color:var(--ink-3);margin-left:4px}
+.pill:hover{background:rgba(255,255,255,.7)}
+.pill.on{background:var(--acc);color:#fff;box-shadow:0 4px 12px rgba(47,107,255,.3)}
+.pill.on .c{color:rgba(255,255,255,.75)}
+.pcat{margin-bottom:34px}
+.pcat.hide{display:none}
+.pcat-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.pcat-h .pn{font-size:16px;color:var(--acc);font-weight:800;line-height:1}
+.pcat-h h3{font-size:16px;font-weight:700}
+.pcat-h .en{font-size:10px;letter-spacing:.2em;color:var(--ink-3)}
+.pcat-h .fl{flex:1;height:1px;background:linear-gradient(90deg,rgba(13,17,23,.14),transparent)}
+.pcat-h .n{font-size:11px;color:var(--ink-3)}
+/* ---------- 摄影：正片墙（每行自适应高度，整张不裁） ---------- */
+.pwall{margin-bottom:6px}
+.prowx{display:flex;gap:12px;margin-bottom:12px}
+.prowx:last-child{margin-bottom:0}
+.prowx figure{position:relative;flex:none;border-radius:var(--r-sm);overflow:hidden;cursor:zoom-in;
+  background:#e3e9f3;box-shadow:0 5px 16px rgba(16,24,40,.12);transition:box-shadow .3s}
+.prowx figure:hover{box-shadow:0 14px 34px rgba(16,24,40,.22)}
+.prowx img{width:100%;height:100%;object-fit:contain;display:block}   /* 整张展示，不裁 */
+.prowx figcaption{position:absolute;left:9px;bottom:8px;z-index:2;font-size:10px;color:#fff;
+  padding:4px 10px;border-radius:999px;background:rgba(12,16,24,.46);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;transition:.3s}
+.prowx figure:hover figcaption{opacity:1}
+
+#lb{position:fixed;inset:0;z-index:200;background:rgba(6,9,15,.9);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  display:none;align-items:center;justify-content:center;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-width:92vw;max-height:86vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+#lbbar{position:fixed;left:0;right:0;bottom:0;z-index:210;display:none;justify-content:space-between;
+  align-items:center;padding:16px 26px;color:#fff;font-size:13px;
+  background:linear-gradient(to top,rgba(6,9,15,.8),transparent)}
+#lbbar.on{display:flex}
+#lbbar .lt b{color:var(--acc-2)}
+#lbclose{font-family:inherit;font-size:12px;color:#fff;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 15px;cursor:pointer}
+
+/* ---------- 关于 / 简历 ---------- */
+.resume{display:grid;grid-template-columns:320px 1fr;gap:34px;align-items:start}
+.rcard{padding:26px 24px}
+/* 简历对齐后右栏（自我介绍 / 实践经历 / 数据能力 / 荣誉）高到 1232px，
+   而左卡片只有 842px，下方会空出近 400px。桌面端让卡片吸顶跟随，
+   滚动读右栏时它一直在视野里；单列布局下卡片本身就很高，必须取消。 */
+@media(min-width:681px){.resume>.rcard{position:sticky;top:96px}}
+.rphoto{display:block;width:132px;height:132px;object-fit:cover;object-position:50% 16%;
+  border-radius:20px;margin:0 auto 18px;
+  box-shadow:0 12px 28px -10px rgba(16,24,40,.34), 0 0 0 1px rgba(13,17,23,.06)}
+.rhead{text-align:center}
+.rname{font-size:26px;font-weight:800;letter-spacing:.04em}
+.ren{font-size:10.5px;letter-spacing:.24em;color:var(--ink-3);margin-top:4px}
+.rline{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;padding:9px 0;border-bottom:1px solid rgba(13,17,23,.08)}
+.rline:last-child{border:0}
+.rline .k{color:var(--ink-3);flex:none}
+.rline .v{text-align:right;
+  /* 中文默认逐字可断，「核心课程」那种长值会断在词中间（…新闻评论 / 学 93）。
+     keep-all 让中文只在空格、间隔号处断行；万一某段比栏宽还长，
+     交给 overflow-wrap:anywhere 兜底，不会撑破卡片。 */
+  word-break:keep-all;overflow-wrap:anywhere}
+.abt-blk{margin-bottom:38px}
+.abt-h{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.2em;color:var(--acc);font-weight:600;margin-bottom:16px}
+.abt-h::before{content:"◆";font-size:7px;color:var(--acc-2)}
+.abt-h::after{content:'';flex:1;height:1px;background:rgba(13,17,23,.12)}
+.abt-blk p{font-size:14.5px;color:var(--ink-2);line-height:1.95;margin-bottom:12px}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dcard{padding:20px 20px 18px}
+.dcard .no{font-size:10.5px;letter-spacing:.2em;color:var(--acc);font-weight:700}
+.dcard h5{font-size:14px;font-weight:700;margin:8px 0 8px}
+.dcard p{font-size:12.5px;color:var(--ink-2);line-height:1.75;margin:0}
+.awards li{list-style:none;display:flex;gap:14px;align-items:baseline;font-size:13.5px;padding:10px 0;
+  border-bottom:1px solid rgba(13,17,23,.08)}
+.awards li b{flex:none;color:var(--acc);font-weight:700;font-size:12.5px;min-width:88px}
+.awards li span{color:var(--ink-2)}
+
+/* ---------- 联系 / 页脚 ---------- */
+.contact-c{text-align:center;padding:64px 40px}
+.contact-c h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;margin:14px 0 10px}
+.contact-c .sub{font-size:14.5px;color:var(--ink-2)}
+.big-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}
+.big-link{font-size:clamp(15px,1.8vw,20px);font-weight:700;color:var(--ink);text-decoration:none;
+  padding:12px 24px;border-radius:999px;background:rgba(255,255,255,.6);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.85), 0 4px 14px rgba(16,24,40,.08);transition:.25s}
+.big-link:hover{background:#fff;transform:translateY(-2px)}
+.plinks{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.plink{font-size:12.5px;color:var(--ink-2);text-decoration:none;padding:9px 17px;border-radius:999px;
+  background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.8);transition:.22s}
+.plink:hover{background:#fff;color:var(--acc)}
+.all-line{font-size:12.5px;color:var(--ink-3);margin-top:26px}
+footer{padding:40px 0 56px;text-align:center}
+footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:11.5px;color:var(--ink-3);letter-spacing:.08em}
+
+/* ---------- 项目档案 ---------- */
+.pjgroup{margin-bottom:32px}
+.pjgroup-h{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.pjgroup-h .pn{font-size:16px;color:var(--acc);font-weight:800;line-height:1}
+.pjgroup-h h3{font-size:16px;font-weight:800}
+.pjgroup-h .en{font-size:10.5px;letter-spacing:.18em;color:var(--ink-3);font-weight:600}
+.pjgroup-h .fl{flex:1;height:1px;background:rgba(13,17,23,.12)}
+.pjgroup-h .n{font-size:11.5px;color:var(--ink-3)}
+
+.pjcards{display:grid;gap:18px}
+.pj{padding:26px 28px}
+.pjhead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;row-gap:9px}
+.pjno{width:46px;height:46px;flex:none;border-radius:14px;display:grid;place-items:center;
+  font-size:15px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;
+  background:linear-gradient(158deg,rgba(255,255,255,.92),rgba(255,255,255,.55));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.9), 0 4px 12px rgba(16,24,40,.07)}
+.pjkind{font-size:11.5px;color:var(--ink-3);letter-spacing:.04em}
+.pjkind::before{content:'—';margin-right:8px;opacity:.55}
+/* 「开源项目优化改进」这类定性标签挂行尾 */
+.pjtag{margin-left:auto;font-size:11px;font-weight:600;color:var(--acc);padding:5px 13px;border-radius:999px;
+  background:linear-gradient(158deg,rgba(255,255,255,.88),rgba(255,255,255,.58));
+  box-shadow:inset 0 0 0 1px rgba(47,107,255,.28), 0 3px 10px rgba(47,107,255,.10)}
+.pjtitle{font-size:clamp(19px,2.2vw,24px);font-weight:800;letter-spacing:-.01em}
+.pjoneline{font-size:14px;color:var(--acc);font-weight:600;margin-top:9px}
+
+.pjmetrics{display:flex;flex-wrap:wrap;align-items:baseline;gap:9px 30px;
+  margin-top:22px;padding-top:15px;border-top:1px solid rgba(13,17,23,.08)}
+.pjmetric b{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+.pjmetric span{font-size:12.5px;color:var(--ink-3);margin-left:6px}
+
+.pjbody{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:34px;margin-top:20px}
+.pjdesc{font-size:14px;color:var(--ink-2);line-height:1.92}
+.pjlab{display:flex;align-items:center;gap:10px;font-size:10.5px;letter-spacing:.2em;
+  color:var(--acc);font-weight:600;margin-bottom:13px}
+.pjlab::before{content:'◆';font-size:7px;color:var(--acc-2)}
+.pjstack{display:flex;flex-wrap:wrap;gap:7px;align-content:flex-start}
+.pjstack i{font-style:normal;font-size:11.5px;color:var(--ink-2);padding:6px 12px;border-radius:999px;
+  background:rgba(255,255,255,.58);box-shadow:inset 0 0 0 1px rgba(255,255,255,.85)}
+.pjnotes{list-style:none;margin-top:22px;display:grid;gap:11px}
+.pjblock{margin-top:24px}
+.pjnotes li{position:relative;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.85}
+.pjnotes li::before{content:'';position:absolute;left:2px;top:.72em;width:6px;height:6px;border-radius:50%;
+  background:var(--acc-2);box-shadow:0 0 0 3px rgba(122,162,255,.18)}
+
+/* 图集：统一框高、图片整体完整显示（图表/类图不能被裁），空出来的地方用这张图自己的模糊放大版填底。
+   基准 190 是为了让三图卡在 680 断点之上始终排成一行，不会掉出「2 + 1 个孤儿图」 */
+.pjshots{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.pjshot{position:relative;flex:1 1 190px;max-width:640px;height:196px;border-radius:var(--r-md);
+  overflow:hidden;cursor:zoom-in;background:#dde5f1;isolation:isolate;
+  box-shadow:0 6px 20px rgba(16,24,40,.12), inset 0 0 0 1px rgba(255,255,255,.7);
+  transition:box-shadow .45s, transform .45s}
+/* 模糊底：data URI 不重复存，src 由 JS 复用 img.src 写入 */
+.pjsbg{position:absolute;inset:-12%;z-index:0;background-size:cover;background-position:50% 50%;
+  filter:blur(30px) saturate(165%) brightness(1.04);transform:scale(1.06);opacity:.94}
+.pjshot img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;
+  transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.pjshot:hover{box-shadow:0 16px 38px rgba(16,24,40,.2), inset 0 0 0 1px rgba(255,255,255,.85);
+  transform:translateY(-2px)}
+.pjshot:hover img{transform:scale(1.02)}
+.pjshot figcaption{position:absolute;left:10px;bottom:10px;z-index:2;max-width:calc(100% - 20px);
+  padding:5px 12px;border-radius:999px;font-size:11px;color:#fff;letter-spacing:.02em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;pointer-events:none;background:rgba(10,15,25,.42);
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.22), 0 3px 12px rgba(4,8,16,.22)}
+
+.fade{opacity:0;transform:translateY(18px);transition:opacity .7s, transform .7s}
+.fade.in{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .resume{grid-template-columns:1fr}
+  .plists{grid-template-columns:1fr}
+  .dgrid{grid-template-columns:1fr}
+  .pjbody{grid-template-columns:1fr;gap:22px}
+  /* 职务标签任何宽度都要挂出来（原来 ≤960px 直接 display:none，等于白填） */
+  .vdesc{-webkit-line-clamp:1}
+}
+/* 中间档（681–1100px）：卡片还是 16/9 绝对定位的奖状卡，但卡高已经压到
+   380–580px，一叠长奖项名的奖状往上长会顶到标题。这个区间把奖状收成小角标。 */
+@media(max-width:1100px) and (min-width:681px){
+  /* 这一档奖状贴右下角，但卡片已经变窄（≤900px 时 .vinfo 右边界会越过奖状左边界）。
+     把 .vinfo 收窄给奖状让位：留出 奖状 max-width + 间距 的空间。
+     奖状最多 min(230px,40%)，所以 .vinfo 收到 46% 即可不打架。 */
+  .vinfo{width:min(46%,520px)}
+  .vcard.wide .vinfo{width:min(46%,520px)}
+  .vawards{right:16px;bottom:34px;max-width:min(230px,40%)}
+  .vawards .vaw{padding:5px 11px 5px 6px;gap:6px}
+  .vawards .vaw .med{flex:0 0 17px;width:17px;height:17px;font-size:9px}
+  .vawards .vaw .at{font-size:11px}
+  .vawards .vaw .al{font-size:9.5px;-webkit-line-clamp:1}
+  /* 三张及以上或长名时收成角标（由生成器加 .mini 类，见 vcard()） */
+  .vawards.mini .vaw{padding:5px;border-radius:50%;gap:0}
+  .vawards.mini .vaw > span{display:none}
+  .vawards.mini .vaw .med{flex:0 0 21px;width:21px;height:21px;font-size:10px}
+  .vawards.mini .vaw + .vaw{margin-bottom:-13px}
+}
+@media(max-width:680px){
+  .nav{gap:10px;padding:8px 10px}
+  .vwall{grid-template-columns:repeat(2,1fr);gap:11px}
+  .vwall .serbody{padding:10px 11px 12px}
+  .vwall .serttl{font-size:13px}
+  .hwall{grid-template-columns:1fr;gap:15px}
+  .vep{top:9px;right:9px;font-size:10px;padding:4px 9px}
+  .nav-cta{margin-left:auto}
+  .hero{margin:-68px 0 0;padding:120px 0 46px;min-height:0}
+  .hero-in{padding:0 22px}                       /* 首屏内容别贴着屏幕边 */
+  .hero-bg img{object-position:50% 42%}
+  .hero::after{height:72px}
+  .hero .tagline{max-width:none;font-size:14px;line-height:1.82}
+  /* 分区标题 + 英文 + 筛选按钮在窄屏挤不下 → 按钮换行靠右，并收一点内边距 */
+  .sec-head{gap:10px 12px}
+  .vfil{padding:7px 13px;font-size:12px}
+  .vfil .cn{font-size:10.5px}
+  .avatar{width:70px;height:70px;margin-bottom:16px;box-shadow:0 10px 26px rgba(0,0,0,.44), 0 0 0 5px rgba(255,255,255,.10)}
+  .hmeta{gap:7px;margin-top:20px}
+  .hmeta li{font-size:11.5px;padding:6px 12px}
+  .heronav{margin-top:24px;gap:3px;padding:5px}
+  .heronav a{font-size:12px;padding:7px 12px}
+  .heronav a.hn-cta{margin-left:2px}
+  /* 4 个数字在窄屏排成 2×2，胶囊圆角会变形 → 换成网格 + 内描边分隔 */
+  .hero .stats{display:grid;grid-template-columns:1fr 1fr;width:min(100%,360px);
+    border-radius:var(--r-lg);padding:4px}
+  .hero .stat{padding:13px 6px}
+  .hero .stat + .stat::before{display:none}
+  .hero .stat:nth-child(even){box-shadow:inset 1px 0 0 rgba(255,255,255,.16)}
+  .hero .stat:nth-child(3){box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+  .hero .stat:nth-child(4){box-shadow:inset 1px 0 0 rgba(255,255,255,.16), inset 0 1px 0 rgba(255,255,255,.16)}
+  .flow{gap:26px}
+  .vcard{border-radius:22px;aspect-ratio:4/3}
+  .vcard.wide{aspect-ratio:4/3}
+  .vcard.nocover .vbig{left:18px}
+  .vcard.nocover .vtag{left:20px}
+  .vinfo{left:18px;right:18px;bottom:18px;width:auto}
+  .vtitle{font-size:19px}
+  .vkick{margin-bottom:6px}
+  .vdesc{font-size:12.5px;-webkit-line-clamp:2;margin-top:7px}
+  .vduty{display:flex;margin-top:11px;padding-top:10px;gap:5px}
+  .vduty .dc{font-size:10px;padding:4px 9px}
+  /* 手机档：.vawards 现在挂在 .vcard 下（已不在 .vinfo 里），继续用绝对定位贴右下角，
+     与职务标签底边对齐即可。**不能改成 position:static** —— 它会脱离 .vinfo 跑到
+     卡片最下面，反而错位（那是它还在 .vinfo 里时的旧写法）。4/3 的卡比 16/9 高，放得下。 */
+  .vawards{right:18px;bottom:18px;max-width:min(190px,52%);gap:5px}
+  .vawards.mini{right:14px;gap:0}
+  .vaw{padding:5px 10px 5px 6px;gap:6px}
+  .vaw .med{flex:0 0 16px;width:16px;height:16px;font-size:9px}
+  .vaw .at{font-size:11px}
+  .vaw .al{font-size:9.5px;-webkit-line-clamp:1}
+  .vgo{opacity:1;transform:none;top:14px;right:14px}   /* 移动端没 hover，观看按钮常显 */
+  .vstar{top:14px;left:14px;font-size:10.5px;padding:5px 11px}
+  .band{padding:26px 24px;gap:22px}
+  .prowx{gap:8px;margin-bottom:8px}
+  .contact-c{padding:44px 22px}
+  section{scroll-margin-top:132px}
+  .grp{scroll-margin-top:134px}
+  .catbar{top:66px}
+  /* 项目档案窄屏 */
+  .pj{padding:22px 20px}
+  .pjtag{margin-left:0}
+  .pjno{width:42px;height:42px;font-size:14px}
+  .pjshots{gap:12px;margin-top:22px}
+  /* 一图一行：两图并排会把截图/词云压到读不清，三图卡还会掉出「2 + 1 个孤儿图」 */
+  .pjshot{flex:1 1 100%;max-width:none;height:200px}
+  .pjshot figcaption{left:7px;bottom:7px;padding:4px 10px;font-size:10.5px}
+  /* 数码内容窄屏 */
+  .dacct{grid-template-columns:1fr;gap:16px;padding:26px 22px;margin-top:18px}
+  .dacct .dava{width:60px;height:60px;border-radius:18px}
+  /* 手机端两列密排：块数看着更多，也省纵向空间 */
+  .hcards{grid-template-columns:repeat(2,1fr);gap:10px}
+  .hc .dur{font-size:10px;right:6px;bottom:6px;padding:2px 7px}
+  .hc .meta-l{font-size:9.5px;left:6px;top:6px;padding:2px 8px;gap:6px}
+  .hc .meta-l .yr{padding-left:7px}
+  .hc .tp{display:none}
+  .dmore{padding:24px 22px}
+}
+</style></head><body>
+<header class="nav g"><a class="brand" href="#top"><img class="mark" src="assets/hero/avatar.jpg" alt="寻踪踏迹"><span class="bid">寻踪踏迹<em>XUNZONG TAJI</em></span></a><nav class="navlinks">
+<a href="#work">影像</a>
+<a href="#digital">数码</a>
+<a href="#photo">摄影</a>
+<a href="#projects">技术</a>
+<a href="#about">关于</a>
+</nav><a class="nav-cta" href="#contact">联系合作</a></header>
+<section class="hero" id="top">
+<div class="hero-bg"><img src="assets/hero/cover.jpg" alt="" fetchpriority="high"><div class="hero-scrim"></div></div>
+<div class="hero-in wrap">
+<img class="avatar fade" src="assets/hero/avatar.jpg" alt="寻踪踏迹 · 头像">
+<div class="kick fade">Portfolio — 2026 影像 · 摄影 · 内容</div>
+<h1 class="fade">寻踪踏迹<span class="en">XUNZONG TAJI</span></h1>
+<p class="tagline fade">求职方向是新媒体运营 / 内容运营。选题、拍摄、剪辑可以一个人交付全链路，有从 0 到 1 跑起一个账号的经历：300+条作品、总播放 130 万+。运营侧靠数据做判断，把跑得好的选题类型沉淀成下一轮方向。</p>
+<ul class="hmeta fade">
+<li><i>坐标</i>武汉 · 籍贯昆明</li>
+<li><i>方向</i>影像 / 内容 / 数据</li>
+<li><i>签约</i>视觉中国签约摄影师</li>
+</ul>
+<div class="stats g fade">
+<div class="stat"><b>300+</b><span>条作品产出</span></div>
+<div class="stat"><b>60万+</b><span>运营账号播放</span></div>
+<div class="stat"><b>130万+</b><span>个人账号全网播放</span></div>
+<div class="stat"><b>9项</b><span>国家级5 · 省级4</span></div>
+</div>
+<nav class="heronav fade">
+<a href="#work">影像</a>
+<a href="#digital">数码</a>
+<a href="#photo">摄影</a>
+<a href="#projects">技术</a>
+<a href="#about">关于</a>
+<a class="hn-cta" href="#contact">联系合作</a></nav>
+</div></section>
+<section id="work"><div class="wrap">
+<div class="sec-head fade"><span class="num">一</span><h2>影像作品</h2><span class="sec-en">Film &amp; Video</span>
+<button class="vfil" id="vfil" type="button" aria-pressed="false"><span class="st">★</span>只看代表作<span class="cn">18</span></button></div>
+<p class="sec-sub fade">这里的片子跨度比较大：汽车广告、AIGC、纪录片、专题片和校园项目。每张卡写了片子的来龙去脉，以及我在其中实际负责的那一部分。</p>
+<nav class="catbar g" data-bar><div class="cat-inner">
+<a class="cat" href="#g0">汽车与商业广告</a>
+<a class="cat" href="#g1">AIGC 作品</a>
+<a class="cat" href="#g2">AI 科普系列</a>
+<a class="cat" href="#g3">大广赛 · 品牌广告</a>
+<a class="cat" href="#g4">纪录片</a>
+<a class="cat" href="#g5">专题与城市影像</a>
+<a class="cat" href="#g6">校园与项目视频</a>
+<a class="cat" href="#g7">学姐请回答</a>
+</div></nav>
+<div class="grp" id="g0"><div class="grp-t"><h3>汽车与商业广告</h3><span class="fl"></span><span class="n">AUTOMOTIVE</span></div><p class="grp-sub">极氪 8X 与 9X 的整车向内容：山路试驾、门店三条试驾路线、雨季涉水实测，等根据销售端需求定制的视频</p><div class="flow"><article class="vcard fade star"><img src="assets/cover/图片-2026-09-28T101932.453.jpg" alt="云边慢行 · 极氪 8X" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AuCLK1Gled" target="_blank" rel="noopener" aria-label="云边慢行 · 极氪 8X"></a><div class="vinfo"><div class="vkick">汽车广告 · 山路试驾 · 2026.09</div><h3 class="vtitle">云边慢行 · 极氪 8X</h3><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="flow special"><article class="vcard fade wide star"><img src="assets/covers/zeekr9x-special-01.jpg" alt="一山观三海 · 极氪 9X" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AwR99lQ5Pi" target="_blank" rel="noopener" aria-label="一山观三海 · 极氪 9X"></a><div class="vinfo"><div class="vkick">9X 专项 · 2026.09</div><h3 class="vtitle">一山观三海 · 极氪 9X</h3><p class="vdesc">9X 专项四支成片。第一期用航拍展示山路与车身姿态，后三期结合微剧情与氛围感运镜，展现豪华本色。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="subwall"><a class="subitem fade" href="https://weixin.qq.com/sph/ASAG4bHbE9" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-02.jpg" alt="姐开极氪9X带你好不好" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">姐开极氪9X带你好不好</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/AZjOlYS74C" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-03.jpg" alt="旗舰本色从容自若" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">旗舰本色从容自若</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/An5RThWstk" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-04.jpg" alt="沉浸式体验极氪9X" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">沉浸式体验极氪9X</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a></div><div class="flow special"><article class="vcard fade wide star"><img src="assets/cover/图片(30).jpg" alt="寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/A6LK62sFJQ" target="_blank" rel="noopener" aria-label="寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐"></a><div class="vinfo"><div class="vkick">极氪云南行 · 2026.08</div><h3 class="vtitle">寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐</h3><p class="vdesc">极氪云南行 志在结合云南的特色文化和旅游场景 结合车的卖点打造系列化长篇</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="subwall"><a class="subitem fade" href="https://weixin.qq.com/sph/AOVjRAbJfX" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_fire.jpg" alt="火光赴盛，座舱归安" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">火光赴盛，座舱归安</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/AyAHId08vv" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_chuxiong.jpg" alt="云南人的快乐！开极氪8X去楚雄捡菌，电车也能跑山野！" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">云南人的快乐！开极氪8X去楚雄捡菌，电车也能跑山野！</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/A0ZcEmQMt4" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_camp.jpg" alt="电车露营靠谱吗？极氪户外实地测试！外放电自由⚡" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">电车露营靠谱吗？极氪户外实地测试！外放电自由⚡</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a></div><div class="flow"><article class="vcard fade star"><img src="assets/cover/8月4日(1)(3)-封面.jpg" alt="全地形试驾 · 极氪宜家门店" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AMqqoJOBnm" target="_blank" rel="noopener" aria-label="全地形试驾 · 极氪宜家门店"></a><div class="vinfo"><div class="vkick">汽车广告 · 门店试驾 · 2026.08</div><h3 class="vtitle">全地形试驾 · 极氪宜家门店</h3><p class="vdesc">根据极氪宜家店特色试驾路线销售终端需求打造，通过减震臂，航拍器，运动相机等设备，打造低成本但是具备强烈视觉冲击力的宣传片</p><div class="vduty"><span class="dl">场景</span><span class="dc">三条试驾路线</span></div></div></article><article class="vcard fade"><img src="assets/cover/图片(27).jpg" alt="雨季涉水实测" loading="lazy"><div class="vscrim"></div><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AmtAu1uDUI" target="_blank" rel="noopener" aria-label="雨季涉水实测"></a><div class="vinfo"><div class="vkick">汽车广告 · 涉水测试 · 2026.08</div><h3 class="vtitle">雨季涉水实测</h3><p class="vdesc">通过对特殊路线的越野性能拍摄，展现品牌旗舰产品的越野性和通过性</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div></div>
+<div class="grp" id="g1"><div class="grp-t"><h3>AIGC 作品</h3><span class="fl"></span><span class="n">GENERATIVE</span></div><p class="grp-sub">把 AI 生成的画面接进实拍里的几支片子。AI 出画面、实拍补质感，拼在同一条时间线上。</p><div class="flow"><article class="vcard fade star"><img src="assets/cover/ad_haoshi.jpg" alt="大广赛 · 豪士面包" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13830294" target="_blank" rel="noopener" aria-label="大广赛 · 豪士面包"></a><div class="vinfo"><div class="vkick">视频广告 · AIGC 动画 + 实拍</div><h3 class="vtitle">大广赛 · 豪士面包</h3><p class="vdesc">用 AIGC 卡通动画和丝滑转场包装实拍，讲述豪士面包的特点与魅力。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">导演</span><span class="dc">统筹</span><span class="dc">剪辑师</span><span class="dc">摄影师</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/大广赛省优-2.jpg" data-cap="省级优秀奖 · 第18届全国大学生广告艺术大赛" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级优秀奖</b><span class="al">第18届全国大学生广告艺术大赛</span></span></span></div></article><article class="vcard fade star"><img src="assets/cover/ad_adgai.jpg" alt="大广赛 · AD 钙奶" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13830299" target="_blank" rel="noopener" aria-label="大广赛 · AD 钙奶"></a><div class="vinfo"><div class="vkick">视频广告 · 实拍 + 动画</div><h3 class="vtitle">大广赛 · AD 钙奶</h3><p class="vdesc">通过实拍加动画，着手于AD 钙奶的酸甜口感和 30 年记忆，讲述它怎么陪着一代代人长大的故事。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span><span class="dc">导演</span><span class="dc">统筹</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/大广赛省三-2.jpg" data-cap="省级三等奖 · 第18届全国大学生广告艺术大赛" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级三等奖</b><span class="al">第18届全国大学生广告艺术大赛</span></span></span></div></article><article class="vcard fade"><img src="assets/cover/xpc_anhe.jpg" alt="地学 AIGC 科普" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13830337" target="_blank" rel="noopener" aria-label="地学 AIGC 科普"></a><div class="vinfo"><div class="vkick">AIGC 视频 · 地学科普</div><h3 class="vtitle">地学 AIGC 科普</h3><p class="vdesc">结合地大地学特色，用AIGC技术实现较难实拍的画面和讲解动画。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span></div></div></article></div></div>
+<div class="grp" id="g2"><div class="grp-t"><h3>AI 科普系列</h3><span class="fl"></span><span class="n">SCIENCE</span></div><p class="grp-sub">一期讲清一个概念。从手机像素到相机测光，都是平时真用得上的常识。</p><div class="serwall"><a class="sercard fade" href="https://www.xiaohongshu.com/discovery/item/6a92b60a0000000025018b4d?xsec_token=YB9HhDsEanILpmST_UtAv8iOXN8BU2CxxNd4PnWw6PSUc=&amp;xsec_source=pc_share" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 1 期</span><img src="assets/cover/图片(58).jpg" alt="两亿像素手机，被两千万像素微单吊打？" loading="lazy"></div><div class="serbody"><div class="serkick">AIGC 科普 · 2026.09</div><h4 class="serttl">两亿像素手机，被两千万像素微单吊打？</h4><p class="serdesc">手机像素越做越高，画质为什么没跟上。</p><div class="subduty"><span class="dc">策划</span><span class="dc">剪辑</span><span class="dc">AI 生图</span></div><span class="subgo">小红书 <span class="arr">↗</span></span></div></a><a class="sercard fade" href="https://www.xiaohongshu.com/discovery/item/6aa9080b000000002502fae1?source=webshare&amp;xhsshare=pc_web&amp;xsec_token=ABn0YDkrvEZi70qAZ4AQsyi4q7UHoIKmijndijR7aip7k=&amp;xsec_source=pc_share" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 2 期</span><img src="assets/cover/图片-2026-09-15T160942.923.jpg" alt="拍照总发灰？曝光补偿就四个字：白加黑减" loading="lazy"></div><div class="serbody"><div class="serkick">AIGC 科普 · 2026.09</div><h4 class="serttl">拍照总发灰？曝光补偿就四个字：白加黑减</h4><p class="serdesc">同一片雪，别人拍是奶油白，你拍是水泥灰。曝光补偿其实就四个字：白加黑减，拍完记得归零。</p><div class="subduty"><span class="dc">策划</span><span class="dc">剪辑</span><span class="dc">AI 生图</span></div><span class="subgo">小红书 <span class="arr">↗</span></span></div></a><article class="sercard fade"><div class="serimg"><span class="serep">第 3 期</span><img src="assets/cover/图片-2026-10-01T165901.403.jpg" alt="相机测光模式：2 分钟搞懂怎么用" loading="lazy"></div><div class="serbody"><div class="serkick">AIGC 科普 ·  2026.10</div><h4 class="serttl">相机测光模式：2 分钟搞懂怎么用</h4><p class="serdesc">测光模式选错了，曝光补偿也救不回来。评价测光、中央重点测光、点测光，三种模式分别适合什么场景，一支讲清楚。</p><div class="subduty"><span class="dc">策划</span><span class="dc">剪辑</span><span class="dc">AI 生图</span></div></div></article></div></div>
+<div class="grp" id="g3"><div class="grp-t"><h3>大广赛 · 品牌广告</h3><span class="fl"></span><span class="n">ADVERTISING</span></div><div class="flow"><article class="vcard fade star"><img src="assets/cover/ad_canva.jpg" alt="大广赛 · 可画 Canva" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13624804" target="_blank" rel="noopener" aria-label="大广赛 · 可画 Canva"></a><div class="vinfo"><div class="vkick">视频广告 · 品牌叙事</div><h3 class="vtitle">大广赛 · 可画 Canva</h3><p class="vdesc">把 Canva 可画画成一只小精灵，跟着一个自媒体博主从大一到大四，用 AI 化解做封面、做动效这些难题。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span><span class="dc">调色师</span><span class="dc">编导</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/aw_dgs17_you_keai.jpg" data-cap="省级优秀奖 · 第17届全国大学生广告艺术大赛（湖北赛区 · 微电影广告）" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级优秀奖</b><span class="al">第17届全国大学生广告艺术大赛（湖北赛区 · 微电影广告）</span></span></span></div></article><article class="vcard fade"><img src="assets/cover/ad_zhiyu.jpg" alt="大广赛 · 药膏光影" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13713454" target="_blank" rel="noopener" aria-label="大广赛 · 药膏光影"></a><div class="vinfo"><div class="vkick">视频广告 · 布光实验</div><h3 class="vtitle">大广赛 · 药膏光影</h3><p class="vdesc">以创意光影语言重新诠释药膏的功效，打破常规视角，用镜头语言让产品&quot;说话&quot;</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影师</span><span class="dc">灯光师</span><span class="dc">剪辑师</span></div></div></article><article class="vcard fade star"><img src="assets/cover/图片00-2.jpg" alt="大广赛 · 汉口二厂" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13497723" target="_blank" rel="noopener" aria-label="大广赛 · 汉口二厂"></a><div class="vinfo"><div class="vkick">视频广告 · 节奏剪辑</div><h3 class="vtitle">大广赛 · 汉口二厂</h3><p class="vdesc">以律动音乐驱动视觉叙事，通过多组质感镜头呈现汉口二厂汽水的多元风味，在节奏与画面的共振中传递品牌活力与产品个性。
+</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/2025年湖北大学生新闻传播教育创新实践技能竞赛广告类一等奖.jpg" data-cap="省级一等奖 · 2025年湖北大学生新闻传播教育创新实践技能竞赛广告类一等奖" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级一等奖</b><span class="al">2025年湖北大学生新闻传播教育创新实践技能竞赛广告类一等奖</span></span></span></div></article><article class="vcard fade star nocover"><div class="vbig">联通沃派 广播</div><div class="vtag">Radio Ad · 00:30</div><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13707922" target="_blank" rel="noopener" aria-label="联通沃派 · 广播类"></a><div class="vinfo"><div class="vkick">广播广告 · 团队「梦启 Byte」</div><h3 class="vtitle">联通沃派 · 广播类</h3><p class="vdesc">30 秒校园创业场景：电脑崩了、创业计划没备份，云盘救场；答辩成功后，喜悦变成 AI 视频彩铃的旋律。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/aw_dgs17_guoyou_byte.jpg" data-cap="国家级优秀奖 · 第17届全国大学生广告艺术大赛（全国 · 广播类）" title="点击查看奖状"><i class="med">奖</i><span><b class="at">国家级优秀奖</b><span class="al">第17届全国大学生广告艺术大赛（全国 · 广播类）</span></span></span><span class="vaw" data-img="assets/award/aw_dgs17_s3_byte.jpg" data-cap="省级三等奖 · 第17届全国大学生广告艺术大赛（湖北赛区 · 广播类）" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级三等奖</b><span class="al">第17届全国大学生广告艺术大赛（湖北赛区 · 广播类）</span></span></span></div></article></div></div>
+<div class="grp" id="g4"><div class="grp-t"><h3>纪录片</h3><span class="fl"></span><span class="n">DOCUMENTARY</span></div><p class="grp-sub">纪实长片，题材集中在长江生态保护和山区支教。以跟拍为主，从选题、采访到成片完整走一遍。</p><div class="flow"><article class="vcard fade star"><img src="assets/cover/清漂20载-守护一江碧.mp4_20261002_125143.761-4.jpg" alt="清漂二十载 守护一江碧" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13514888" target="_blank" rel="noopener" aria-label="清漂二十载 守护一江碧"></a><div class="vinfo"><div class="vkick">纪录片 · 生态纪实 · 2026</div><h3 class="vtitle">清漂二十载 守护一江碧</h3><p class="vdesc">跟拍秭归清漂队七天。队长周功虎清漂二十年，每天清晨五点出航——二十年间 1.6 万次，清走 28 万立方米漂浮物。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影</span><span class="dc">剪辑</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/Screenshot2026-10-07233356.jpg" data-cap="国家级二等奖 · 中国好创意暨全国数字艺术设计大赛本科组" title="点击查看奖状"><i class="med">奖</i><span><b class="at">国家级二等奖</b><span class="al">中国好创意暨全国数字艺术设计大赛本科组</span></span></span></div></article><article class="vcard fade"><img src="assets/cover/xpc_kanjian.jpg" alt="《看见》· 山田完全小学" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13514888" target="_blank" rel="noopener" aria-label="《看见》· 山田完全小学"></a><div class="vinfo"><div class="vkick">公益纪录片 · 支教纪实</div><h3 class="vtitle">《看见》· 山田完全小学</h3><p class="vdesc">200 公里山路，从城市到村庄。记录湖北黄石阳新县山田完全小学的夏天，和一群支教者碰到的未被书写的故事。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">记者</span><span class="dc">策划</span></div></div></article><article class="vcard fade star"><img src="assets/cover/短视频-封面.jpg" alt="越千里山海 赴一树花开" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13485925" target="_blank" rel="noopener" aria-label="越千里山海 赴一树花开"></a><div class="vinfo"><div class="vkick">公益纪录片 · 支教纪实</div><h3 class="vtitle">越千里山海 赴一树花开</h3><p class="vdesc">七月，一群青年走进桂北雄村小学。十五天里，没有空调的教室、暴雨中的上学路，和城乡教育的温差。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">记者</span><span class="dc">导演</span><span class="dc">策划</span></div></div></article><article class="vcard fade star"><img src="assets/cover/edu_yuancheng.jpg" alt="千里云课 静待花开" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13717926" target="_blank" rel="noopener" aria-label="千里云课 静待花开"></a><div class="vinfo"><div class="vkick">公益纪录片 · 远程支教</div><h3 class="vtitle">千里云课 静待花开</h3><p class="vdesc">山中花儿爱心助学团做了 21 年远程支教，隔着屏幕给山区孩子上课，志愿者边教边学。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">导演</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">编导</span><span class="dc">策划</span></div></div></article><article class="vcard fade"><img src="assets/cover/xpc_dashan.jpg" alt="大山外的呼唤" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13521146" target="_blank" rel="noopener" aria-label="大山外的呼唤"></a><div class="vinfo"><div class="vkick">公益纪录片 · 支教纪实 · 2024 暑期</div><h3 class="vtitle">大山外的呼唤</h3><p class="vdesc">2024 年夏天，19 个年轻人坐绿皮火车转客运大巴，走了 20 个小时进山。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span><span class="dc">调色师</span></div></div></article><article class="vcard fade"><img src="assets/cover/xpc_bici.jpg" alt="彼此照亮：难忘的你，想对你说" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13477134" target="_blank" rel="noopener" aria-label="彼此照亮：难忘的你，想对你说"></a><div class="vinfo"><div class="vkick">公益纪录片 · 人物访谈</div><h3 class="vtitle">彼此照亮：难忘的你，想对你说</h3><p class="vdesc">支教队人物访谈。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">编导</span><span class="dc">剪辑师</span><span class="dc">摄影师</span></div></div></article></div></div>
+<div class="grp" id="g5"><div class="grp-t"><h3>专题与城市影像</h3><span class="fl"></span><span class="n">FEATURE &amp; CITY</span></div><div class="flow"><article class="vcard fade star"><img src="assets/cover/city_hankou.jpg" alt="汉口风华遇知音" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/A4m1buxZXH" target="_blank" rel="noopener" aria-label="汉口风华遇知音"></a><div class="vinfo"><div class="vkick">纪录短片 · 城市更新 · 2025</div><h3 class="vtitle">汉口风华遇知音</h3><p class="vdesc">以&quot;知音号&quot;游轮与汉口历史风貌区为双线叙事主轴，呈现江汉关大楼、同兴里等历史建筑的活态传承，融入伯牙子期知音文化意象，展现百年老城与当代生活的和谐共生。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span><span class="dc">导演</span><span class="dc">调色师</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/aw_guocai_guoyin25.jpg" data-cap="国家级银奖 · 2025“外研社·国才杯”“理解当代中国”全国大学生外语能力大赛（国赛 · 英语组短视频赛项）" title="点击查看奖状"><i class="med">奖</i><span><b class="at">国家级银奖</b><span class="al">2025“外研社·国才杯”“理解当代中国”全国大学生外语能力大赛（国赛 · 英语组短视频赛项）</span></span></span></div></article><article class="vcard fade star"><img src="assets/cover/掐丝珐琅-非遗传承.mp4_20261007_153553.760.jpg" alt="她「耀」西山 · 邓璧玲" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13496315" target="_blank" rel="noopener" aria-label="她「耀」西山 · 邓璧玲"></a><div class="vinfo"><div class="vkick">非遗人物专题 · 后期全流程</div><h3 class="vtitle">她「耀」西山 · 邓璧玲</h3><p class="vdesc">掐丝珐琅彩画传承人邓璧玲：从拜师学艺到创业，疫情三年不裁员搞研发，把这门八百年技艺做进了大运会「蓉宝」。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">文案</span></div></div></article><article class="vcard fade"><img src="assets/cover/xpc_konggui.jpg" alt="空轨瞰江城" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13633270" target="_blank" rel="noopener" aria-label="空轨瞰江城"></a><div class="vinfo"><div class="vkick">城市印象片 · 航拍 + 动效</div><h3 class="vtitle">空轨瞰江城</h3><p class="vdesc">从北方小镇到江城武汉，隔着一千公里的距离，眼前的一切既新鲜又陌生。然而有一道银蓝色的影子，在十米高的空中悄然划过——那是中国首条开通运营的悬挂式空轨，光谷光子号。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影师</span><span class="dc">剪辑师</span><span class="dc">调色师</span></div></div></article><article class="vcard fade star"><img src="assets/cover/city_yinghua.jpg" alt="樱遇武汉 遇见春天" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13712334" target="_blank" rel="noopener" aria-label="樱遇武汉 遇见春天"></a><div class="vinfo"><div class="vkick">城市印象片 · 航拍 + 地面</div><h3 class="vtitle">樱遇武汉 遇见春天</h3><p class="vdesc">两个女孩的两段故事：一个在校园樱花树下找回勇气，一个在职场夜晚的站台重拾骄傲。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影师</span><span class="dc">剪辑师</span><span class="dc">调色师</span></div></div></article><article class="vcard fade star"><img src="assets/cover/city_luobu.jpg" alt="智驭未来 · 萝卜快跑" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13531914" target="_blank" rel="noopener" aria-label="智驭未来 · 萝卜快跑"></a><div class="vinfo"><div class="vkick">专题片 · 无人驾驶 · 动效 + 航拍</div><h3 class="vtitle">智驭未来 · 萝卜快跑</h3><p class="vdesc">当无人驾驶出租车悄然穿梭于武汉街头，一场前所未有的出行革命已悄然到来。
+</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div></div>
+<div class="grp" id="g6"><div class="grp-t"><h3>校园与项目视频</h3><span class="fl"></span><span class="n">CAMPUS</span></div><p class="grp-sub">校方委托的宣传片、人物专题，以及创新创业项目介绍片。</p><div class="flow"><article class="vcard fade"><img src="assets/cover/xpc_guojiao.jpg" alt="国奖获得者励志宣传片" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13633269" target="_blank" rel="noopener" aria-label="国奖获得者励志宣传片"></a><div class="vinfo"><div class="vkick">校园人物群像 · 校方委托</div><h3 class="vtitle">国奖获得者励志宣传片</h3><p class="vdesc">这是一部聚焦中国地质大学（武汉）国家奖学金获得者的人物群像专题视频。
+</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">调色师</span></div></div></article><article class="vcard fade star"><img src="assets/cover/xpc_dashi.jpg" alt="大地师者 润育嘉禾" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13725711" target="_blank" rel="noopener" aria-label="大地师者 润育嘉禾"></a><div class="vinfo"><div class="vkick">人物专题片 · 校方委托 · 2024.12</div><h3 class="vtitle">大地师者 润育嘉禾</h3><p class="vdesc">师者如大地，育人如耕土。这是一部聚焦中国地质大学（武汉）国家奖学金获得者的人物群像专题视频。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">编导</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/读懂中国.jpg" data-cap="省级最佳微视频 · 2025「读懂中国」" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级最佳微视频</b><span class="al">2025「读懂中国」</span></span></span></div></article><article class="vcard fade star"><img src="assets/cover/xpc_cilu.jpg" alt="「磁」路通畅项目介绍" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13521121" target="_blank" rel="noopener" aria-label="「磁」路通畅项目介绍"></a><div class="vinfo"><div class="vkick">项目介绍片 · 创新创业 · 省铜奖</div><h3 class="vtitle">「磁」路通畅项目介绍</h3><p class="vdesc">中国国际大学生创新大赛省铜奖项目介绍视频</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/aw_dici_shtong.jpg" data-cap="省级铜奖 · 中国国际大学生创新大赛（2024）湖北省复赛 · 高教主赛道" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级铜奖</b><span class="al">中国国际大学生创新大赛（2024）湖北省复赛 · 高教主赛道</span></span></span></div></article><article class="vcard fade"><img src="assets/cover/xpc_liufujiang.jpg" alt="人物专访 · 刘福江" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13521118" target="_blank" rel="noopener" aria-label="人物专访 · 刘福江"></a><div class="vinfo"><div class="vkick">人物专访 · 长片</div><h3 class="vtitle">人物专访 · 刘福江</h3><p class="vdesc">聚焦地大网红科普教授刘福江老师，深入的访谈了解其选择科普的初心</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span></div></div></article><article class="vcard fade"><img src="assets/cover/xpc_yinwang.jpg" alt="茚旺高级中学 2024 回音节主题宣传片" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13514852" target="_blank" rel="noopener" aria-label="茚旺高级中学 2024 回音节主题宣传片"></a><div class="vinfo"><div class="vkick">校园宣传片 · 文娱活动</div><h3 class="vtitle">茚旺高级中学 2024 回音节主题宣传片</h3><p class="vdesc">会泽县茚旺高级中学校园宣传片。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影师</span></div></div></article></div></div>
+<div class="grp" id="g7"><div class="grp-t"><h3>学姐请回答</h3><span class="fl"></span><span class="n"></span></div><p class="grp-sub">为「数智地大」校园 App 做的系列短视频。用校园场景讲产品功能：课表导航、校园一张图、网络安全。竖屏发布，一条讲一件事。</p><div class="vwall"><a class="sercard fade" href="https://weixin.qq.com/sph/AYBjgGLfw7" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 1 期</span><img src="assets/cover/微信图片_20260421120512_3653_331.jpg" alt="你的掌上地大，&quot;数智地大&quot;app来啦~" loading="lazy"></div><div class="serbody"><div class="serkick">数智地大 · 2026.03</div><h4 class="serttl">你的掌上地大，&quot;数智地大&quot;app来啦~</h4><span class="subgo">微信视频号 <span class="arr">↗</span></span></div></a><a class="sercard fade" href="https://weixin.qq.com/sph/A0ZeEo2ORg" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 2 期</span><img src="assets/cover/3月9日(2)-封面.jpg" alt="「校园一张图」有多牛？课表导航找教室！" loading="lazy"></div><div class="serbody"><div class="serkick">数智地大 · 2026.04</div><h4 class="serttl">「校园一张图」有多牛？课表导航找教室！</h4><span class="subgo">微信视频号 <span class="arr">↗</span></span></div></a><a class="sercard fade" href="https://weixin.qq.com/sph/AO7XuN0Yhl" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 3 期</span><img src="assets/cover/3月9日(1)-封面.jpg" alt="数智地大app，你怎么还有这么多宝藏功能！" loading="lazy"></div><div class="serbody"><div class="serkick">数智地大 · 2026.04</div><h4 class="serttl">数智地大app，你怎么还有这么多宝藏功能！</h4><span class="subgo">微信视频号 <span class="arr">↗</span></span></div></a><a class="sercard fade" href="https://weixin.qq.com/sph/Acrpyn2uEU" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 4 期</span><img src="assets/cover/3月9日(5)-封面.jpg" alt="开学第一件事一定是先搞好校园网络" loading="lazy"></div><div class="serbody"><div class="serkick">数智地大 · 2026.06</div><h4 class="serttl">开学第一件事一定是先搞好校园网络</h4><span class="subgo">微信视频号 <span class="arr">↗</span></span></div></a></div></div>
+</div></section>
+<section id="digital"><div class="wrap">
+<div class="sec-head fade"><span class="num">二</span><h2>数码内容</h2><span class="sec-en">Tech &amp; Review</span></div>
+<p class="sec-sub fade">现频道置顶最新一期，其余按播放量从高到低排；早期频道按播放量排。播放量 100 以下的不收录。</p>
+<div class="dacct g fade">
+<img class="dava" src="assets/hero/avatar.jpg" alt="寻踪评">
+<div><div class="dan"><h3>寻踪评</h3><span class="den">DIGITAL REVIEW</span></div>
+<p class="dasub">一个人在做的数码评测频道。自己选题、自己拍、自己剪，主攻手机影像与高性价比数码产品的长期实测，也做摄影基础知识的科普。从 2017 年课余做的早期频道一路更新到今天，两个账号累计发布作品 51 条。</p>
+<div class="dchips"><span class="dchip">手机影像</span><span class="dchip">相机评测</span><span class="dchip">性价比数码</span><span class="dchip">摄影科普</span></div>
+<a class="dlink" href="https://space.bilibili.com/3546635227367625" target="_blank" rel="noopener">查看 B 站主页 <span>↗</span></a>
+</div></div>
+<div class="grp-t fade"><h3>寻踪评 · 现频道</h3><span class="fl"></span><span class="n">19 条</span></div>
+<div class="hcards"><a class="hc fade" href="https://www.bilibili.com/video/BV1yqpK6DERY/" target="_blank" rel="noopener" title="华为外挂镜头卖1w7，它前辈只要800？索尼QX1体验到底如何" aria-label="华为外挂镜头卖1w7，它前辈只要800？索尼QX1体验到底如何"><img src="assets/digital/01_BV1yqpK6DERY.webp" alt="华为外挂镜头卖1w7，它前辈只要800？索尼QX1体验到底如何" loading="lazy"><span class="meta-l"><span class="play">1073</span></span><span class="dur">08:11</span><span class="tp">华为外挂镜头卖1w7，它前辈只要800？索尼QX1体验到底如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV124xmz8EZh/" target="_blank" rel="noopener" title="1200不到的安卓影像旗舰？2022年发布的小米12sultra现如今体验如何" aria-label="1200不到的安卓影像旗舰？2022年发布的小米12sultra现如今体验如何"><img src="assets/digital/02_BV124xmz8EZh.webp" alt="1200不到的安卓影像旗舰？2022年发布的小米12sultra现如今体验如何" loading="lazy"><span class="meta-l"><span class="play">1.4万</span></span><span class="dur">06:50</span><span class="tp">1200不到的安卓影像旗舰？2022年发布的小米12sultra现如今体验如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1wBLf6jE2B/" target="_blank" rel="noopener" title="索尼a6700用满两年拍了几千条视频 1w不到的半画幅旗舰到底值不值？" aria-label="索尼a6700用满两年拍了几千条视频 1w不到的半画幅旗舰到底值不值？"><img src="assets/digital/03_BV1wBLf6jE2B.webp" alt="索尼a6700用满两年拍了几千条视频 1w不到的半画幅旗舰到底值不值？" loading="lazy"><span class="meta-l"><span class="play">7381</span></span><span class="dur">11:32</span><span class="tp">索尼a6700用满两年拍了几千条视频 1w不到的半画幅旗舰到底值不值？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1LpXPBBEmp/" target="_blank" rel="noopener" title="仅需788的小米13pro？百元8gen2+一英寸大底 性价比到底如何？" aria-label="仅需788的小米13pro？百元8gen2+一英寸大底 性价比到底如何？"><img src="assets/digital/04_BV1LpXPBBEmp.webp" alt="仅需788的小米13pro？百元8gen2+一英寸大底 性价比到底如何？" loading="lazy"><span class="meta-l"><span class="play">6149</span></span><span class="dur">05:29</span><span class="tp">仅需788的小米13pro？百元8gen2+一英寸大底 性价比到底如何？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1DE8m68EKg/" target="_blank" rel="noopener" title="仅需700 半台MacBook的&quot;无头骑士&quot;到底好不好用" aria-label="仅需700 半台MacBook的&quot;无头骑士&quot;到底好不好用"><img src="assets/digital/05_BV1DE8m68EKg.webp" alt="仅需700 半台MacBook的&quot;无头骑士&quot;到底好不好用" loading="lazy"><span class="meta-l"><span class="play">2883</span></span><span class="dur">06:07</span><span class="tp">仅需700 半台MacBook的&quot;无头骑士&quot;到底好不好用</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1NGY264E72/" target="_blank" rel="noopener" title="骁龙8Gen3折叠屏只卖680？小米MixFlip现如今体验到底如何" aria-label="骁龙8Gen3折叠屏只卖680？小米MixFlip现如今体验到底如何"><img src="assets/digital/06_BV1NGY264E72.webp" alt="骁龙8Gen3折叠屏只卖680？小米MixFlip现如今体验到底如何" loading="lazy"><span class="meta-l"><span class="play">2856</span></span><span class="dur">04:56</span><span class="tp">骁龙8Gen3折叠屏只卖680？小米MixFlip现如今体验到底如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV19bWCzREbt/" target="_blank" rel="noopener" title="1500不到的全能形运动相机？2023年发布的insta360Acepro使用体验到底如何？" aria-label="1500不到的全能形运动相机？2023年发布的insta360Acepro使用体验到底如何？"><img src="assets/digital/07_BV19bWCzREbt.webp" alt="1500不到的全能形运动相机？2023年发布的insta360Acepro使用体验到底如何？" loading="lazy"><span class="meta-l"><span class="play">2401</span></span><span class="dur">06:29</span><span class="tp">1500不到的全能形运动相机？2023年发布的insta360Acepro使用体验到底如何？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1KxBqByE2H/" target="_blank" rel="noopener" title="仅需900元的电影变形镜头，2025年思锐50mmF1.8 X1.33变形镜头体验到底如何" aria-label="仅需900元的电影变形镜头，2025年思锐50mmF1.8 X1.33变形镜头体验到底如何"><img src="assets/digital/08_BV1KxBqByE2H.webp" alt="仅需900元的电影变形镜头，2025年思锐50mmF1.8 X1.33变形镜头体验到底如何" loading="lazy"><span class="meta-l"><span class="play">2119</span></span><span class="dur">04:30</span><span class="tp">仅需900元的电影变形镜头，2025年思锐50mmF1.8 X1.33变形镜头体验到底如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1HYaU6oEdr/" target="_blank" rel="noopener" title="2 亿长焦还不够，华为又给手机外挂了一支镜头？" aria-label="2 亿长焦还不够，华为又给手机外挂了一支镜头？"><img src="assets/digital/09_BV1HYaU6oEdr.webp" alt="2 亿长焦还不够，华为又给手机外挂了一支镜头？" loading="lazy"><span class="meta-l"><span class="play">772</span></span><span class="dur">02:07</span><span class="tp">2 亿长焦还不够，华为又给手机外挂了一支镜头？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1B71VB7E3B/" target="_blank" rel="noopener" title="2025年vivoX300pro到底可以带来什么样的影像体验？" aria-label="2025年vivoX300pro到底可以带来什么样的影像体验？"><img src="assets/digital/10_BV1B71VB7E3B.webp" alt="2025年vivoX300pro到底可以带来什么样的影像体验？" loading="lazy"><span class="meta-l"><span class="play">400</span></span><span class="dur">04:05</span><span class="tp">2025年vivoX300pro到底可以带来什么样的影像体验？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1qth16zE1r/" target="_blank" rel="noopener" title="三天三台旗舰，等等党天塌了？北京无人机新规出台？" aria-label="三天三台旗舰，等等党天塌了？北京无人机新规出台？"><img src="assets/digital/11_BV1qth16zE1r.webp" alt="三天三台旗舰，等等党天塌了？北京无人机新规出台？" loading="lazy"><span class="meta-l"><span class="play">345</span></span><span class="dur">02:08</span><span class="tp">三天三台旗舰，等等党天塌了？北京无人机新规出台？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1XgaZ6eEMi/" target="_blank" rel="noopener" title="别花千元买 CCD 了，45 块的老 iPhone 拍出来也很对味" aria-label="别花千元买 CCD 了，45 块的老 iPhone 拍出来也很对味"><img src="assets/digital/12_BV1XgaZ6eEMi.webp" alt="别花千元买 CCD 了，45 块的老 iPhone 拍出来也很对味" loading="lazy"><span class="meta-l"><span class="play">200</span></span><span class="dur">02:21</span><span class="tp">别花千元买 CCD 了，45 块的老 iPhone 拍出来也很对味</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV18kYv6TEso/" target="_blank" rel="noopener" title="9月数码圈直接封神｜华为苹果小米大折叠正面刚" aria-label="9月数码圈直接封神｜华为苹果小米大折叠正面刚"><img src="assets/digital/13_BV18kYv6TEso.webp" alt="9月数码圈直接封神｜华为苹果小米大折叠正面刚" loading="lazy"><span class="meta-l"><span class="play">160</span></span><span class="dur">02:42</span><span class="tp">9月数码圈直接封神｜华为苹果小米大折叠正面刚</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV13qaB65E4q/" target="_blank" rel="noopener" title="逆光脸黑？3种测光模式怎么选？" aria-label="逆光脸黑？3种测光模式怎么选？"><img src="assets/digital/14_BV13qaB65E4q.webp" alt="逆光脸黑？3种测光模式怎么选？" loading="lazy"><span class="meta-l"><span class="play">157</span></span><span class="dur">01:56</span><span class="tp">逆光脸黑？3种测光模式怎么选？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1cKh56sEpS/" target="_blank" rel="noopener" title="小米玄戒O3发布！GPU性能暴涨85%却更省电？到底OK不OK？" aria-label="小米玄戒O3发布！GPU性能暴涨85%却更省电？到底OK不OK？"><img src="assets/digital/15_BV1cKh56sEpS.webp" alt="小米玄戒O3发布！GPU性能暴涨85%却更省电？到底OK不OK？" loading="lazy"><span class="meta-l"><span class="play">152</span></span><span class="dur">01:09</span><span class="tp">小米玄戒O3发布！GPU性能暴涨85%却更省电？到底OK不OK？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1oies6WEUE/" target="_blank" rel="noopener" title="曝光补偿到底是什么？该怎么用？拍照总发灰？该如何解决？" aria-label="曝光补偿到底是什么？该怎么用？拍照总发灰？该如何解决？"><img src="assets/digital/16_BV1oies6WEUE.webp" alt="曝光补偿到底是什么？该怎么用？拍照总发灰？该如何解决？" loading="lazy"><span class="meta-l"><span class="play">139</span></span><span class="dur">02:31</span><span class="tp">曝光补偿到底是什么？该怎么用？拍照总发灰？该如何解决？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1xFbL68Enk/" target="_blank" rel="noopener" title="小米华为苹果巅峰对决？AGI时代要来了？ 上周数码圈有点意思~" aria-label="小米华为苹果巅峰对决？AGI时代要来了？ 上周数码圈有点意思~"><img src="assets/digital/17_BV1xFbL68Enk.webp" alt="小米华为苹果巅峰对决？AGI时代要来了？ 上周数码圈有点意思~" loading="lazy"><span class="meta-l"><span class="play">133</span></span><span class="dur">02:41</span><span class="tp">小米华为苹果巅峰对决？AGI时代要来了？ 上周数码圈有点意思~</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1iVtD6CErt/" target="_blank" rel="noopener" title="两亿像素手机被两千万像素微单吊打？高像素为什么不等于高画质" aria-label="两亿像素手机被两千万像素微单吊打？高像素为什么不等于高画质"><img src="assets/digital/18_BV1iVtD6CErt.webp" alt="两亿像素手机被两千万像素微单吊打？高像素为什么不等于高画质" loading="lazy"><span class="meta-l"><span class="play">121</span></span><span class="dur">03:51</span><span class="tp">两亿像素手机被两千万像素微单吊打？高像素为什么不等于高画质</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1hze86oEaw/" target="_blank" rel="noopener" title="佳能新机一发布，评论区全是索索索？9月惊喜还有些啥？📷" aria-label="佳能新机一发布，评论区全是索索索？9月惊喜还有些啥？📷"><img src="assets/digital/19_BV1hze86oEaw.webp" alt="佳能新机一发布，评论区全是索索索？9月惊喜还有些啥？📷" loading="lazy"><span class="meta-l"><span class="play">107</span></span><span class="dur">03:19</span><span class="tp">佳能新机一发布，评论区全是索索索？9月惊喜还有些啥？📷</span></a></div>
+<div class="grp-t fade"><h3>早期频道 · CreeperWEN</h3><span class="fl"></span><span class="n">32 条</span></div>
+<p class="grp-sub fade">学生时代做的旧号，从折腾二手硬件、老设备捡漏开始，是后来做数码评测的起点。</p>
+<div class="hcards"><a class="hc fade" href="https://www.bilibili.com/video/BV1VJ4m1p7xg/" target="_blank" rel="noopener" title="2000不到的初代A7在2024年能否再战？" aria-label="2000不到的初代A7在2024年能否再战？"><img src="assets/digital/20_BV1VJ4m1p7xg.webp" alt="2000不到的初代A7在2024年能否再战？" loading="lazy"><span class="meta-l"><span class="play">6.4万</span><span class="yr">2024</span></span><span class="dur">06:51</span><span class="tp">2000不到的初代A7在2024年能否再战？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1tu411N76Y/" target="_blank" rel="noopener" title="一根显卡延长线烧了我俩张显卡" aria-label="一根显卡延长线烧了我俩张显卡"><img src="assets/digital/21_BV1tu411N76Y.webp" alt="一根显卡延长线烧了我俩张显卡" loading="lazy"><span class="meta-l"><span class="play">6.2万</span><span class="yr">2023</span></span><span class="dur">02:33</span><span class="tp">一根显卡延长线烧了我俩张显卡</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1PH4y1a7MQ/" target="_blank" rel="noopener" title="2024年一千五的Macbook pro 2015使用体验如何（mbp15/macos） 制作" aria-label="2024年一千五的Macbook pro 2015使用体验如何（mbp15/macos） 制作"><img src="assets/digital/22_BV1PH4y1a7MQ.webp" alt="2024年一千五的Macbook pro 2015使用体验如何（mbp15/macos） 制作" loading="lazy"><span class="meta-l"><span class="play">6万</span><span class="yr">2024</span></span><span class="dur">03:44</span><span class="tp">2024年一千五的Macbook pro 2015使用体验如何（mbp15/macos） 制作</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1BJ411J7Zr/" target="_blank" rel="noopener" title="144元的双系统手机？手机运行win10？ Lumia920" aria-label="144元的双系统手机？手机运行win10？ Lumia920"><img src="assets/digital/23_BV1BJ411J7Zr.webp" alt="144元的双系统手机？手机运行win10？ Lumia920" loading="lazy"><span class="meta-l"><span class="play">3.6万</span><span class="yr">2020</span></span><span class="dur">08:53</span><span class="tp">144元的双系统手机？手机运行win10？ Lumia920</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1gE4m1R79w/" target="_blank" rel="noopener" title="1400的大疆mini2无人机 现如今体验如何" aria-label="1400的大疆mini2无人机 现如今体验如何"><img src="assets/digital/24_BV1gE4m1R79w.webp" alt="1400的大疆mini2无人机 现如今体验如何" loading="lazy"><span class="meta-l"><span class="play">2.4万</span><span class="yr">2024</span></span><span class="dur">05:56</span><span class="tp">1400的大疆mini2无人机 现如今体验如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1ocigezEVY/" target="_blank" rel="noopener" title="1999搭载M1的Macmini现如今体验如何/MuMu模拟器Pro在Macmini-M1测评" aria-label="1999搭载M1的Macmini现如今体验如何/MuMu模拟器Pro在Macmini-M1测评"><img src="assets/digital/25_BV1ocigezEVY.webp" alt="1999搭载M1的Macmini现如今体验如何/MuMu模拟器Pro在Macmini-M1测评" loading="lazy"><span class="meta-l"><span class="play">2.1万</span><span class="yr">2024</span></span><span class="dur">06:20</span><span class="tp">1999搭载M1的Macmini现如今体验如何/MuMu模拟器Pro在Macmini-M1测评</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV19Y91YxEAT/" target="_blank" rel="noopener" title="1200的小米平板5pro现如今体验如何？" aria-label="1200的小米平板5pro现如今体验如何？"><img src="assets/digital/26_BV19Y91YxEAT.webp" alt="1200的小米平板5pro现如今体验如何？" loading="lazy"><span class="meta-l"><span class="play">1.9万</span><span class="yr">2025</span></span><span class="dur">06:09</span><span class="tp">1200的小米平板5pro现如今体验如何？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1bW411n7Q5/" target="_blank" rel="noopener" title="假如你的内存翻了8倍" aria-label="假如你的内存翻了8倍"><img src="assets/digital/27_BV1bW411n7Q5.webp" alt="假如你的内存翻了8倍" loading="lazy"><span class="meta-l"><span class="play">1.9万</span><span class="yr">2018</span></span><span class="dur">04:38</span><span class="tp">假如你的内存翻了8倍</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV12s411c7KP/" target="_blank" rel="noopener" title="开箱+评测" aria-label="开箱+评测"><img src="assets/digital/28_BV12s411c7KP.webp" alt="开箱+评测" loading="lazy"><span class="meta-l"><span class="play">1.6万</span><span class="yr">2018</span></span><span class="dur">17:34</span><span class="tp">开箱+评测</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV16x411J7d7/" target="_blank" rel="noopener" title="当你将你的祖传集成显卡 换成AMD R7 240" aria-label="当你将你的祖传集成显卡 换成AMD R7 240"><img src="assets/digital/29_BV16x411J7d7.webp" alt="当你将你的祖传集成显卡 换成AMD R7 240" loading="lazy"><span class="meta-l"><span class="play">1.6万</span><span class="yr">2017</span></span><span class="dur">02:36</span><span class="tp">当你将你的祖传集成显卡 换成AMD R7 240</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1xc411C7ez/" target="_blank" rel="noopener" title="如何Ai快速将代码转换成流程图？帮助你完成课程设计" aria-label="如何Ai快速将代码转换成流程图？帮助你完成课程设计"><img src="assets/digital/30_BV1xc411C7ez.webp" alt="如何Ai快速将代码转换成流程图？帮助你完成课程设计" loading="lazy"><span class="meta-l"><span class="play">1.4万</span><span class="yr">2023</span></span><span class="dur">01:24</span><span class="tp">如何Ai快速将代码转换成流程图？帮助你完成课程设计</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV16N2UYoEut/" target="_blank" rel="noopener" title="1400的大疆pocket2全能套现如今体验如何？" aria-label="1400的大疆pocket2全能套现如今体验如何？"><img src="assets/digital/31_BV16N2UYoEut.webp" alt="1400的大疆pocket2全能套现如今体验如何？" loading="lazy"><span class="meta-l"><span class="play">1.3万</span><span class="yr">2024</span></span><span class="dur">05:29</span><span class="tp">1400的大疆pocket2全能套现如今体验如何？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1J7411W7bK/" target="_blank" rel="noopener" title="200元能玩MC的windows的寨板？ 寨板在今天还有什么样的体验" aria-label="200元能玩MC的windows的寨板？ 寨板在今天还有什么样的体验"><img src="assets/digital/32_BV1J7411W7bK.webp" alt="200元能玩MC的windows的寨板？ 寨板在今天还有什么样的体验" loading="lazy"><span class="meta-l"><span class="play">1.3万</span><span class="yr">2020</span></span><span class="dur">13:04</span><span class="tp">200元能玩MC的windows的寨板？ 寨板在今天还有什么样的体验</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV15J411E7sP/" target="_blank" rel="noopener" title="350元能打王者的2K娱乐平板 JDtab简单评测" aria-label="350元能打王者的2K娱乐平板 JDtab简单评测"><img src="assets/digital/33_BV15J411E7sP.webp" alt="350元能打王者的2K娱乐平板 JDtab简单评测" loading="lazy"><span class="meta-l"><span class="play">1.3万</span><span class="yr">2020</span></span><span class="dur">09:31</span><span class="tp">350元能打王者的2K娱乐平板 JDtab简单评测</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1CVGDzfE1Q/" target="_blank" rel="noopener" title="计算摄影非常能打？ vivo X200S影像体验 到底如何" aria-label="计算摄影非常能打？ vivo X200S影像体验 到底如何"><img src="assets/digital/34_BV1CVGDzfE1Q.webp" alt="计算摄影非常能打？ vivo X200S影像体验 到底如何" loading="lazy"><span class="meta-l"><span class="play">8820</span><span class="yr">2025</span></span><span class="dur">04:06</span><span class="tp">计算摄影非常能打？ vivo X200S影像体验 到底如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1DW411a7Xe/" target="_blank" rel="noopener" title="笔记本安装内存条 Creepr_WEN搞机" aria-label="笔记本安装内存条 Creepr_WEN搞机"><img src="assets/digital/35_BV1DW411a7Xe.webp" alt="笔记本安装内存条 Creepr_WEN搞机" loading="lazy"><span class="meta-l"><span class="play">6103</span><span class="yr">2017</span></span><span class="dur">09:39</span><span class="tp">笔记本安装内存条 Creepr_WEN搞机</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1zGYFe6Ewc/" target="_blank" rel="noopener" title="适配M系列芯片的安卓模拟器?MuMu 模拟器pro使用体验" aria-label="适配M系列芯片的安卓模拟器?MuMu 模拟器pro使用体验"><img src="assets/digital/36_BV1zGYFe6Ewc.webp" alt="适配M系列芯片的安卓模拟器?MuMu 模拟器pro使用体验" loading="lazy"><span class="meta-l"><span class="play">6065</span><span class="yr">2024</span></span><span class="dur">03:07</span><span class="tp">适配M系列芯片的安卓模拟器?MuMu 模拟器pro使用体验</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1LD4y1U79E/" target="_blank" rel="noopener" title="150的iPhone5s如今还能再战吗" aria-label="150的iPhone5s如今还能再战吗"><img src="assets/digital/37_BV1LD4y1U79E.webp" alt="150的iPhone5s如今还能再战吗" loading="lazy"><span class="meta-l"><span class="play">4517</span><span class="yr">2020</span></span><span class="dur">07:24</span><span class="tp">150的iPhone5s如今还能再战吗</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV14x4y1x7oB/" target="_blank" rel="noopener" title="13000收的索尼a6700大全套到底值不值" aria-label="13000收的索尼a6700大全套到底值不值"><img src="assets/digital/38_BV14x4y1x7oB.webp" alt="13000收的索尼a6700大全套到底值不值" loading="lazy"><span class="meta-l"><span class="play">4160</span><span class="yr">2024</span></span><span class="dur">10:41</span><span class="tp">13000收的索尼a6700大全套到底值不值</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV14b411V7Bh/" target="_blank" rel="noopener" title="拼夕夕9.9买的磁吸式充电线 充电效果怎么样呢？" aria-label="拼夕夕9.9买的磁吸式充电线 充电效果怎么样呢？"><img src="assets/digital/39_BV14b411V7Bh.webp" alt="拼夕夕9.9买的磁吸式充电线 充电效果怎么样呢？" loading="lazy"><span class="meta-l"><span class="play">2990</span><span class="yr">2019</span></span><span class="dur">04:44</span><span class="tp">拼夕夕9.9买的磁吸式充电线 充电效果怎么样呢？</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV18z4y1f7cT/" target="_blank" rel="noopener" title="3DS——曾经的掌机王者" aria-label="3DS——曾经的掌机王者"><img src="assets/digital/40_BV18z4y1f7cT.webp" alt="3DS——曾经的掌机王者" loading="lazy"><span class="meta-l"><span class="play">2851</span><span class="yr">2020</span></span><span class="dur">05:28</span><span class="tp">3DS——曾经的掌机王者</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1sb411C7Kj/" target="_blank" rel="noopener" title="小鸡手柄G4多玩我的世界版开箱" aria-label="小鸡手柄G4多玩我的世界版开箱"><img src="assets/digital/41_BV1sb411C7Kj.webp" alt="小鸡手柄G4多玩我的世界版开箱" loading="lazy"><span class="meta-l"><span class="play">2551</span><span class="yr">2019</span></span><span class="dur">10:48</span><span class="tp">小鸡手柄G4多玩我的世界版开箱</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1JKpQzSEFW/" target="_blank" rel="noopener" title="1700的Insta360AcePro运动相机现如今体验咋样" aria-label="1700的Insta360AcePro运动相机现如今体验咋样"><img src="assets/digital/42_BV1JKpQzSEFW.webp" alt="1700的Insta360AcePro运动相机现如今体验咋样" loading="lazy"><span class="meta-l"><span class="play">1694</span><span class="yr">2025</span></span><span class="dur">07:00</span><span class="tp">1700的Insta360AcePro运动相机现如今体验咋样</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV19t411n7He/" target="_blank" rel="noopener" title="60块钱的16GB的iphone?" aria-label="60块钱的16GB的iphone?"><img src="assets/digital/43_BV19t411n7He.webp" alt="60块钱的16GB的iphone?" loading="lazy"><span class="meta-l"><span class="play">1455</span><span class="yr">2019</span></span><span class="dur">08:00</span><span class="tp">60块钱的16GB的iphone?</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1x9saeWEkE/" target="_blank" rel="noopener" title="嘿！教授刘福江喊你来唠嗑啦，超有趣" aria-label="嘿！教授刘福江喊你来唠嗑啦，超有趣"><img src="assets/digital/44_BV1x9saeWEkE.webp" alt="嘿！教授刘福江喊你来唠嗑啦，超有趣" loading="lazy"><span class="meta-l"><span class="play">1341</span><span class="yr">2024</span></span><span class="dur">26:37</span><span class="tp">嘿！教授刘福江喊你来唠嗑啦，超有趣</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1mMrxYZE3W/" target="_blank" rel="noopener" title="国产高性价比半画幅人文扫街头来了！永诺索尼e卡口23mmF1.4新品体验！等效35mm大光圈人文扫街镜头！" aria-label="国产高性价比半画幅人文扫街头来了！永诺索尼e卡口23mmF1.4新品体验！等效35mm大光圈人文扫街镜头！"><img src="assets/digital/45_BV1mMrxYZE3W.webp" alt="国产高性价比半画幅人文扫街头来了！永诺索尼e卡口23mmF1.4新品体验！等效35mm大光圈人文扫街镜头！" loading="lazy"><span class="meta-l"><span class="play">1151</span><span class="yr">2025</span></span><span class="dur">03:07</span><span class="tp">国产高性价比半画幅人文扫街头来了！永诺索尼e卡口23mmF1.4新品体验！等效35mm大光圈人文扫街镜头！</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1bF411C7w1/" target="_blank" rel="noopener" title="仅需2400元的黑苹果双系统ITX主机" aria-label="仅需2400元的黑苹果双系统ITX主机"><img src="assets/digital/46_BV1bF411C7w1.webp" alt="仅需2400元的黑苹果双系统ITX主机" loading="lazy"><span class="meta-l"><span class="play">940</span><span class="yr">2023</span></span><span class="dur">06:13</span><span class="tp">仅需2400元的黑苹果双系统ITX主机</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1GRwreNEKM/" target="_blank" rel="noopener" title="大疆flip 可折叠航拍vlog无人机 开箱初体验!" aria-label="大疆flip 可折叠航拍vlog无人机 开箱初体验!"><img src="assets/digital/47_BV1GRwreNEKM.webp" alt="大疆flip 可折叠航拍vlog无人机 开箱初体验!" loading="lazy"><span class="meta-l"><span class="play">623</span><span class="yr">2025</span></span><span class="dur">11:42</span><span class="tp">大疆flip 可折叠航拍vlog无人机 开箱初体验!</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1AW411274n/" target="_blank" rel="noopener" title="吃鸡神器是否像JS说的那么神奇" aria-label="吃鸡神器是否像JS说的那么神奇"><img src="assets/digital/48_BV1AW411274n.webp" alt="吃鸡神器是否像JS说的那么神奇" loading="lazy"><span class="meta-l"><span class="play">488</span><span class="yr">2018</span></span><span class="dur">16:16</span><span class="tp">吃鸡神器是否像JS说的那么神奇</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1sh4y117Z9/" target="_blank" rel="noopener" title="仅需200元的完全远程控制的下载机使用体验如何" aria-label="仅需200元的完全远程控制的下载机使用体验如何"><img src="assets/digital/49_BV1sh4y117Z9.webp" alt="仅需200元的完全远程控制的下载机使用体验如何" loading="lazy"><span class="meta-l"><span class="play">319</span><span class="yr">2023</span></span><span class="dur">04:00</span><span class="tp">仅需200元的完全远程控制的下载机使用体验如何</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV1U7wjepEjx/" target="_blank" rel="noopener" title="来地大之前vs来地大之后" aria-label="来地大之前vs来地大之后"><img src="assets/digital/50_BV1U7wjepEjx.webp" alt="来地大之前vs来地大之后" loading="lazy"><span class="meta-l"><span class="play">183</span><span class="yr">2025</span></span><span class="dur">01:52</span><span class="tp">来地大之前vs来地大之后</span></a><a class="hc fade" href="https://www.bilibili.com/video/BV12oFYzpEdk/" target="_blank" rel="noopener" title="听说你也想来看看像素地大#1" aria-label="听说你也想来看看像素地大#1"><img src="assets/digital/51_BV12oFYzpEdk.webp" alt="听说你也想来看看像素地大#1" loading="lazy"><span class="meta-l"><span class="play">129</span><span class="yr">2026</span></span><span class="dur">00:40</span><span class="tp">听说你也想来看看像素地大#1</span></a></div>
+<div class="dmore g fade"><div><div class="mt">更多视频在 B 站主页</div><div class="ms">两个账号的完整作品、更新预告都在这里。</div></div><a href="https://space.bilibili.com/3546635227367625" target="_blank" rel="noopener">前往新号主页 <span>↗</span></a></div>
+</div></section>
+<section id="photo"><div class="wrap">
+<div class="sec-head fade"><span class="num">三</span><h2>摄影</h2><span class="sec-en">Photography</span></div>
+<p class="sec-sub fade">视觉中国签约摄影师 · 光厂签约创作人 · 米拍新秀摄影师 · NiSi 地标摄影师，无人机累计飞行 50 小时以上。拍摄从拍摄到后期可以一个人完成。</p>
+<div class="pills g fade" id="pills">
+<button class="pill on" data-k="all">全部 <span class="c">85</span></button>
+<button class="pill" data-k="aerial">一 航拍 <span class="c">12</span></button>
+<button class="pill" data-k="doc">二 纪实 <span class="c">8</span></button>
+<button class="pill" data-k="event">三 活动 <span class="c">9</span></button>
+<button class="pill" data-k="land">四 风光 <span class="c">12</span></button>
+<button class="pill" data-k="human">五 人文 <span class="c">9</span></button>
+<button class="pill" data-k="arch">六 建筑 <span class="c">12</span></button>
+<button class="pill" data-k="portrait">七 人像 <span class="c">14</span></button>
+<button class="pill" data-k="still">八 静物 <span class="c">9</span></button>
+</div><div id="photos">
+<div class="pcat fade" data-cat="aerial"><div class="pcat-h"><span class="pn">一</span><h3>航拍</h3><span class="en">Aerial</span><span class="fl"></span><span class="n">12 张</span></div><p class="grp-sub">无人机视角下的城市街区、古建与山野。</p>
+<div class="pwall">
+<figure data-r="1.3437"><img src="assets/photo2/t/aerial_01.jpg" data-full="assets/photo2/aerial_01.jpg" alt="航拍 · 01" loading="lazy"><figcaption>航拍 · 01</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_02.jpg" data-full="assets/photo2/aerial_02.jpg" alt="航拍 · 02" loading="lazy"><figcaption>航拍 · 02</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_03.jpg" data-full="assets/photo2/aerial_03.jpg" alt="航拍 · 03" loading="lazy"><figcaption>航拍 · 03</figcaption></figure>
+<figure data-r="1.6538"><img src="assets/photo2/t/aerial_04.jpg" data-full="assets/photo2/aerial_04.jpg" alt="航拍 · 04" loading="lazy"><figcaption>航拍 · 04</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_05.jpg" data-full="assets/photo2/aerial_05.jpg" alt="航拍 · 05" loading="lazy"><figcaption>航拍 · 05</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_06.jpg" data-full="assets/photo2/aerial_06.jpg" alt="航拍 · 06" loading="lazy"><figcaption>航拍 · 06</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_07.jpg" data-full="assets/photo2/aerial_07.jpg" alt="航拍 · 07" loading="lazy"><figcaption>航拍 · 07</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_08.jpg" data-full="assets/photo2/aerial_08.jpg" alt="航拍 · 08" loading="lazy"><figcaption>航拍 · 08</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/aerial_09.jpg" data-full="assets/photo2/aerial_09.jpg" alt="航拍 · 09" loading="lazy"><figcaption>航拍 · 09</figcaption></figure>
+<figure data-r="1.2450"><img src="assets/photo2/t/aerial_10.jpg" data-full="assets/photo2/aerial_10.jpg" alt="航拍 · 10" loading="lazy"><figcaption>航拍 · 10</figcaption></figure>
+<figure data-r="0.5617"><img src="assets/photo2/t/aerial_11.jpg" data-full="assets/photo2/aerial_11.jpg" alt="航拍 · 11" loading="lazy"><figcaption>航拍 · 11</figcaption></figure>
+<figure data-r="1.6490"><img src="assets/photo2/t/aerial_12.jpg" data-full="assets/photo2/aerial_12.jpg" alt="航拍 · 12" loading="lazy"><figcaption>航拍 · 12</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="doc"><div class="pcat-h"><span class="pn">二</span><h3>纪实</h3><span class="en">Documentary</span><span class="fl"></span><span class="n">8 张</span></div><p class="grp-sub">现场跟拍，不摆拍。湖上的日出、支教课堂里的孩子。</p>
+<div class="pwall">
+<figure data-r="1.3940"><img src="assets/photo2/t/doc_01.jpg" data-full="assets/photo2/doc_01.jpg" alt="纪实 · 01" loading="lazy"><figcaption>纪实 · 01</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/doc_02.jpg" data-full="assets/photo2/doc_02.jpg" alt="纪实 · 02" loading="lazy"><figcaption>纪实 · 02</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/doc_03.jpg" data-full="assets/photo2/doc_03.jpg" alt="纪实 · 03" loading="lazy"><figcaption>纪实 · 03</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/doc_04.jpg" data-full="assets/photo2/doc_04.jpg" alt="纪实 · 04" loading="lazy"><figcaption>纪实 · 04</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/doc_05.jpg" data-full="assets/photo2/doc_05.jpg" alt="纪实 · 05" loading="lazy"><figcaption>纪实 · 05</figcaption></figure>
+<figure data-r="0.7191"><img src="assets/photo2/t/doc_06.jpg" data-full="assets/photo2/doc_06.jpg" alt="纪实 · 06" loading="lazy"><figcaption>纪实 · 06</figcaption></figure>
+<figure data-r="1.5027"><img src="assets/photo2/t/doc_07.jpg" data-full="assets/photo2/doc_07.jpg" alt="纪实 · 07" loading="lazy"><figcaption>纪实 · 07</figcaption></figure>
+<figure data-r="0.7478"><img src="assets/photo2/t/doc_08.jpg" data-full="assets/photo2/doc_08.jpg" alt="纪实 · 08" loading="lazy"><figcaption>纪实 · 08</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="event"><div class="pcat-h"><span class="pn">三</span><h3>活动</h3><span class="en">Event</span><span class="fl"></span><span class="n">9 张</span></div><p class="grp-sub">校园活动与城市夜间现场，人多光杂，靠抓拍。</p>
+<div class="pwall">
+<figure data-r="1.3634"><img src="assets/photo2/t/event_01.jpg" data-full="assets/photo2/event_01.jpg" alt="活动 · 01" loading="lazy"><figcaption>活动 · 01</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/event_02.jpg" data-full="assets/photo2/event_02.jpg" alt="活动 · 02" loading="lazy"><figcaption>活动 · 02</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/event_03.jpg" data-full="assets/photo2/event_03.jpg" alt="活动 · 03" loading="lazy"><figcaption>活动 · 03</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/event_04.jpg" data-full="assets/photo2/event_04.jpg" alt="活动 · 04" loading="lazy"><figcaption>活动 · 04</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/event_05.jpg" data-full="assets/photo2/event_05.jpg" alt="活动 · 05" loading="lazy"><figcaption>活动 · 05</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/event_06.jpg" data-full="assets/photo2/event_06.jpg" alt="活动 · 06" loading="lazy"><figcaption>活动 · 06</figcaption></figure>
+<figure data-r="1.7803"><img src="assets/photo2/t/event_07.jpg" data-full="assets/photo2/event_07.jpg" alt="活动 · 07" loading="lazy"><figcaption>活动 · 07</figcaption></figure>
+<figure data-r="1.3246"><img src="assets/photo2/t/event_08.jpg" data-full="assets/photo2/event_08.jpg" alt="活动 · 08" loading="lazy"><figcaption>活动 · 08</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/event_09.jpg" data-full="assets/photo2/event_09.jpg" alt="活动 · 09" loading="lazy"><figcaption>活动 · 09</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="land"><div class="pcat-h"><span class="pn">四</span><h3>风光</h3><span class="en">Landscape</span><span class="fl"></span><span class="n">12 张</span></div><p class="grp-sub">星空、雪山与季节变化。</p>
+<div class="pwall">
+<figure data-r="1.3341"><img src="assets/photo2/t/land_01.jpg" data-full="assets/photo2/land_01.jpg" alt="风光 · 01" loading="lazy"><figcaption>风光 · 01</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/land_02.jpg" data-full="assets/photo2/land_02.jpg" alt="风光 · 02" loading="lazy"><figcaption>风光 · 02</figcaption></figure>
+<figure data-r="1.3184"><img src="assets/photo2/t/land_03.jpg" data-full="assets/photo2/land_03.jpg" alt="风光 · 03" loading="lazy"><figcaption>风光 · 03</figcaption></figure>
+<figure data-r="1.5027"><img src="assets/photo2/t/land_04.jpg" data-full="assets/photo2/land_04.jpg" alt="风光 · 04" loading="lazy"><figcaption>风光 · 04</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_05.jpg" data-full="assets/photo2/land_05.jpg" alt="风光 · 05" loading="lazy"><figcaption>风光 · 05</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_06.jpg" data-full="assets/photo2/land_06.jpg" alt="风光 · 06" loading="lazy"><figcaption>风光 · 06</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_07.jpg" data-full="assets/photo2/land_07.jpg" alt="风光 · 07" loading="lazy"><figcaption>风光 · 07</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_08.jpg" data-full="assets/photo2/land_08.jpg" alt="风光 · 08" loading="lazy"><figcaption>风光 · 08</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_09.jpg" data-full="assets/photo2/land_09.jpg" alt="风光 · 09" loading="lazy"><figcaption>风光 · 09</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_10.jpg" data-full="assets/photo2/land_10.jpg" alt="风光 · 10" loading="lazy"><figcaption>风光 · 10</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_11.jpg" data-full="assets/photo2/land_11.jpg" alt="风光 · 11" loading="lazy"><figcaption>风光 · 11</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/land_12.jpg" data-full="assets/photo2/land_12.jpg" alt="风光 · 12" loading="lazy"><figcaption>风光 · 12</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="human"><div class="pcat-h"><span class="pn">五</span><h3>人文</h3><span class="en">Humanity</span><span class="fl"></span><span class="n">9 张</span></div><p class="grp-sub">校园里的日常：操场上的列队、草地上躺着看书的午后。</p>
+<div class="pwall">
+<figure data-r="1.3341"><img src="assets/photo2/t/human_01.jpg" data-full="assets/photo2/human_01.jpg" alt="人文 · 01" loading="lazy"><figcaption>人文 · 01</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/human_02.jpg" data-full="assets/photo2/human_02.jpg" alt="人文 · 02" loading="lazy"><figcaption>人文 · 02</figcaption></figure>
+<figure data-r="0.7496"><img src="assets/photo2/t/human_03.jpg" data-full="assets/photo2/human_03.jpg" alt="人文 · 03" loading="lazy"><figcaption>人文 · 03</figcaption></figure>
+<figure data-r="0.6047"><img src="assets/photo2/t/human_04.jpg" data-full="assets/photo2/human_04.jpg" alt="人文 · 04" loading="lazy"><figcaption>人文 · 04</figcaption></figure>
+<figure data-r="0.6154"><img src="assets/photo2/t/human_05.jpg" data-full="assets/photo2/human_05.jpg" alt="人文 · 05" loading="lazy"><figcaption>人文 · 05</figcaption></figure>
+<figure data-r="1.4045"><img src="assets/photo2/t/human_06.jpg" data-full="assets/photo2/human_06.jpg" alt="人文 · 06" loading="lazy"><figcaption>人文 · 06</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/human_07.jpg" data-full="assets/photo2/human_07.jpg" alt="人文 · 07" loading="lazy"><figcaption>人文 · 07</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/human_08.jpg" data-full="assets/photo2/human_08.jpg" alt="人文 · 08" loading="lazy"><figcaption>人文 · 08</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/human_09.jpg" data-full="assets/photo2/human_09.jpg" alt="人文 · 09" loading="lazy"><figcaption>人文 · 09</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="arch"><div class="pcat-h"><span class="pn">六</span><h3>建筑</h3><span class="en">Architecture</span><span class="fl"></span><span class="n">12 张</span></div><p class="grp-sub">住宅群、校园建筑与园林古塔，看结构和光。</p>
+<div class="pwall">
+<figure data-r="1.3341"><img src="assets/photo2/t/arch_01.jpg" data-full="assets/photo2/arch_01.jpg" alt="建筑 · 01" loading="lazy"><figcaption>建筑 · 01</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/arch_02.jpg" data-full="assets/photo2/arch_02.jpg" alt="建筑 · 02" loading="lazy"><figcaption>建筑 · 02</figcaption></figure>
+<figure data-r="0.7764"><img src="assets/photo2/t/arch_03.jpg" data-full="assets/photo2/arch_03.jpg" alt="建筑 · 03" loading="lazy"><figcaption>建筑 · 03</figcaption></figure>
+<figure data-r="0.6404"><img src="assets/photo2/t/arch_04.jpg" data-full="assets/photo2/arch_04.jpg" alt="建筑 · 04" loading="lazy"><figcaption>建筑 · 04</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/arch_05.jpg" data-full="assets/photo2/arch_05.jpg" alt="建筑 · 05" loading="lazy"><figcaption>建筑 · 05</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/arch_06.jpg" data-full="assets/photo2/arch_06.jpg" alt="建筑 · 06" loading="lazy"><figcaption>建筑 · 06</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/arch_07.jpg" data-full="assets/photo2/arch_07.jpg" alt="建筑 · 07" loading="lazy"><figcaption>建筑 · 07</figcaption></figure>
+<figure data-r="0.7871"><img src="assets/photo2/t/arch_08.jpg" data-full="assets/photo2/arch_08.jpg" alt="建筑 · 08" loading="lazy"><figcaption>建筑 · 08</figcaption></figure>
+<figure data-r="1.3373"><img src="assets/photo2/t/arch_09.jpg" data-full="assets/photo2/arch_09.jpg" alt="建筑 · 09" loading="lazy"><figcaption>建筑 · 09</figcaption></figure>
+<figure data-r="1.3341"><img src="assets/photo2/t/arch_10.jpg" data-full="assets/photo2/arch_10.jpg" alt="建筑 · 10" loading="lazy"><figcaption>建筑 · 10</figcaption></figure>
+<figure data-r="1.4224"><img src="assets/photo2/t/arch_11.jpg" data-full="assets/photo2/arch_11.jpg" alt="建筑 · 11" loading="lazy"><figcaption>建筑 · 11</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/arch_12.jpg" data-full="assets/photo2/arch_12.jpg" alt="建筑 · 12" loading="lazy"><figcaption>建筑 · 12</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="portrait"><div class="pcat-h"><span class="pn">七</span><h3>人像</h3><span class="en">Portrait</span><span class="fl"></span><span class="n">14 张</span></div><p class="grp-sub">自然光下的人物肖像，多为逆光与侧光。</p>
+<div class="pwall">
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_01.jpg" data-full="assets/photo2/portrait_01.jpg" alt="人像 · 01" loading="lazy"><figcaption>人像 · 01</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/portrait_02.jpg" data-full="assets/photo2/portrait_02.jpg" alt="人像 · 02" loading="lazy"><figcaption>人像 · 02</figcaption></figure>
+<figure data-r="0.6547"><img src="assets/photo2/t/portrait_03.jpg" data-full="assets/photo2/portrait_03.jpg" alt="人像 · 03" loading="lazy"><figcaption>人像 · 03</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_04.jpg" data-full="assets/photo2/portrait_04.jpg" alt="人像 · 04" loading="lazy"><figcaption>人像 · 04</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_05.jpg" data-full="assets/photo2/portrait_05.jpg" alt="人像 · 05" loading="lazy"><figcaption>人像 · 05</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_06.jpg" data-full="assets/photo2/portrait_06.jpg" alt="人像 · 06" loading="lazy"><figcaption>人像 · 06</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_07.jpg" data-full="assets/photo2/portrait_07.jpg" alt="人像 · 07" loading="lazy"><figcaption>人像 · 07</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_08.jpg" data-full="assets/photo2/portrait_08.jpg" alt="人像 · 08" loading="lazy"><figcaption>人像 · 08</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_09.jpg" data-full="assets/photo2/portrait_09.jpg" alt="人像 · 09" loading="lazy"><figcaption>人像 · 09</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_10.jpg" data-full="assets/photo2/portrait_10.jpg" alt="人像 · 10" loading="lazy"><figcaption>人像 · 10</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/portrait_11.jpg" data-full="assets/photo2/portrait_11.jpg" alt="人像 · 11" loading="lazy"><figcaption>人像 · 11</figcaption></figure>
+<figure data-r="0.6708"><img src="assets/photo2/t/portrait_12.jpg" data-full="assets/photo2/portrait_12.jpg" alt="人像 · 12" loading="lazy"><figcaption>人像 · 12</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/portrait_13.jpg" data-full="assets/photo2/portrait_13.jpg" alt="人像 · 13" loading="lazy"><figcaption>人像 · 13</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/portrait_14.jpg" data-full="assets/photo2/portrait_14.jpg" alt="人像 · 14" loading="lazy"><figcaption>人像 · 14</figcaption></figure>
+</div></div>
+<div class="pcat fade" data-cat="still"><div class="pcat-h"><span class="pn">八</span><h3>静物</h3><span class="en">Still Life</span><span class="fl"></span><span class="n">9 张</span></div><p class="grp-sub">布光练习与小品，从夜里的一盏灯到树梢上的白鹭。</p>
+<div class="pwall">
+<figure data-r="1.4987"><img src="assets/photo2/t/still_01.jpg" data-full="assets/photo2/still_01.jpg" alt="静物 · 01" loading="lazy"><figcaption>静物 · 01</figcaption></figure>
+<figure data-r="1.0939"><img src="assets/photo2/t/still_02.jpg" data-full="assets/photo2/still_02.jpg" alt="静物 · 02" loading="lazy"><figcaption>静物 · 02</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/still_03.jpg" data-full="assets/photo2/still_03.jpg" alt="静物 · 03" loading="lazy"><figcaption>静物 · 03</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/still_04.jpg" data-full="assets/photo2/still_04.jpg" alt="静物 · 04" loading="lazy"><figcaption>静物 · 04</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/still_05.jpg" data-full="assets/photo2/still_05.jpg" alt="静物 · 05" loading="lazy"><figcaption>静物 · 05</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/still_06.jpg" data-full="assets/photo2/still_06.jpg" alt="静物 · 06" loading="lazy"><figcaption>静物 · 06</figcaption></figure>
+<figure data-r="2.3195"><img src="assets/photo2/t/still_07.jpg" data-full="assets/photo2/still_07.jpg" alt="静物 · 07" loading="lazy"><figcaption>静物 · 07</figcaption></figure>
+<figure data-r="0.6673"><img src="assets/photo2/t/still_08.jpg" data-full="assets/photo2/still_08.jpg" alt="静物 · 08" loading="lazy"><figcaption>静物 · 08</figcaption></figure>
+<figure data-r="1.4987"><img src="assets/photo2/t/still_09.jpg" data-full="assets/photo2/still_09.jpg" alt="静物 · 09" loading="lazy"><figcaption>静物 · 09</figcaption></figure>
+</div></div>
+</div></div></section>
+<section id="projects"><div class="wrap">
+<div class="sec-head fade"><span class="num">四</span><h2>AI 与编程实践</h2><span class="sec-en">AI &amp; Coding</span></div>
+<p class="sec-sub fade">七个项目分两段：前面三个把内容生产做成工具，后面四个是数据、算法与工程实践。每一条都写了技术栈和我实际动手做的部分——这些是我除了内容运营之外，能上手数据与工程的地方。</p>
+<div class="pjgroup">
+<div class="pjgroup-h fade"><span class="pn">一</span><h3>内容生产工具</h3><span class="en">CONTENT TOOLS</span><span class="fl"></span><span class="n">3 个项目</span></div><p class="grp-sub">三个把重复劳动做成工具的项目。都先用脚本把流程固定下来，再让内容批量产出。</p>
+<div class="pjcards">
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">01</span><span class="pjkind">单文件网站 · 可离线分发</span></div>
+<h4 class="pjtitle">「寻踪踏迹」个人作品集网站</h4>
+<p class="pjoneline">独立设计开发摄影作品集网站，成品为可离线分发的单文件。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>97</b><span>张影像作品收录</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">独立完成一个摄影作品集网站，从视觉设计、前端开发到内容编译一手处理。图库支持分类筛选与点击放大；页面文案由脚本读表生成，改内容不必动代码。最终把全部图片内嵌为单个 HTML 文件，无需服务器，微信或邮件直接发送即可打开。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>HTML</i><i>CSS</i><i>JavaScript</i><i>Python 脚本生成</i><i>Pillow 压缩</i><i>单文件内嵌</i></div></div></div>
+<div class="pjshots">
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/web_front.jpg" data-full="assets/projects/web_front.jpg" alt="前台首屏" loading="lazy"><figcaption>前台首屏</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/web_admin.jpg" data-full="assets/projects/web_admin.jpg" alt="内容管理后台" loading="lazy"><figcaption>内容管理后台</figcaption></figure>
+</div>
+</article>
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">02</span><span class="pjkind">B 站科普栏目 · 自动成片</span><span class="pjtag">开源项目优化改进</span></div>
+<h4 class="pjtitle">《数码原来如此》白板动画成片流水线</h4>
+<p class="pjoneline">为 B 站栏目搭建白板动画自动成片流水线，分镜进、成片出。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>3</b><span>期已交付科普成片</span></div>
+<div class="pjmetric"><b>1</b><span>套跨期复用的流水线</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">为 B 站科普栏目《数码原来如此》独立搭建一条白板动画成片流水线：把分镜表和字幕喂进去，按叙事顺序自动落笔，直接渲染导出 MP4，全程无需人工逐帧。高像素、曝光补偿、测光三期科普均由这条线产出。同一套流程可跨期复用，重复出片。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>分镜表驱动</i><i>AI 生图</i><i>字幕对齐</i><i>区间落笔</i><i>导出 MP4</i></div></div></div>
+<div class="pjshots">
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/sci_cover.jpg" data-full="assets/projects/sci_cover.jpg" alt="封面 · 两亿像素" loading="lazy"><figcaption>封面 · 两亿像素</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/sci_ep.jpg" data-full="assets/projects/sci_ep.jpg" alt="正片 · 曝光补偿" loading="lazy"><figcaption>正片 · 曝光补偿</figcaption></figure>
+</div>
+</article>
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">03</span><span class="pjkind">规则系统 · 一套骨架三类内容</span></div>
+<h4 class="pjtitle">「寻踪评」口播文案生产体系</h4>
+<p class="pjoneline">把口播文案生产归纳成可复用规则，一套骨架支撑三类内容。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>20+</b><span>篇已发布文案语料</span></div>
+<div class="pjmetric"><b>3</b><span>类内容复用同一骨架</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">独立搭建一套口播文案生产体系：从 20 多篇已发布文案中归纳语体规则，再用规则出稿。《评到底》长评测按设备参数与真实体验撰写，《新机有点意思》数码速报按固定流程从选题到成稿，极氪 30 秒口播沿用同一套骨架。速报素材按稿自动归集，采完即自动对应到段落。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>语体规则归纳</i><i>微博采集</i><i>选题排序</i><i>素材自动归集</i><i>字数硬约束</i></div></div></div>
+</article>
+</div></div>
+<div class="pjgroup">
+<div class="pjgroup-h fade"><span class="pn">二</span><h3>计算机基础实践</h3><span class="en">CS FUNDAMENTALS</span><span class="fl"></span><span class="n">4 个项目</span></div><p class="grp-sub">课程里从零实现的那部分：数据分析、文本分类、图像处理，以及一个完整的桌面应用。</p>
+<div class="pjcards">
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">04</span><span class="pjkind">数据 · 采集到可视化</span></div>
+<h4 class="pjtitle">B 站科普视频标题与传播效果分析</h4>
+<p class="pjoneline">用 400 条视频的互动数据，倒推「什么样的标题真的火」。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>400</b><span>条视频数据</span></div>
+<div class="pjmetric"><b>6</b><span>项互动指标加权</span></div>
+<div class="pjmetric"><b>5</b><span>类 LDA 主题</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">独立完成 B 站科普区 400 条视频的数据采集与分析：把「5.2 万」这类中文数值解析成数字完成清洗，分词过滤后对六项互动指标取对数平滑再加权构造热度分（硬币 15、分享 12、收藏 10、点赞 8、弹幕 6、播放 0.3），把权重回填到标题词上得到加权词频；再用 LDA 主题建模（K=5）和自定义情感词表做标注，最后用传播学框架解释结果。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>pandas</i><i>jieba 分词</i><i>对数平滑加权</i><i>LDA 主题建模（K=5）</i><i>情感词典匹配</i><i>WordCloud 词云</i><i>传播学框架分析</i></div></div></div>
+<div class="pjblock"><div class="pjlab">主要结论</div><ul class="pjnotes"><li>LDA 把 400 条标题归成五类主题：知识科普、现象解读、生活关联、专业原理、热点结合</li><li>「多视频中等热度」胜过「单视频爆款」：单条最高播放 882 万的「世界」，综合热度反不如覆盖 44 条视频的「科普」</li><li>情感倾向以中性理性为主（72%），悬念型弱情感占 25%、强情感仅 3%；悬念型标题的平均播放量高于中性理性标题</li><li>标题长度集中在 15–25 字（占 68%），20–25 字平均播放最高；超过 30 字会被 B 站列表页只显示前 20 字的规则截断</li></ul></div>
+<div class="pjshots">
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/data_wc.jpg" data-full="assets/projects/data_wc.jpg" alt="加权词云" loading="lazy"><figcaption>加权词云</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/data_top15.jpg" data-full="assets/projects/data_top15.jpg" alt="关键词 Top15" loading="lazy"><figcaption>关键词 Top15</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/data_lda.jpg" data-full="assets/projects/data_lda.jpg" alt="LDA 主题数评估" loading="lazy"><figcaption>LDA 主题数评估</figcaption></figure>
+</div>
+</article>
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">05</span><span class="pjkind">算法 · 不依赖现成库</span></div>
+<h4 class="pjtitle">中文新闻文本分类实验</h4>
+<p class="pjoneline">不依赖现成库，用 NumPy 从零实现三种文本分类算法。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>5</b><span>万条训练样本</span></div>
+<div class="pjmetric"><b>3</b><span>种从零手写的分类算法</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">基于 CNews 中文新闻数据集（10 类、5 万条训练样本），不依赖现成分类库、用 NumPy 从零实现三种经典分类算法，再用 Weka 平台跑同一组实验做对照验证。重点是把算法原理落到代码，并用对照实验交叉验证结果。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>NumPy 手写实现</i><i>朴素贝叶斯</i><i>ID3 决策树</i><i>KNN</i><i>Weka 对照实验</i><i>留出法 + 10 折交叉验证</i></div></div></div>
+<div class="pjshots">
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/cls_acc.jpg" data-full="assets/projects/cls_acc.jpg" alt="准确率对比" loading="lazy"><figcaption>准确率对比</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/cls_matrix.jpg" data-full="assets/projects/cls_matrix.jpg" alt="混淆矩阵" loading="lazy"><figcaption>混淆矩阵</figcaption></figure>
+</div>
+</article>
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">06</span><span class="pjkind">图像 · 空间域到频率域</span></div>
+<h4 class="pjtitle">图像处理与分析课程设计</h4>
+<p class="pjoneline">Python 实现空间域增强、频率域滤波、图像复原等四个模块。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>4</b><span>个独立实现的处理模块</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">独立完成图像处理与分析课程设计，用 Python 实现四个模块：空间域增强、频率域滤波、模糊图像复原、彩色图像处理。每个模块都输出处理前后对比图，用来验证算法效果。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>Python</i><i>空间域增强</i><i>频率域滤波</i><i>模糊图像复原</i><i>彩色图像处理</i></div></div></div>
+<div class="pjshots">
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/img_turb.jpg" data-full="assets/projects/img_turb.jpg" alt="湍流模糊复原" loading="lazy"><figcaption>湍流模糊复原</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/img_hist.jpg" data-full="assets/projects/img_hist.jpg" alt="直方图均衡" loading="lazy"><figcaption>直方图均衡</figcaption></figure>
+</div>
+</article>
+<article class="pj g fade">
+<div class="pjhead"><span class="pjno">07</span><span class="pjkind">桌面应用 · C++ / Qt + SQLite</span></div>
+<h4 class="pjtitle">Qt 图书馆信息管理系统</h4>
+<p class="pjoneline">独立开发 C++ / Qt + SQLite 桌面应用，从设计一路做到打包。</p>
+<div class="pjmetrics">
+<div class="pjmetric"><b>1</b><span>个从设计到打包的完整 exe</span></div>
+</div>
+<div class="pjbody"><p class="pjdesc">独立完成一个完整桌面应用工程：C++ / Qt 开发，登录验证、主窗口、数据编辑三层结构，SQLite 存储图书与借阅数据，支持增删改查。从类图设计到打包成可运行 exe，全流程独立完成。</p><div><div class="pjlab">技术栈</div><div class="pjstack"><i>C++</i><i>Qt</i><i>SQLite</i><i>MVC 三层结构</i><i>类图设计</i><i>exe 打包</i></div></div></div>
+<div class="pjshots">
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/qt_login.jpg" data-full="assets/projects/qt_login.jpg" alt="登录窗口" loading="lazy"><figcaption>登录窗口</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/qt_main.jpg" data-full="assets/projects/qt_main.jpg" alt="主窗口 · 数据管理" loading="lazy"><figcaption>主窗口 · 数据管理</figcaption></figure>
+<figure class="pjshot"><span class="pjsbg"></span><img src="assets/projects/qt_class.jpg" data-full="assets/projects/qt_class.jpg" alt="类图" loading="lazy"><figcaption>类图</figcaption></figure>
+</div>
+</article>
+</div></div>
+</div></section>
+<section id="about"><div class="wrap">
+<div class="sec-head fade"><span class="num">五</span><h2>关于我</h2><span class="sec-en">Self-Introduction</span></div>
+<p class="sec-sub fade">求职方向：新媒体运营 / 内容运营。内容生产在一线，判断靠数据。</p>
+<div class="resume"><aside class="rcard g fade">
+<img class="rphoto" src="assets/about/portrait.jpg" alt="王文坤">
+<div class="rhead"><div class="rname">王文坤</div><div class="ren">WANG WENKUN</div></div><div style="height:18px"></div>
+<div class="rline"><span class="k">求职意向</span><span class="v">新媒体运营 / 内容运营</span></div>
+<div class="rline"><span class="k">姓名</span><span class="v">王文坤</span></div>
+<div class="rline"><span class="k">学校</span><span class="v">中国地质大学（武汉）</span></div>
+<div class="rline"><span class="k">专业</span><span class="v">广播电视学（国家级一流本科专业）· 辅修计算机</span></div>
+<div class="rline"><span class="k">坐标</span><span class="v">武汉 · 籍贯昆明</span></div>
+<div class="rline"><span class="k">核心课程</span><span class="v">电视摄影与剪辑 96 · 纪录片创作 95 · 新闻评论学 93 · 教学实习 91</span></div>
+<div class="rline"><span class="k">后期</span><span class="v">剪映 / 达芬奇 / AE</span></div>
+<div class="rline"><span class="k">签约</span><span class="v">视觉中国 · 光厂 · 米拍 · NiSi</span></div>
+<div class="rline"><span class="k">方向</span><span class="v">影像 / 内容 / 数据</span></div>
+<div style="height:14px"></div>
+<div class="rline"><span class="k">联系</span><span class="v"><a href="tel:18589309926" style="color:inherit;text-decoration:none">18589309926</a></span></div>
+<div class="rline"><span class="k">联系</span><span class="v"><a href="mailto:2777927109@qq.com" style="color:inherit;text-decoration:none">2777927109@qq.com</a></span></div>
+</aside><div>
+<div class="abt-blk fade"><div class="abt-h">求职方向</div>
+<p>求职方向是新媒体运营 / 内容运营。内容生产上，选题、拍摄、剪辑可以一个人走完，从策划文案到成片交付不用等排期；账号运营上，习惯每周汇总账号与直播数据做点检，把跑得好的选题类型沉淀成下一轮内容方向。日常还借助 Agent 完成资料整理与流程自动化，把重复的活交给工具，人专注在判断上。</p>
+</div>
+<div class="abt-blk fade"><div class="abt-h">实践经历</div>
+<p>比起课堂学习，我更倾向于实践出真知。无论是学生工作还是实习工作，我都努力把一条成片从创意到交付的全流程实现得更好。</p>
+<div class="jrow"><div class="jt">2026.07 – 2026.09</div><div><div class="jh">极氪汽车（Zeekr）</div><div class="jr">新媒体运营 · 云南区域主播账号内容运营｜选题 · 拍摄 · 剪辑全流程</div>
+<ul class="jl">
+<li>独立承接区域主播账号的内容供给，累计产出作品 107 条、总播放 49 万+，其中 10 条破万，单条最高 14.2 万</li>
+<li>选题锚定具体场景而非泛流量：「极氪云南行」「8X 雨季涉水实测」「宜家门店全地形试驾」等长视频均按销售终端需求定制</li>
+<li>每周驻扎多家门店协助店长制作个人向短视频，汇总账号与直播数据做日常点检，把跑得好的选题类型沉淀为下一轮内容方向</li>
+</ul>
+</div></div>
+<div class="jrow"><div class="jt">2025.01 – 2025.02</div><div><div class="jh">昆明市西山区融媒体中心</div><div class="jr">融媒体编辑</div>
+<ul class="jl">
+<li>独立完成三八妇女节非遗主题街采视频后期全流程；参与区级民族节庆预热视频拍摄与人物采访</li>
+<li>独立策划采编本地人文与城市风光宣传短片，结合无人机航拍采集素材；承接日常营销类短视频剪辑</li>
+</ul>
+</div></div>
+<div class="jrow"><div class="jt">2025.04 – 2026.07</div><div><div class="jh">vivo</div><div class="jr">校园大使</div>
+<ul class="jl">
+<li>参与新机漂流体验活动，围绕产品核心卖点与真实使用场景持续输出 10 余条图文 / 视频推文，累计曝光 20 万+</li>
+<li>负责线下活动落地与校园社群传播，推动品牌在高校场景的渗透</li>
+</ul>
+</div></div>
+<div class="jrow"><div class="jt">2024.09 – 2025.06</div><div><div class="jh">岩石纪元 Minecraft 社团</div><div class="jr">创始核心成员 · 外宣部长</div>
+<ul class="jl">
+<li>从零搭建社团对外传播体系：官方账号内容策划与排期发布、宣传物料设计，建立稳定的发布节奏与品牌调性</li>
+<li>主导周边产品从创意策划到落地（设计对接、打样、成品）与「复原工程」3D 动画全流程制作</li>
+<li>代表社团参加品牌铸造项目答辩，获优秀结项</li>
+</ul>
+</div></div>
+<div class="jrow"><div class="jt">2025.03 – 2025.07</div><div><div class="jh">地大抖音俱乐部</div><div class="jr">运营</div>
+<ul class="jl">
+<li>参与搭建抖音及微信公众号双平台宣传矩阵，负责内容策划与日常运营；统筹校园特色活动宣传直播</li>
+</ul>
+</div></div>
+<div class="jrow"><div class="jt">2024.05 – 2026.07</div><div><div class="jh">中国地质大学（武汉）信息化办新媒体工作室</div><div class="jr">编辑</div>
+<ul class="jl">
+<li>负责《学姐请回答》系列数字化介绍短片全程摄制（拍摄、剪辑、调色、字幕包装），并承担活动视频与推文配图拍摄</li>
+</ul>
+</div></div>
+<div class="jrow"><div class="jt">2024.09 – 2026.05</div><div><div class="jh">山中花儿爱心助学团</div><div class="jr">宣传部 · 20 周年纪录片导演</div>
+<ul class="jl">
+<li>3 次赴支教地开设《无人机技术与原理》兴趣课，教授学生 150 余人</li>
+<li>策划并制作 5 部公益纪录片，独立完成拍摄制作全流程，用于团队 20 周年宣传与公益传播</li>
+</ul>
+</div></div>
+</div>
+<div class="abt-blk fade"><div class="abt-h">数据能力摘要</div>
+<ul class="dsum">
+<li><span class="dn">采集到可视化</span><span class="dt"><b>B 站科普视频标题与传播效果分析</b>：400 条视频、六项互动指标取对数平滑加权构造热度分，LDA 主题建模 + 情感词典标注。</span></li>
+<li><span class="dn">数据看选题</span><span class="dt"><b>极氪账号运营</b>：每周汇总账号与直播数据做点检，把跑得好的选题类型沉淀成下一轮内容方向。</span></li>
+<li><span class="dn">算法验结果</span><span class="dt"><b>中文新闻文本分类实验</b>：不用现成库、用 NumPy 从零写朴素贝叶斯 / ID3 / KNN，再用 Weka 跑同一组实验交叉验证。</span></li>
+<li><span class="dn">评论文本处理</span><span class="dt"><b>分词 + 停用词过滤 + 词频统计 + 词云</b>：把一批评论文本变成能直接看的图。</span></li>
+</ul>
+</div>
+<div class="abt-blk fade"><div class="abt-h">荣誉奖项 · 国家级 5 项 / 省级 4 项</div>
+<ul class="awards">
+<li><b>全国二等奖</b><span>2026 中国好创意全国数字艺术设计大赛</span></li>
+<li><b>国家级银奖</b><span>2025「外研社·国才杯」全国短视频赛项</span></li>
+<li><b>国家二等奖</b><span>2024「讲好中国故事」国际大赛</span></li>
+<li><b>国家三等奖</b><span>第八届全国大学生数字编辑创新大赛</span></li>
+<li><b>国家优秀奖</b><span>第 17 届大广赛 · 广播类</span></li>
+<li><b>省级一等奖</b><span>2025 湖北大学生新闻传播教育创新实践技能竞赛</span></li>
+<li><b>优秀奖</b><span>第 17 届大广赛湖北赛区 · 微电影广告类</span></li>
+<li><b>三等奖</b><span>第 18 届大广赛湖北赛区 · 视频类影视广告类</span></li>
+<li><b>优秀奖</b><span>第 18 届大广赛湖北赛区 · 视频类影视广告类</span></li>
+</ul>
+</div>
+</div></div></div></section>
+<section id="contact"><div class="wrap"><div class="contact-c g fade">
+<div class="kick">Contact</div><h2>谢谢观看</h2><p class="sub">合作、约拍、写稿，或者聊聊运营岗的机会，微信最快。</p>
+<div class="big-links">
+<a class="big-link" href="tel:18589309926">18589309926</a>
+<a class="big-link" href="mailto:2777927109@qq.com">2777927109@qq.com</a>
+</div><div class="plinks">
+<a class="plink" href="https://www.xinpianchang.com/u15244490" target="_blank" rel="noopener">新片场 · 作品主页</a>
+<a class="plink" href="https://space.bilibili.com/3546635227367625" target="_blank" rel="noopener">B 站 · 数码评测</a>
+<a class="plink" href="https://space.bilibili.com/14214655" target="_blank" rel="noopener">B 站 · 早期频道</a>
+</div>
+</div></div></section>
+<footer><div class="wrap"><span class="g">© 2026 王文坤 武汉 · 籍贯昆明 · 新媒体运营 / 内容运营</span></div></footer>
+<div id="lb"><img id="lbimg" src="" alt=""></div><div id="lbbar"><span class="lt" id="lbtxt"></span><button id="lbclose">关闭 ✕</button></div>
+<script>
+/* 分类导航：滚动高亮 + 点击居中 */
+document.querySelectorAll('[data-bar]').forEach(bar => {
+  const links = [...bar.querySelectorAll('.cat')];
+  links.forEach(a => a.addEventListener('click', () =>
+    a.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'})));
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    const on = bar.querySelector('.cat.on');
+    if (on) on.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+  }), {rootMargin:'-160px 0px -70% 0px', threshold:0});
+  bar.closest('section').querySelectorAll('.grp').forEach(g => obs.observe(g));
+});
+
+/* 只看代表作：给分组预打标记（哪些组里有被标的卡），避免依赖 :has() */
+const vfil = document.getElementById('vfil');
+const wsec = document.getElementById('work');
+if (vfil && wsec) {
+  const grps = [...wsec.querySelectorAll('.grp')];
+  grps.forEach(g => g.classList.toggle('on', !!g.querySelector('.vcard.star')));
+  vfil.addEventListener('click', () => {
+    const on = !vfil.classList.contains('on');
+    vfil.classList.toggle('on', on);
+    vfil.setAttribute('aria-pressed', on ? 'true' : 'false');
+    wsec.classList.toggle('star-only', on);
+    /* 是用户主动要看代表作的：直接补上入场类，
+       否则刚好卡在观察器 8% 阈值边缘的那张会停在全透明 */
+    if (on) wsec.querySelectorAll('.vcard.star').forEach(c => c.classList.add('in'));
+  });
+}
+
+/* 顶栏 */
+const nav = document.querySelector('.nav');
+const links = [...document.querySelectorAll('.navlinks a')];
+const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+
+/* 首屏那排标签栏：进场动画跑完后接管透明度，快钻到顶栏底下就淡出，
+   否则顶栏玻璃会把它透出来，看着像两排导航 */
+const hnav = document.querySelector('.heronav');
+let hnavOwn = false;
+function hnavFade(){
+  if (!hnav || !hnavOwn) return;
+  const gap = hnav.getBoundingClientRect().top - nav.getBoundingClientRect().bottom;
+  const k = Math.max(0, Math.min(1, gap / 120));
+  hnav.style.opacity = k.toFixed(3);
+  hnav.style.transform = k < 1 ? 'translateY(' + ((k - 1) * 16).toFixed(1) + 'px)' : 'none';
+  hnav.style.pointerEvents = k > .5 ? '' : 'none';
+}
+
+addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 10);
+  let cur = -1;
+  secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= 200) cur = i; });
+  links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  hnavFade();
+}, {passive:true});
+/* 等首屏入场淡入跑完（.7s）再接管，免得抢掉入场动画 */
+setTimeout(() => { if (hnav) { hnavOwn = true; hnav.style.transition = 'none'; hnavFade(); } }, 900);
+
+/* 正片墙：按真实宽高比分行，行高自适应 → 每张完整展示、不裁切、填满整行 */
+function layoutWall(){
+  const GAP = innerWidth < 680 ? 8 : 12;
+  document.querySelectorAll('.pwall').forEach(wall => {
+    const W = wall.clientWidth;
+    if (!W) return;
+    const figs = [...wall.querySelectorAll('figure')];
+    if (!figs.length) return;
+    const H = W > 1000 ? 235 : W > 620 ? 175 : 128;      // 目标行高
+    const rows = []; let cur = [], sum = 0;
+    const hOf = n => (W - GAP * (n - 1)) / sum;
+    figs.forEach(f => {
+      cur.push(f); sum += parseFloat(f.dataset.r) || 1.5;
+      const h = hOf(cur.length);
+      if (h <= H || cur.length >= 6) { rows.push({items: cur, h: Math.min(h, H)}); cur = []; sum = 0; }
+    });
+    if (cur.length) rows.push({items: cur, h: Math.min(hOf(cur.length), H * 1.4)});
+    const frag = document.createDocumentFragment();
+    rows.forEach(row => {
+      const d = document.createElement('div');
+      d.className = 'prowx';
+      d.style.height = row.h.toFixed(1) + 'px';
+      row.items.forEach(f => {
+        const r = parseFloat(f.dataset.r) || 1.5;
+        f.style.width = (r * row.h).toFixed(1) + 'px';
+        f.style.height = row.h.toFixed(1) + 'px';
+        d.appendChild(f);
+      });
+      frag.appendChild(d);
+    });
+    wall.innerHTML = '';
+    wall.appendChild(frag);
+  });
+}
+layoutWall();
+
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(layoutWall, 160); });
+
+/* 摄影筛选 */
+const pills = document.getElementById('pills'), pbox = document.getElementById('photos');
+if (pills) pills.addEventListener('click', e => {
+  const b = e.target.closest('.pill'); if (!b) return;
+  pills.querySelectorAll('.pill').forEach(p => p.classList.toggle('on', p === b));
+  const k = b.dataset.k;
+  pbox.querySelectorAll('.pcat').forEach(c => c.classList.toggle('hide', k !== 'all' && c.dataset.cat !== k));
+});
+
+/* 灯箱 */
+const lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg'),
+      lbbar = document.getElementById('lbbar'), lbtxt = document.getElementById('lbtxt');
+let curIdx = -1, curList = [];
+function show(){
+  const it = curList[curIdx];
+  lbimg.src = it.full; lbimg.alt = it.cap;
+  lbtxt.innerHTML = curList.length > 1
+    ? '<b>' + (curIdx + 1) + '</b> / ' + curList.length + ' &nbsp;·&nbsp; ' + it.cap
+    : it.cap;                                   /* 单张（奖状）就不显示 1/1 */
+  lb.classList.add('on'); lbbar.classList.add('on');
+}
+function closeLB(){ lb.classList.remove('on'); lbbar.classList.remove('on'); lbimg.src = ''; }
+function step(d){ if (!curList.length) return; curIdx = (curIdx + d + curList.length) % curList.length; show(); }
+document.addEventListener('click', e => {
+  const aw = e.target.closest('.vaw[data-img]');        /* 奖状：单张进灯箱 */
+  if (aw) {
+    curList = [{full: aw.dataset.img, cap: aw.dataset.cap}];
+    curIdx = 0; show();
+    return;
+  }
+  const pjf = e.target.closest('.pjshot');       /* 项目档案：按卡片内图集翻页 */
+  if (pjf) {
+    const box = pjf.closest('.pjshots');
+    curList = [...box.querySelectorAll('img')].map(im => ({full: im.dataset.full, cap: im.alt}));
+    curIdx = [...box.querySelectorAll('.pjshot')].indexOf(pjf);
+    show(); return;
+  }
+  const fig = e.target.closest('.pcat figure');   /* 主图 + 拼图格子统一走灯箱 */
+  if (fig) {
+    const cat = fig.closest('.pcat');
+    curList = [...cat.querySelectorAll('figure img')].map(im => ({full: im.dataset.full, cap: im.alt}));
+    curIdx = [...cat.querySelectorAll('figure')].indexOf(fig);
+    show();
+  } else if (e.target === lb || e.target === lbimg || e.target.id === 'lbclose') { closeLB(); }
+});
+addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLB();
+  if (!lb.classList.contains('on')) return;
+  if (e.key === 'ArrowRight') step(1);
+  if (e.key === 'ArrowLeft') step(-1);
+});
+
+/* 项目档案：模糊底复用同一张图，不给 data URI 存两遍 */
+document.querySelectorAll('.pjshot').forEach(f => {
+  const im = f.querySelector('img'), b = f.querySelector('.pjsbg');
+  if (b && im && im.src) b.style.backgroundImage = 'url("' + im.src + '")';
+});
+
+/* 入场 */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el);
+});
+</script></body></html>
