@@ -1,14 +1,24 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>寻踪踏迹 · 王文坤作品集</title>
 <meta name="description" content="影像 · 摄影 · 内容 —— 从选题、拍摄、剪辑到成片一个人走完。">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>(function(){var c={"mode": "time", "darkAt": "19:00", "lightAt": "07:00", "accent": "#e0651c"};try{var u=localStorage.getItem('pf-theme');if(u==='light'||u==='dark'){document.documentElement.dataset.theme=u;document.documentElement.dataset.manual='1';}else{var f=function(s){var p=String(s||'').split(':');return ((+p[0])||0)*60+((+p[1])||0);},n=new Date(),m=n.getHours()*60+n.getMinutes(),a=f(c.darkAt),b=f(c.lightAt),d;if(c.mode==='dark')d=true;else if(c.mode==='light')d=false;else if(c.mode==='time')d=(a<=b)?(m>=a&&m<b):(m>=a||m<b);else d=!!(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';}}catch(e){}window.__TH=c;})()</script>
 <style>
 :root{
   --ink:#0d1117; --ink-2:#4d5766; --ink-3:#8a909c;
-  --acc:#2f6bff; --acc-2:#7aa2ff;
+  /* 主题色只是一个主色 --acc，其余全部由它推导（见 build/palette.py）。
+     生成时 build/gen_site.py 会在样式表**后面**再插一段 <style>，
+     按 data.json 里 site.theme.accent 覆盖下面这些值；这里写的是默认蓝。
+     为什么要拆出 -rgb：阴影和光晕要用半透明色，写成 rgba(var(--acc-rgb),.32) 的话
+     换了主色阴影还是蓝的 —— 只有分量能塞进 rgba()。 */
+  --acc:#2f6bff; --acc-2:#7aa2ff; --acc-3:#5b8cff;
+  --acc-rgb:47,107,255; --acc-2-rgb:122,162,255; --acc-3-rgb:91,140,255;
+  /* 背景那四团柔光（按主色相转），和两档底色 */
+  --w1:120,170,255; --w2:255,168,205; --w3:150,235,225; --w4:255,204,138;
+  --bg1:#f4f7fc; --bg2:#eaeff8; --bgD:#070a11;
   --r-xl:34px; --r-lg:28px; --r-md:22px; --r-sm:14px;
   --sh:0 8px 30px rgba(16,24,40,.10), 0 2px 8px rgba(16,24,40,.06);
   --sh-hi:0 18px 50px rgba(16,24,40,.16), 0 4px 14px rgba(16,24,40,.08);
@@ -18,13 +28,16 @@
 html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
   color:var(--ink);background:#eef2f9;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* ⚠️ 下面两条柔光规则的「几何 + 透明度」和 build/palette.py 的 _WASH_GEO /
+   _WASH_ALPHA_* 是同一份数据（那边给后台预览小样用）。改透明度记得同步两边，
+   否则后台看到的底色和实际网页差一档。颜色值不用同步 —— 那些走 --w1..--w4。 */
 body::before{content:'';position:fixed;inset:0;z-index:-2;
   background:
-    radial-gradient(46% 40% at 10% 4%, rgba(120,170,255,.62), transparent 62%),
-    radial-gradient(38% 36% at 90% 10%, rgba(255,168,205,.48), transparent 60%),
-    radial-gradient(52% 44% at 80% 84%, rgba(150,235,225,.55), transparent 62%),
-    radial-gradient(42% 38% at 16% 90%, rgba(255,204,138,.45), transparent 60%),
-    linear-gradient(180deg,#f4f7fc,#eaeff8)}
+    radial-gradient(46% 40% at 10% 4%, rgba(var(--w1),.62), transparent 62%),
+    radial-gradient(38% 36% at 90% 10%, rgba(var(--w2),.48), transparent 60%),
+    radial-gradient(52% 44% at 80% 84%, rgba(var(--w3),.55), transparent 62%),
+    radial-gradient(42% 38% at 16% 90%, rgba(var(--w4),.45), transparent 60%),
+    linear-gradient(180deg,var(--bg1),var(--bg2))}
 body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.028;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
 
@@ -61,15 +74,70 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 .mark{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 22%;display:block;flex:none;
   background:linear-gradient(150deg,var(--acc-2),var(--acc));
   box-shadow:0 4px 12px rgba(20,32,60,.28), inset 0 0 0 1px rgba(255,255,255,.9)}
+/* 自己传的 logo：按原比例整张显示。
+   圆形容器 + cover 是给头像用的；横版字标（品牌名排成一行）塞进去只会剩中间一块色块，
+   所以换成长方形、contain、去掉渐变底和描边。 */
+.mark-wm{width:auto;max-width:140px;height:34px;object-fit:contain;
+  object-position:50% 50%;border-radius:7px;background:none;box-shadow:none}
 .bid{font-size:16px;font-weight:700}
 .bid em{display:block;font-style:normal;font-size:9.5px;letter-spacing:.22em;color:var(--ink-3);font-weight:500;margin-top:-2px}
-.navlinks{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
-.navlinks a{font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 13px;border-radius:999px;transition:.22s;white-space:nowrap}
+/* 导航永远留在顶栏里，一行到底；放不下就让这一排自己横滑。
+   ⚠️ 三个关键词都不能少：
+   - `flex:1 1 auto`：吃掉品牌和右侧按钮之间的全部空间，滚动的可视宽度就等于这段空间。
+   - `min-width:66px`：显式给个下限（也顺手替代了 flex 的 `auto` 最小尺寸，让 overflow 能触发）。
+     不给的话空间紧张时会先被压成 0 宽，看着像导航丢了；给了就轮到品牌去省略。
+   ⚠️ 千万别写 flex-wrap:wrap：容器上要是还有 margin-left:auto，宽度不足时 flex 会把它压到
+   「最宽那一项」的宽度，wrap 就一个一项地竖着堆，7 个导航项在 570px 变成一根竖线。 */
+.navlinks{display:flex;align-items:center;gap:4px;flex:1 1 auto;
+  min-width:66px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
+  scrollbar-width:none;-ms-overflow-style:none;--fl:0px;--fr:0px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--fl),
+    #000 calc(100% - var(--fr)),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 var(--fl),
+    #000 calc(100% - var(--fr)),transparent 100%)}
+.navlinks::-webkit-scrollbar{display:none}
+/* 宽度富余时把导航项推到右边（贴着主题按钮）；一旦挤到要滚动，auto 边距自动归零，
+   从第一项开始排 —— 这样"能滚"和"下一项被藏起来"不会同时发生。 */
+.navlinks::before{content:'';flex:0 0 0;margin-left:auto}
+.navlinks a{font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 13px;border-radius:999px;transition:.22s;white-space:nowrap;flex:none}
 .navlinks a:hover{background:rgba(255,255,255,.75);color:var(--ink)}
-.navlinks a.on{background:var(--acc);color:#fff;box-shadow:0 4px 12px rgba(47,107,255,.32)}
-.nav-cta{font-size:13px;font-weight:600;color:#fff;text-decoration:none;padding:8px 16px;border-radius:999px;
+.navlinks a.on{background:var(--acc);color:#fff;box-shadow:0 4px 12px rgba(var(--acc-rgb),.32)}
+
+.nav-cta{font-size:13px;font-weight:600;color:#fff;text-decoration:none;padding:8px 16px;border-radius:999px;flex:none;
   background:linear-gradient(150deg,var(--acc-2),var(--acc));
-  box-shadow:0 5px 16px rgba(47,107,255,.34), inset 0 1px 0 rgba(255,255,255,.5)}
+  box-shadow:0 5px 16px rgba(var(--acc-rgb),.34), inset 0 1px 0 rgba(255,255,255,.5)}
+
+/* 宽度一紧，先给胶囊瘦身：内距和字号各收一档，能多塞一两个再让它滚 */
+@media(max-width:1080px){
+  .nav{gap:12px}
+  .navlinks a{padding:7px 10px;font-size:12.5px}
+}
+/* 再窄一档：品牌开始让步（长名字省略），把空间让给导航 */
+@media(max-width:680px){
+  .nav{gap:9px}
+  .brand{min-width:0;flex-shrink:1}
+  .bid{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .navlinks a{padding:6px 9px;font-size:12.5px}
+}
+
+/* ≤560：品牌名让位，顶栏只留 logo。
+   算过账：390px 下如果不让，品牌名会被省略成「见…」——两头都不好看；
+   而名字在下方首屏 H1 里就有，顶栏留 logo 已经够认。让出来的空间全给导航。 */
+@media(max-width:560px){
+  .brand{gap:0}
+  .bid{display:none}
+}
+
+/* 手机（≤430）：主题 + CTA 的最小宽度已经吃掉大半，留给导航的横向空间很少。
+   继续让位：CTA 内距收到 12、logo 收到 32，能挤出约一个导航项的空间。
+   ⚠️ 这段必须写在 .nav/.bid/.nav-cta/.mark 的基础规则**之后**：
+   媒体查询不提升优先级，只是「满足条件时也算一条普通规则」——放前面就会被后面的
+   基础声明整条盖掉，改了半天不出效果，还以为是被别的样式压了。 */
+@media(max-width:430px){
+  .nav{gap:8px;padding:8px 9px 8px 7px}
+  .nav-cta{padding:7px 12px;font-size:12px}
+  .mark{width:32px;height:32px}
+}
 
 /* ---------- 首屏（航拍满幅，不再是圆角卡片） ---------- */
 .hero{position:relative;width:100%;margin:-72px 0 0;text-align:center;isolation:isolate;overflow:hidden;
@@ -124,7 +192,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 .heronav a:hover{background:rgba(255,255,255,.16);color:#fff}
 .heronav a.hn-cta{color:#fff;font-weight:600;margin-left:4px;
   background:linear-gradient(150deg,var(--acc-2),var(--acc));
-  box-shadow:0 5px 16px rgba(47,107,255,.42), inset 0 1px 0 rgba(255,255,255,.5)}
+  box-shadow:0 5px 16px rgba(var(--acc-rgb),.42), inset 0 1px 0 rgba(255,255,255,.5)}
 .heronav a.hn-cta:hover{background:linear-gradient(150deg,var(--acc),var(--acc-2))}
 .tagline{margin:26px auto 0;max-width:660px;font-size:clamp(15px,1.7vw,19px);color:var(--ink-2);line-height:1.85}
 .stats{display:flex;justify-content:center;margin:36px auto 0;padding:8px;width:fit-content;border-radius:999px;flex-wrap:wrap}
@@ -145,6 +213,13 @@ section{padding:56px 0;scroll-margin-top:150px}
 /* 序号与后接标题同号，只靠颜色区分——小号 + 大字母间距那套是配英文标签的，配中文标题不搭 */
 .sec-head .num{font-size:clamp(24px,3vw,34px);color:var(--acc);font-weight:800;line-height:1}
 .sec-sub{color:var(--ink-2);font-size:14px;max-width:760px;margin-bottom:26px}
+/* 一个页面挂了多块：页面头是这一屏的主角，块标题降一档，靠缩进和字重分层 */
+.pghead{padding:56px 0 0}
+.pghead .sec-sub{margin-bottom:0}
+.sec-head.blk{margin-top:54px;gap:12px}
+.sec-head.blk h2{font-size:clamp(18px,2.1vw,23px);font-weight:750}
+.sec-head.blk .num{font-size:clamp(18px,2.1vw,23px)}
+.sec-head.blk .sec-en{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 
 /* ---------- 分类导航 ---------- */
 .catbar{position:sticky;top:74px;z-index:50;margin:0 0 30px;padding:8px;border-radius:999px;--blur:30px}
@@ -152,7 +227,7 @@ section{padding:56px 0;scroll-margin-top:150px}
 .cat-inner::-webkit-scrollbar{display:none}
 .cat{flex:0 0 auto;font-size:13px;color:var(--ink-2);text-decoration:none;padding:9px 17px;border-radius:999px;transition:.22s;white-space:nowrap}
 .cat:hover{background:rgba(255,255,255,.8);color:var(--ink)}
-.cat.on{background:rgba(47,107,255,.14);color:var(--acc);font-weight:600;box-shadow:inset 0 0 0 1px rgba(47,107,255,.22)}
+.cat.on{background:rgba(var(--acc-rgb),.14);color:var(--acc);font-weight:600;box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.22)}
 .grp-t{display:flex;align-items:center;gap:14px;margin:46px 0 20px}
 .grp-t h3{font-size:18px;font-weight:700;white-space:nowrap}
 .grp-t .fl{flex:1;height:1px;background:linear-gradient(90deg,rgba(13,17,23,.16),transparent)}
@@ -179,12 +254,12 @@ section{padding:56px 0;scroll-margin-top:150px}
 .dacct .dasub b{color:var(--ink);font-weight:700}
 .dacct .dchips{margin-top:15px;display:flex;gap:9px;flex-wrap:wrap}
 .dacct .dchip{font-size:12px;font-weight:600;color:var(--acc);padding:6px 13px;border-radius:999px;
-  background:rgba(47,107,255,.09);box-shadow:inset 0 0 0 1px rgba(47,107,255,.16)}
+  background:rgba(var(--acc-rgb),.09);box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.16)}
 .dacct .dlink{margin-top:17px;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
   font-size:13.5px;font-weight:700;color:#fff;padding:11px 20px;border-radius:999px;
-  background:linear-gradient(135deg,var(--acc),#5b8cff);box-shadow:0 8px 22px rgba(47,107,255,.32);
+  background:linear-gradient(135deg,var(--acc),var(--acc-3));box-shadow:0 8px 22px rgba(var(--acc-rgb),.32);
   transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
-.dacct .dlink:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,107,255,.40)}
+.dacct .dlink:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(var(--acc-rgb),.40)}
 
 .hcards{display:grid;gap:14px;margin-top:4px;
   grid-template-columns:repeat(auto-fill,minmax(212px,1fr))}
@@ -233,10 +308,10 @@ section{padding:56px 0;scroll-margin-top:150px}
 .dmore .ms{font-size:13px;color:var(--ink-2);margin-top:6px}
 .dmore a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;
   font-weight:700;color:#fff;padding:13px 24px;border-radius:999px;white-space:nowrap;
-  background:linear-gradient(135deg,var(--acc),#5b8cff);
-  box-shadow:0 8px 22px rgba(47,107,255,.30);
+  background:linear-gradient(135deg,var(--acc),var(--acc-3));
+  box-shadow:0 8px 22px rgba(var(--acc-rgb),.30);
   transition:transform .3s cubic-bezier(.2,.7,.3,1),box-shadow .3s}
-.dmore a:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(47,107,255,.42)}
+.dmore a:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(var(--acc-rgb),.42)}
 
 /* 「实践经历」按简历逐条搬运后的行式排版：时间 / 头衔 / 主体 / 要点。
    节奏是「左窄右宽」，窄列放时间，宽列放单位与成果。 */
@@ -250,7 +325,7 @@ section{padding:56px 0;scroll-margin-top:150px}
 .jrow .jl{list-style:none;margin:9px 0 0;display:grid;gap:7px}
 .jrow .jl li{position:relative;padding-left:16px;font-size:13.5px;color:var(--ink-2);line-height:1.85}
 .jrow .jl li::before{content:'';position:absolute;left:2px;top:.72em;width:5px;height:5px;border-radius:50%;
-  background:var(--acc-2);box-shadow:0 0 0 3px rgba(122,162,255,.16)}
+  background:var(--acc-2);box-shadow:0 0 0 3px rgba(var(--acc-2-rgb),.16)}
 /* 数据能力：前面项目的四字摘要表，一行一个项目 */
 .dsum{list-style:none;display:grid;gap:0;margin-top:4px}
 .dsum li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:6px 18px;align-items:baseline;
@@ -366,6 +441,10 @@ section{padding:56px 0;scroll-margin-top:150px}
 .vcard.nocover .vtag{position:absolute;left:40px;top:calc(50% + 34px);z-index:4;font-size:11px;
   letter-spacing:.2em;color:rgba(255,255,255,.42)}
 .vcard.wide{aspect-ratio:2.35/1}
+/* 本站：视频区不贴封面，纯文字卡改用宽银幕比例，缩短整页纵向长度 */
+.vcard.nocover{aspect-ratio:2.35/1;background:linear-gradient(135deg,#22304a 0%,#161d2b 62%,#0e131d 100%)}
+.vcard.nocover .vbig{font-size:clamp(46px,6.4vw,96px);color:rgba(255,255,255,.09);top:44%}
+.vcard.nocover .vinfo{bottom:30px}
 .vcard.wide .vinfo{width:min(54%,560px)}
 .vcard.wide .vdesc{-webkit-line-clamp:3}
 
@@ -499,7 +578,7 @@ section{padding:56px 0;scroll-margin-top:150px}
   background:transparent;color:var(--ink-2);font-family:inherit;transition:.22s}
 .pill .c{font-size:10.5px;color:var(--ink-3);margin-left:4px}
 .pill:hover{background:rgba(255,255,255,.7)}
-.pill.on{background:var(--acc);color:#fff;box-shadow:0 4px 12px rgba(47,107,255,.3)}
+.pill.on{background:var(--acc);color:#fff;box-shadow:0 4px 12px rgba(var(--acc-rgb),.3)}
 .pill.on .c{color:rgba(255,255,255,.75)}
 .pcat{margin-bottom:34px}
 .pcat.hide{display:none}
@@ -526,14 +605,33 @@ section{padding:56px 0;scroll-margin-top:150px}
   -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
   display:none;align-items:center;justify-content:center;cursor:zoom-out}
 #lb.on{display:flex}
-#lb img{max-width:92vw;max-height:86vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+#lb img{max-width:92vw;max-height:86vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5);
+  transform-origin:center center;transition:transform .18s cubic-bezier(.2,.8,.3,1);
+  cursor:zoom-in;touch-action:none;-webkit-user-select:none;user-select:none}
+/* 放大后要拖动看：光标换成抓手机，并关掉过渡（否则拖起来是「跟手迟缓」） */
+#lb img.zoomed{cursor:grab;transition:none}
+#lb img.dragging{cursor:grabbing}
 #lbbar{position:fixed;left:0;right:0;bottom:0;z-index:210;display:none;justify-content:space-between;
   align-items:center;padding:16px 26px;color:#fff;font-size:13px;
   background:linear-gradient(to top,rgba(6,9,15,.8),transparent)}
 #lbbar.on{display:flex}
 #lbbar .lt b{color:var(--acc-2)}
+.lbacts{display:flex;align-items:center;gap:10px;flex:none}
+#lbfull{font-size:12px;color:#fff;text-decoration:none;opacity:.8;
+  border-bottom:1px solid rgba(255,255,255,.42);padding-bottom:1px}
+#lbfull:hover{opacity:1}
 #lbclose{font-family:inherit;font-size:12px;color:#fff;background:rgba(255,255,255,.14);
   border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 15px;cursor:pointer}
+
+/* 能点开放大的图统一给个手型 + 轻微放大反馈。
+   缺了 cursor 用户根本不会去点 —— 论文封面和内页缩略图原本看着就像静态配图，
+   所以「可点」这件事必须由鼠标形态先说一遍。 */
+.pap-cv,.pap-pi .im,.dz-t,.opd-th{cursor:zoom-in}
+.pap-cv img,.pap-pi .im img,.dz-t img,.opd-th img{
+  transition:transform .5s cubic-bezier(.2,.8,.3,1)}
+.pap-cv:hover img,.pap-pi .im:hover img,.dz-t:hover img,.opd-th:hover img{transform:scale(1.035)}
+.pap-cv.pap-empty,.pap-pi .im.ph{cursor:default}
+.pap-cv.pap-empty:hover img,.pap-pi .im.ph:hover img{transform:none}
 
 /* ---------- 关于 / 简历 ---------- */
 .resume{display:grid;grid-template-columns:320px 1fr;gap:34px;align-items:start}
@@ -609,7 +707,7 @@ footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:1
 /* 「开源项目优化改进」这类定性标签挂行尾 */
 .pjtag{margin-left:auto;font-size:11px;font-weight:600;color:var(--acc);padding:5px 13px;border-radius:999px;
   background:linear-gradient(158deg,rgba(255,255,255,.88),rgba(255,255,255,.58));
-  box-shadow:inset 0 0 0 1px rgba(47,107,255,.28), 0 3px 10px rgba(47,107,255,.10)}
+  box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.28), 0 3px 10px rgba(var(--acc-rgb),.10)}
 .pjtitle{font-size:clamp(19px,2.2vw,24px);font-weight:800;letter-spacing:-.01em}
 .pjoneline{font-size:14px;color:var(--acc);font-weight:600;margin-top:9px}
 
@@ -630,7 +728,7 @@ footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:1
 .pjblock{margin-top:24px}
 .pjnotes li{position:relative;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.85}
 .pjnotes li::before{content:'';position:absolute;left:2px;top:.72em;width:6px;height:6px;border-radius:50%;
-  background:var(--acc-2);box-shadow:0 0 0 3px rgba(122,162,255,.18)}
+  background:var(--acc-2);box-shadow:0 0 0 3px rgba(var(--acc-2-rgb),.18)}
 
 /* 图集：统一框高、图片整体完整显示（图表/类图不能被裁），空出来的地方用这张图自己的模糊放大版填底。
    基准 190 是为了让三图卡在 680 断点之上始终排成一行，不会掉出「2 + 1 个孤儿图」 */
@@ -761,14 +859,347 @@ footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:1
   .hc .tp{display:none}
   .dmore{padding:24px 22px}
 }
-</style></head><body>
-<header class="nav g"><a class="brand" href="#top"><img class="mark" src="assets/hero/avatar.jpg" alt="寻踪踏迹"><span class="bid">寻踪踏迹<em>XUNZONG TAJI</em></span></a><nav class="navlinks">
+
+/* ================= 论文与研究（以大封面为主） ================= */
+.pap{display:grid;grid-template-columns:340px minmax(0,1fr);gap:34px;align-items:start;
+  border-radius:var(--r-lg);padding:28px 30px 24px;margin-bottom:20px}
+.pap:last-child{margin-bottom:0}
+.pap-cv{position:relative;border-radius:5px;overflow:hidden;background:#fff;
+  border:1px solid rgba(16,24,40,.07);
+  box-shadow:0 16px 38px rgba(16,24,40,.20), 0 2px 6px rgba(16,24,40,.10)}
+.pap-cv img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center}
+/* 书脊：左沿一道暗边，纸的厚度感靠它 */
+.pap-cv::before{content:'';position:absolute;inset:0 auto 0 0;width:8px;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,rgba(16,24,40,.13),rgba(16,24,40,0))}
+.pap-cv.pap-empty{display:grid;place-items:center;aspect-ratio:3/4;box-shadow:none;
+  background:#f7f9fd;border:1px dashed rgba(16,24,40,.20)}
+.pap-empty span{font-size:12px;color:var(--ink-3);line-height:1.85;text-align:center}
+.pap-empty em{font-style:normal;font-size:10.5px}
+.pap-tag{position:absolute;right:9px;bottom:9px;z-index:3;font-size:10.5px;font-weight:700;
+  letter-spacing:.04em;padding:3px 8px;border-radius:5px;color:#fff;background:rgba(13,17,23,.66)}
+.pap-bd{min-width:0;display:flex;flex-direction:column;height:100%;padding-top:2px}
+.pap-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pap-no{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.08em}
+.pap-kind{font-size:11.5px;color:var(--ink-2);background:#f2f5fa;border-radius:6px;padding:3px 9px}
+.pap-title{font-size:22px;font-weight:800;line-height:1.4;letter-spacing:-.015em}
+.pap-one{margin-top:8px;font-size:13.5px;color:var(--ink-2);line-height:1.72}
+.pap-points{list-style:none;margin-top:15px;display:grid;gap:7px}
+.pap-points li{display:grid;grid-template-columns:16px 1fr;gap:6px;font-size:13px;
+  color:var(--ink-2);line-height:1.68}
+.pap-points li::before{content:'—';color:var(--acc);font-weight:800;line-height:1.68}
+/* margin-top:auto 让指标贴着卡片底走，跟封面对齐；
+   否则封面高、右栏矮，右下会空出一块像是没排完 */
+.pap-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:auto;padding-top:14px;
+  border-top:1px solid rgba(16,24,40,.07);align-items:flex-end}
+.pap-meta b{display:block;font-size:20px;font-weight:800;line-height:1.15;letter-spacing:-.02em}
+.pap-meta span{font-size:11px;color:var(--ink-3)}
+.pap-read{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--acc);text-decoration:none;
+  border:1px solid rgba(var(--acc-rgb),.24);border-radius:9px;padding:8px 14px;
+  background:rgba(var(--acc-rgb),.05);white-space:nowrap}
+.pap-pages{grid-column:1/-1;margin-top:6px;padding-top:16px;border-top:1px solid rgba(16,24,40,.07)}
+.pap-ph{display:flex;align-items:baseline;gap:9px;margin-bottom:11px;flex-wrap:wrap}
+.pap-ph b{font-size:12.5px;font-weight:750}
+.pap-ph span{font-size:11px;color:var(--ink-3);letter-spacing:.02em}
+/* 内页按张数等分铺满整行：4 张就 4 列，别挤在左边留一大片白。
+   但每张要限宽居中 —— 不然 4 张摊到 1124px，单张比大封面还宽，喧宾夺主 */
+.pap-strip{display:grid;grid-template-columns:repeat(var(--pn,4),minmax(0,1fr));gap:14px}
+.pap-pi{min-width:0;width:100%;max-width:196px;justify-self:center}
+.pap-pi .im{border-radius:6px;overflow:hidden;background:#eef2f9;aspect-ratio:3/4;
+  border:1px solid rgba(16,24,40,.07);box-shadow:0 3px 10px rgba(16,24,40,.08)}
+.pap-pi img{width:100%;height:100%;object-fit:cover;display:block}
+.pap-pi .im.ph{display:grid;place-items:center;background:#f7f9fd;
+  border:1px dashed rgba(16,24,40,.20);box-shadow:none}
+.pap-pi .im.ph span{font-size:10.5px;color:var(--ink-3);text-align:center;line-height:1.6}
+.pap-pi>span{display:block;margin-top:5px;font-size:10.5px;color:var(--ink-3);text-align:center}
+
+/* ================= 评论与随笔（时间线） ================= */
+.opd-top{display:flex;align-items:baseline;gap:12px;margin:2px 0 10px;flex-wrap:wrap}
+.opd-top b{font-size:13.5px;font-weight:750}
+.opd-top span{font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
+.opd-list{position:relative;padding-left:26px}
+.opd-list::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(180deg,rgba(var(--acc-rgb),.36),rgba(16,24,40,.10))}
+.opd{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:22px;
+  align-items:start;padding:16px 0;border-bottom:1px solid rgba(16,24,40,.06)}
+.opd:last-child{border-bottom:0}
+.opd::before{content:'';position:absolute;left:-25px;top:25px;width:9px;height:9px;border-radius:50%;
+  background:#fff;border:2px solid var(--acc)}
+.opd-date b{display:block;font-size:15px;font-weight:800;letter-spacing:.02em}
+.opd-date span{font-size:11px;color:var(--ink-3)}
+.opd-bd h3{font-size:16.5px;font-weight:700;line-height:1.5;letter-spacing:-.005em}
+.opd-bd p{margin-top:5px;font-size:13px;color:var(--ink-2);line-height:1.65}
+.opd-q{margin:9px 0 0;padding:7px 0 7px 12px;border-left:2px solid rgba(var(--acc-rgb),.28);
+  font-size:12.5px;color:var(--ink-2);line-height:1.7}
+/* 缩略图要做成「一张纸」：3px 白边 + 双层投影，不是贴一张小图 */
+.opd-th{width:106px;aspect-ratio:3/4;border-radius:5px;overflow:hidden;background:#fff;padding:3px;
+  border:1px solid rgba(16,24,40,.09);
+  box-shadow:0 9px 22px rgba(16,24,40,.14), 0 1px 3px rgba(16,24,40,.10)}
+.opd-th img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  border-radius:2px}
+.opd-th.opd-noth{background:transparent;border:0;box-shadow:none;padding:0}
+
+/* ================= 设计与物料（按形态分组） ================= */
+.dz{border-radius:var(--r-lg);padding:24px 26px 26px;margin-bottom:20px}
+.dz:last-child{margin-bottom:0}
+.dz-h{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap}
+.dz-h>div{flex:1;min-width:280px}
+.dz-h h3{font-size:20px;font-weight:800;line-height:1.4;letter-spacing:-.012em}
+.dz-h p{margin-top:6px;font-size:13.5px;color:var(--ink-2);line-height:1.72;max-width:62ch}
+.dz-spec{list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-self:flex-end}
+.dz-spec li{font-size:12px;color:var(--ink-2);background:#f4f7fc;
+  border:1px solid rgba(16,24,40,.05);border-radius:8px;padding:5px 10px}
+.dz-spec li b{color:var(--ink);font-weight:750;margin-right:3px}
+.dz-grp{margin-top:22px}
+.dz-gh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.dz-gh b{font-size:13px;font-weight:750;white-space:nowrap}
+.dz-gh span{font-size:11px;color:var(--ink-3);letter-spacing:.03em;white-space:nowrap}
+.dz-gh i{flex:1;height:1px;background:rgba(16,24,40,.08);min-width:20px}
+.dz-grid{display:grid;gap:12px}
+.dz-g4{grid-template-columns:repeat(4,1fr)}
+.dz-g3{grid-template-columns:repeat(3,1fr)}
+.dz-g2{grid-template-columns:repeat(2,1fr)}
+.dz-t{background:#eef2f9;border-radius:9px;overflow:hidden;position:relative;
+  box-shadow:0 4px 14px rgba(16,24,40,.10)}
+.dz-t img{width:100%;height:100%;object-fit:cover;display:block}
+.dz-t.s16{aspect-ratio:16/9}
+.dz-t.stall{aspect-ratio:1130/1600}
+.dz-t.ssq{aspect-ratio:1/1}
+.dz-t.sflag{aspect-ratio:1445/334;margin-top:12px}
+.dz-t em{position:absolute;left:7px;bottom:7px;font-style:normal;font-size:10px;font-weight:700;
+  padding:2px 7px;border-radius:4px;color:#fff;background:rgba(13,17,23,.62)}
+.dz-note{background:#f4f7fd;border:1px solid rgba(var(--acc-rgb),.13);border-radius:9px;
+  padding:14px 15px;display:grid;gap:8px;align-content:start}
+.dz-note>b{font-size:12.5px;font-weight:750;margin-bottom:2px}
+.dz-note>div{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--ink-2)}
+.dz-note>div span{color:var(--ink-3)}
+.dz-note>div i{font-style:normal;font-weight:650}
+.dz-note-foot{margin-top:4px;padding-top:9px;border-top:1px dashed rgba(16,24,40,.12);
+  font-size:10.5px;color:var(--ink-3);letter-spacing:.02em}
+.dz-foot{display:flex;align-items:center;gap:12px;margin-top:20px;padding-top:14px;
+  border-top:1px solid rgba(16,24,40,.07);font-size:12.5px;color:var(--ink-3);flex-wrap:wrap}
+.dz-foot b{color:var(--ink-2);font-weight:650}
+.dz-badge{display:inline-block;font-size:11px;font-weight:700;color:#8a5a00;background:#fff4dd;
+  border:1px solid rgba(180,120,0,.18);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+
+/* ================= 问题与方案 ================= */
+.prp{border-radius:var(--r-lg);padding:26px 28px;margin-bottom:18px}
+.prp:last-child{margin-bottom:0}
+.prp-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.prp-h h3{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.prp-h span{font-size:11.5px;color:var(--ink-3)}
+.prp-sub{margin-top:7px;font-size:13.5px;color:var(--ink-2);line-height:1.72;max-width:74ch}
+.prp-flow{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);
+  margin-top:20px;align-items:stretch}
+.prp-col{display:grid;gap:9px;align-content:start}
+.prp-ch{font-size:11px;letter-spacing:.16em;color:var(--ink-3);margin-bottom:1px}
+.prp-s{background:#f5f8fd;border:1px solid rgba(16,24,40,.05);border-radius:12px;padding:11px 14px}
+.prp-s b{display:block;font-size:13px;font-weight:700;margin-bottom:3px}
+.prp-s span{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.prp-ar{display:grid;place-items:center;color:rgba(var(--acc-rgb),.72);font-size:19px;font-weight:700}
+.prp-foot{margin-top:16px;padding-top:12px;border-top:1px solid rgba(16,24,40,.07);
+  font-size:12.5px;color:var(--ink-3)}
+
+@media(max-width:960px){
+  .pap{grid-template-columns:minmax(0,1fr)}
+  .pap-cv{max-width:230px}
+  .pap-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pap-meta{gap:20px}
+  .pap-meta .pap-read{margin-left:0}
+  .opd{grid-template-columns:minmax(0,1fr);gap:8px}
+  .opd-th{width:100%;height:150px;aspect-ratio:auto}
+  .opd-th.opd-noth{display:none}
+  .prp-flow{grid-template-columns:minmax(0,1fr)}
+  .prp-ar{display:none}
+  .dz-g4{grid-template-columns:repeat(2,1fr)}
+  .dz-g3{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ================= 深色（夜晚）模式 =================
+   做法和浅色完全一致：上面所有规则一个字不动，只在这里按 html[data-theme="dark"]
+   追加覆盖。两套配色各自独立，谁也不会把谁改坏，删掉这一段就回到纯浅色。
+   玻璃卡靠三样东西立起来：半透明底、内高光、外投影。深色下内高光必须压到 .12 以下，
+   否则会有「晚上还在发白光」的塑料感；外投影要加重，靠它把卡片从深底上「抬」起来。 */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e9eef8; --ink-2:#a6b2c6; --ink-3:#78859a;
+  --acc:#6b96ff; --acc-2:#9dbaff; --acc-3:#7da3ff;
+  --acc-rgb:107,150,255; --acc-2-rgb:157,186,255; --acc-3-rgb:125,163,255;
+  --w1:44,84,166; --w2:116,50,94; --w3:22,94,90; --w4:108,66,26;
+  --bg1:#0a0f18; --bg2:#06090f; --bgD:#070a11;
+  --sh:0 10px 34px rgba(0,0,0,.50), 0 2px 8px rgba(0,0,0,.34);
+  --sh-hi:0 20px 54px rgba(0,0,0,.60), 0 4px 14px rgba(0,0,0,.40);
+}
+html[data-theme="dark"] body{background:var(--bgD)}
+/* 深底的彩色柔光：亮度和饱和度都要压下来，夜间大面积高饱和会糊成一片 */
+html[data-theme="dark"] body::before{
+  background:
+    radial-gradient(46% 40% at 10% 4%, rgba(var(--w1),.40), transparent 62%),
+    radial-gradient(38% 36% at 90% 10%, rgba(var(--w2),.30), transparent 60%),
+    radial-gradient(52% 44% at 80% 84%, rgba(var(--w3),.30), transparent 62%),
+    radial-gradient(42% 38% at 16% 90%, rgba(var(--w4),.26), transparent 60%),
+    linear-gradient(180deg,var(--bg1),var(--bg2))}
+html[data-theme="dark"] body::after{opacity:.05}
+
+/* 玻璃卡 */
+html[data-theme="dark"] .g{
+  background:linear-gradient(158deg, rgba(32,41,57,.74), rgba(19,26,37,.60) 52%, rgba(27,35,49,.70));
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(150%) brightness(.96);
+  backdrop-filter:blur(var(--blur)) saturate(150%) brightness(.96);
+  box-shadow:var(--sh), inset 0 1px 0 rgba(255,255,255,.09), inset 0 -1px 0 rgba(255,255,255,.03)}
+html[data-theme="dark"] .g::before{
+  background:linear-gradient(145deg, rgba(255,255,255,.26), rgba(255,255,255,.02) 34%,
+             rgba(255,255,255,.12) 58%, rgba(255,255,255,.02) 82%, rgba(255,255,255,.16))}
+html[data-theme="dark"] .g::after{
+  background:radial-gradient(115% 78% at 8% -14%, rgba(255,255,255,.10), rgba(255,255,255,0) 56%)}
+
+/* 顶栏 */
+html[data-theme="dark"] .nav{
+  background:linear-gradient(158deg,rgba(22,29,41,.92),rgba(15,20,29,.80) 52%,rgba(19,25,35,.88));
+  box-shadow:var(--sh-hi), inset 0 1px 0 rgba(255,255,255,.10)}
+html[data-theme="dark"] .nav.scrolled{
+  background:linear-gradient(158deg,rgba(19,26,37,.96),rgba(14,19,27,.92) 52%,rgba(17,22,32,.95));
+  box-shadow:var(--sh-hi), inset 0 1px 0 rgba(255,255,255,.12)}
+html[data-theme="dark"] .mark{box-shadow:0 4px 12px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.20)}
+html[data-theme="dark"] .navlinks a:hover,
+html[data-theme="dark"] .cat:hover,
+html[data-theme="dark"] .pill:hover{background:rgba(255,255,255,.10);color:var(--ink)}
+
+/* 主题切换按钮：两个图标靠 data-theme 换，不重画 DOM */
+.themebtn{width:34px;height:34px;flex:none;display:grid;place-items:center;cursor:pointer;
+  border:0;border-radius:999px;background:transparent;color:var(--ink-2);transition:.2s}
+.themebtn:hover{background:rgba(13,17,23,.07);color:var(--ink)}
+.themebtn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.themebtn svg{width:17px;height:17px;display:block}
+.themebtn .ic-sun{display:none}
+html[data-theme="dark"] .themebtn:hover{background:rgba(255,255,255,.12)}
+html[data-theme="dark"] .themebtn .ic-sun{display:block}
+html[data-theme="dark"] .themebtn .ic-moon{display:none}
+
+/* 首屏底边要融进深色页面，不能再融浅灰 */
+html[data-theme="dark"] .hero::after{
+  background:linear-gradient(180deg,rgba(7,10,17,0) 0%,rgba(7,10,17,.55) 58%,rgba(7,10,17,.94) 100%)}
+html[data-theme="dark"] .avatar{
+  border-color:rgba(255,255,255,.26);
+  box-shadow:0 14px 34px rgba(0,0,0,.55), 0 0 0 6px rgba(255,255,255,.06)}
+
+/* 各种细线 / 分隔：浅色下是「深色 8%」，深色下必须反过来变「白 10%」，否则整片看不见 */
+html[data-theme="dark"] .stat + .stat::before{background:rgba(255,255,255,.14)}
+html[data-theme="dark"] .grp-t .fl,
+html[data-theme="dark"] .pcat-h .fl,
+html[data-theme="dark"] .pjgroup-h .fl{background:linear-gradient(90deg,rgba(255,255,255,.18),transparent)}
+html[data-theme="dark"] .abt-h::after{background:rgba(255,255,255,.14)}
+html[data-theme="dark"] .dz-gh i{background:rgba(255,255,255,.12)}
+html[data-theme="dark"] .opd-list::before{
+  background:linear-gradient(180deg,rgba(107,150,255,.42),rgba(255,255,255,.10))}
+html[data-theme="dark"] .jrow + .jrow,
+html[data-theme="dark"] .dsum li,
+html[data-theme="dark"] .prow,
+html[data-theme="dark"] .rline,
+html[data-theme="dark"] .awards li,
+html[data-theme="dark"] .pjmetrics,
+html[data-theme="dark"] .prp-foot,
+html[data-theme="dark"] .dz-foot,
+html[data-theme="dark"] .pap-meta,
+html[data-theme="dark"] .pap-pages,
+html[data-theme="dark"] .dz-note-foot,
+html[data-theme="dark"] .opd{border-color:rgba(255,255,255,.10)}
+
+/* 图片容器的占位底色：亮灰在深色里会漏出白边，统一换成深灰蓝 */
+html[data-theme="dark"] .hc,
+html[data-theme="dark"] .vcard,
+html[data-theme="dark"] .serimg,
+html[data-theme="dark"] .prowx figure,
+html[data-theme="dark"] .pjshot,
+html[data-theme="dark"] .dz-t,
+html[data-theme="dark"] .pap-pi .im{background:#141a24}
+
+/* 卡片 */
+html[data-theme="dark"] .vcard{box-shadow:0 14px 44px rgba(0,0,0,.55)}
+html[data-theme="dark"] .vcard:hover{box-shadow:0 26px 64px rgba(0,0,0,.70)}
+html[data-theme="dark"] .hc{box-shadow:0 6px 18px rgba(0,0,0,.40)}
+html[data-theme="dark"] .hc:hover{box-shadow:0 18px 38px rgba(0,0,0,.60)}
+html[data-theme="dark"] .subitem{background:rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+html[data-theme="dark"] .subitem:hover{box-shadow:0 22px 46px rgba(0,0,0,.62)}
+html[data-theme="dark"] .submeta{background:#111721}
+html[data-theme="dark"] .sercard{background:rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+html[data-theme="dark"] .sercard:hover{box-shadow:0 22px 46px rgba(0,0,0,.62)}
+html[data-theme="dark"] .pjshot{box-shadow:0 6px 20px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.10)}
+html[data-theme="dark"] .pjshot:hover{box-shadow:0 16px 38px rgba(0,0,0,.60), inset 0 0 0 1px rgba(255,255,255,.18)}
+html[data-theme="dark"] .prowx figure{box-shadow:0 5px 16px rgba(0,0,0,.42)}
+html[data-theme="dark"] .prowx figure:hover{box-shadow:0 14px 34px rgba(0,0,0,.60)}
+
+/* 数据条 / 联系 / 页脚的小胶囊 */
+html[data-theme="dark"] .band .bi{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+html[data-theme="dark"] .big-link{background:rgba(255,255,255,.08);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14), 0 4px 14px rgba(0,0,0,.35)}
+html[data-theme="dark"] .big-link:hover{background:rgba(255,255,255,.14)}
+html[data-theme="dark"] .plink{background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+html[data-theme="dark"] .plink:hover{background:rgba(255,255,255,.13);color:var(--acc)}
+
+/* 「只看代表作」胶囊 */
+html[data-theme="dark"] .vfil{
+  background:linear-gradient(158deg,rgba(255,255,255,.12),rgba(255,255,255,.05) 52%,rgba(255,255,255,.09));
+  box-shadow:0 6px 20px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.10)}
+html[data-theme="dark"] .vfil:hover{
+  box-shadow:0 10px 26px rgba(0,0,0,.50), inset 0 1px 0 rgba(255,255,255,.20), inset 0 0 0 1px rgba(255,255,255,.18)}
+
+/* 偏白的芯片 / 标签：底色换深、文字提亮，不然蓝字压深底读不出来 */
+html[data-theme="dark"] .subduty .dc{color:#9dbaff;background:rgba(107,150,255,.13);
+  box-shadow:inset 0 0 0 1px rgba(107,150,255,.22)}
+html[data-theme="dark"] .subgo{color:#9dbaff;background:rgba(107,150,255,.13)}
+html[data-theme="dark"] .subitem:hover .subgo{background:#3f6fd6;color:#fff}
+html[data-theme="dark"] .dacct .dchip{background:rgba(107,150,255,.14);box-shadow:inset 0 0 0 1px rgba(107,150,255,.24)}
+html[data-theme="dark"] .dacct .dava{box-shadow:0 10px 26px rgba(0,0,0,.5), inset 0 0 0 3px rgba(255,255,255,.12)}
+html[data-theme="dark"] .pjno{background:linear-gradient(158deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14), 0 4px 12px rgba(0,0,0,.30)}
+html[data-theme="dark"] .pjtag{background:linear-gradient(158deg,rgba(107,150,255,.20),rgba(107,150,255,.09));
+  box-shadow:inset 0 0 0 1px rgba(107,150,255,.32), 0 3px 10px rgba(0,0,0,.25)}
+html[data-theme="dark"] .pjstack i{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+html[data-theme="dark"] .pap-read{background:rgba(107,150,255,.12);border-color:rgba(107,150,255,.30)}
+
+/* 论文：封面是纸，深色下别做成纯白（刺眼），压成浅灰蓝仍保留纸感 */
+html[data-theme="dark"] .pap-cv{background:#dfe5ee;border-color:rgba(255,255,255,.10);
+  box-shadow:0 16px 38px rgba(0,0,0,.60), 0 2px 6px rgba(0,0,0,.45)}
+html[data-theme="dark"] .pap-cv::before{
+  background:linear-gradient(90deg,rgba(0,0,0,.20),rgba(0,0,0,0))}
+html[data-theme="dark"] .pap-cv.pap-empty{background:#0f141c;border-color:rgba(255,255,255,.16);box-shadow:none}
+html[data-theme="dark"] .pap-kind{background:rgba(255,255,255,.09)}
+html[data-theme="dark"] .pap-pi .im{border-color:rgba(255,255,255,.10);box-shadow:0 3px 10px rgba(0,0,0,.35)}
+html[data-theme="dark"] .pap-pi .im.ph{background:#0f141c;border-color:rgba(255,255,255,.16)}
+
+/* 随笔：时间轴那个白色节点要跟着底色走，否则暗处一圈白点很扎眼 */
+html[data-theme="dark"] .opd::before{background:#0b1017;border-color:var(--acc)}
+html[data-theme="dark"] .opd-q{border-left-color:rgba(107,150,255,.38)}
+html[data-theme="dark"] .opd-th{background:#dfe5ee;border-color:rgba(255,255,255,.10);
+  box-shadow:0 9px 22px rgba(0,0,0,.50), 0 1px 3px rgba(0,0,0,.40)}
+
+/* 设计与物料 */
+html[data-theme="dark"] .dz-spec li{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.08)}
+html[data-theme="dark"] .dz-note{background:rgba(107,150,255,.09);border-color:rgba(107,150,255,.22)}
+html[data-theme="dark"] .dz-badge{color:#f0c86a;background:rgba(240,200,106,.14);
+  border-color:rgba(240,200,106,.30)}
+
+/* 问题与方案 */
+html[data-theme="dark"] .prp-s{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)}
+html[data-theme="dark"] .prp-ar{color:rgba(107,150,255,.85)}
+
+/* 关于我：证书照片的细描边 */
+html[data-theme="dark"] .rphoto{box-shadow:0 12px 28px -10px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.10)}
+</style>
+<style>
+/* 主题配色（site.theme.accent） */
+:root{--acc:#e0651c;--acc-2:#ed9c6c;--acc-3:#e8854a;--acc-rgb:224,101,28;--acc-2-rgb:237,156,108;--acc-3-rgb:232,133,74;--w1:255,170,120;--w2:168,255,192;--w3:235,150,185;--w4:138,223,255;--bg1:#fcf8f6;--bg2:#f9f0ea;--bgD:#1a0e08}
+html[data-theme="dark"]{--acc:#eb915c;--acc-2:#f2b693;--acc-3:#ed9e70;--acc-rgb:235,145,92;--acc-2-rgb:242,182,147;--acc-3-rgb:237,158,112;--w1:165,89,44;--w2:50,116,68;--w3:94,22,51;--w4:26,86,108;--bg1:#1a100a;--bg2:#120b07;--bgD:#1a0e08}</style></head><body>
+<header class="nav g"><a class="brand" href="#top"><img class="mark" src="assets/hero/avatar.jpg" alt="寻踪踏迹"><span class="bid">寻踪踏迹<em>XUNZONG TAJI</em></span></a><nav class="navlinks" id="navLinks">
 <a href="#work">影像</a>
 <a href="#digital">数码</a>
 <a href="#photo">摄影</a>
 <a href="#projects">技术</a>
 <a href="#about">关于</a>
-</nav><a class="nav-cta" href="#contact">联系合作</a></header>
+</nav>
+<button class="themebtn" id="thBtn" type="button" aria-label="切换深浅色" title="切换深浅色"><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg></button>
+<a class="nav-cta" href="#contact">联系合作</a>
+</header>
 <section class="hero" id="top">
 <div class="hero-bg"><img src="assets/hero/cover.jpg" alt="" fetchpriority="high"><div class="hero-scrim"></div></div>
 <div class="hero-in wrap">
@@ -793,11 +1224,11 @@ footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:1
 <a href="#photo">摄影</a>
 <a href="#projects">技术</a>
 <a href="#about">关于</a>
-<a class="hn-cta" href="#contact">联系合作</a></nav>
+<a class="hn-cta" href="#contact">联系合作</a>
+</nav>
 </div></section>
 <section id="work"><div class="wrap">
-<div class="sec-head fade"><span class="num">一</span><h2>影像作品</h2><span class="sec-en">Film &amp; Video</span>
-<button class="vfil" id="vfil" type="button" aria-pressed="false"><span class="st">★</span>只看代表作<span class="cn">18</span></button></div>
+<div class="sec-head fade"><span class="num">一</span><h2>影像作品</h2><span class="sec-en">Film &amp; Video</span><button class="vfil" id="vfil" type="button" aria-pressed="false"><span class="st">★</span>只看代表作<span class="cn">18</span></button></div>
 <p class="sec-sub fade">这里的片子跨度比较大：汽车广告、AIGC、纪录片、专题片和校园项目。每张卡写了片子的来龙去脉，以及我在其中实际负责的那一部分。</p>
 <nav class="catbar g" data-bar><div class="cat-inner">
 <a class="cat" href="#g0">汽车与商业广告</a>
@@ -809,7 +1240,7 @@ footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:1
 <a class="cat" href="#g6">校园与项目视频</a>
 <a class="cat" href="#g7">学姐请回答</a>
 </div></nav>
-<div class="grp" id="g0"><div class="grp-t"><h3>汽车与商业广告</h3><span class="fl"></span><span class="n">AUTOMOTIVE</span></div><p class="grp-sub">极氪 8X 与 9X 的整车向内容：山路试驾、门店三条试驾路线、雨季涉水实测，等根据销售端需求定制的视频</p><div class="flow"><article class="vcard fade star"><img src="assets/cover/图片-2026-09-28T101932.453.jpg" alt="云边慢行 · 极氪 8X" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AuCLK1Gled" target="_blank" rel="noopener" aria-label="云边慢行 · 极氪 8X"></a><div class="vinfo"><div class="vkick">汽车广告 · 山路试驾 · 2026.09</div><h3 class="vtitle">云边慢行 · 极氪 8X</h3><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="flow special"><article class="vcard fade wide star"><img src="assets/covers/zeekr9x-special-01.jpg" alt="一山观三海 · 极氪 9X" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AwR99lQ5Pi" target="_blank" rel="noopener" aria-label="一山观三海 · 极氪 9X"></a><div class="vinfo"><div class="vkick">9X 专项 · 2026.09</div><h3 class="vtitle">一山观三海 · 极氪 9X</h3><p class="vdesc">9X 专项四支成片。第一期用航拍展示山路与车身姿态，后三期结合微剧情与氛围感运镜，展现豪华本色。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="subwall"><a class="subitem fade" href="https://weixin.qq.com/sph/ASAG4bHbE9" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-02.jpg" alt="姐开极氪9X带你好不好" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">姐开极氪9X带你好不好</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/AZjOlYS74C" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-03.jpg" alt="旗舰本色从容自若" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">旗舰本色从容自若</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/An5RThWstk" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-04.jpg" alt="沉浸式体验极氪9X" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">沉浸式体验极氪9X</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a></div><div class="flow special"><article class="vcard fade wide star"><img src="assets/cover/图片(30).jpg" alt="寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/A6LK62sFJQ" target="_blank" rel="noopener" aria-label="寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐"></a><div class="vinfo"><div class="vkick">极氪云南行 · 2026.08</div><h3 class="vtitle">寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐</h3><p class="vdesc">极氪云南行 志在结合云南的特色文化和旅游场景 结合车的卖点打造系列化长篇</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="subwall"><a class="subitem fade" href="https://weixin.qq.com/sph/AOVjRAbJfX" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_fire.jpg" alt="火光赴盛，座舱归安" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">火光赴盛，座舱归安</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/AyAHId08vv" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_chuxiong.jpg" alt="云南人的快乐！开极氪8X去楚雄捡菌，电车也能跑山野！" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">云南人的快乐！开极氪8X去楚雄捡菌，电车也能跑山野！</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/A0ZcEmQMt4" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_camp.jpg" alt="电车露营靠谱吗？极氪户外实地测试！外放电自由⚡" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">电车露营靠谱吗？极氪户外实地测试！外放电自由⚡</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a></div><div class="flow"><article class="vcard fade star"><img src="assets/cover/8月4日(1)(3)-封面.jpg" alt="全地形试驾 · 极氪宜家门店" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AMqqoJOBnm" target="_blank" rel="noopener" aria-label="全地形试驾 · 极氪宜家门店"></a><div class="vinfo"><div class="vkick">汽车广告 · 门店试驾 · 2026.08</div><h3 class="vtitle">全地形试驾 · 极氪宜家门店</h3><p class="vdesc">根据极氪宜家店特色试驾路线销售终端需求打造，通过减震臂，航拍器，运动相机等设备，打造低成本但是具备强烈视觉冲击力的宣传片</p><div class="vduty"><span class="dl">场景</span><span class="dc">三条试驾路线</span></div></div></article><article class="vcard fade"><img src="assets/cover/图片(27).jpg" alt="雨季涉水实测" loading="lazy"><div class="vscrim"></div><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AmtAu1uDUI" target="_blank" rel="noopener" aria-label="雨季涉水实测"></a><div class="vinfo"><div class="vkick">汽车广告 · 涉水测试 · 2026.08</div><h3 class="vtitle">雨季涉水实测</h3><p class="vdesc">通过对特殊路线的越野性能拍摄，展现品牌旗舰产品的越野性和通过性</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div></div>
+<div class="grp" id="g0"><div class="grp-t"><h3>汽车与商业广告</h3><span class="fl"></span><span class="n">AUTOMOTIVE</span></div><p class="grp-sub">极氪 8X 与 9X 的整车向内容：山路试驾、门店三条试驾路线、雨季涉水实测，等根据销售端需求定制的视频</p><div class="flow"><article class="vcard fade star"><img src="assets/cover/图片-2026-09-28T101932.453.jpg" alt="云边慢行 · 极氪 8X" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AuCLK1Gled" target="_blank" rel="noopener" aria-label="云边慢行 · 极氪 8X"></a><div class="vinfo"><div class="vkick">汽车广告 · 山路试驾 · 2026.09</div><h3 class="vtitle">云边慢行 · 极氪 8X</h3><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="flow special"><article class="vcard fade wide star"><img src="assets/covers/zeekr9x-special-01.jpg" alt="一山观三海 · 极氪 9X" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AwR99lQ5Pi" target="_blank" rel="noopener" aria-label="一山观三海 · 极氪 9X"></a><div class="vinfo"><div class="vkick">9X 专项 · 2026.09</div><h3 class="vtitle">一山观三海 · 极氪 9X</h3><p class="vdesc">9X 专项六支成片。第一期用航拍展示山路与车身姿态，后五期结合微剧情与氛围感运镜，展现豪华本色。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="subwall"><a class="subitem fade" href="https://weixin.qq.com/sph/ASAG4bHbE9" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-02.jpg" alt="姐开极氪9X带你好不好" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">姐开极氪9X带你好不好</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/AZjOlYS74C" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-03.jpg" alt="旗舰本色从容自若" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">旗舰本色从容自若</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/An5RThWstk" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-04.jpg" alt="沉浸式体验极氪9X" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">沉浸式体验极氪9X</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/ACstyGIOZU" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-05.jpg" alt="只管方向 车自有数" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">只管方向 车自有数</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/A06WXgKGOv" target="_blank" rel="noopener"><img src="assets/covers/zeekr9x-special-06.jpg" alt="电走千山静 油行万里长" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">电走千山静 油行万里长</span></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a></div><div class="flow special"><article class="vcard fade wide star"><img src="assets/cover/图片(30).jpg" alt="寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/A6LK62sFJQ" target="_blank" rel="noopener" aria-label="寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐"></a><div class="vinfo"><div class="vkick">极氪云南行 · 2026.08</div><h3 class="vtitle">寻甸寻菌｜开极氪奔赴山野，解锁云南限定快乐</h3><p class="vdesc">极氪云南行 志在结合云南的特色文化和旅游场景 结合车的卖点打造系列化长篇</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div><div class="subwall"><a class="subitem fade" href="https://weixin.qq.com/sph/AOVjRAbJfX" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_fire.jpg" alt="火光赴盛，座舱归安" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">火光赴盛，座舱归安</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/AyAHId08vv" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_chuxiong.jpg" alt="云南人的快乐！开极氪8X去楚雄捡菌，电车也能跑山野！" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">云南人的快乐！开极氪8X去楚雄捡菌，电车也能跑山野！</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a><a class="subitem fade" href="https://weixin.qq.com/sph/A0ZcEmQMt4" target="_blank" rel="noopener"><img src="assets/cover/sph_yn_camp.jpg" alt="电车露营靠谱吗？极氪户外实地测试！外放电自由⚡" loading="lazy"><span class="submeta"><span class="subtx"><span class="subttl">电车露营靠谱吗？极氪户外实地测试！外放电自由⚡</span><div class="subduty"><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></span><span class="subgo">观看 <span class="arr">↗</span></span></span></a></div><div class="flow"><article class="vcard fade star"><img src="assets/cover/8月4日(1)(3)-封面.jpg" alt="全地形试驾 · 极氪宜家门店" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AMqqoJOBnm" target="_blank" rel="noopener" aria-label="全地形试驾 · 极氪宜家门店"></a><div class="vinfo"><div class="vkick">汽车广告 · 门店试驾 · 2026.08</div><h3 class="vtitle">全地形试驾 · 极氪宜家门店</h3><p class="vdesc">根据极氪宜家店特色试驾路线销售终端需求打造，通过减震臂，航拍器，运动相机等设备，打造低成本但是具备强烈视觉冲击力的宣传片</p><div class="vduty"><span class="dl">场景</span><span class="dc">三条试驾路线</span></div></div></article><article class="vcard fade"><img src="assets/cover/图片(27).jpg" alt="雨季涉水实测" loading="lazy"><div class="vscrim"></div><span class="vgo">微信视频号 <span class="arr">↗</span></span><a class="vhit" href="https://weixin.qq.com/sph/AmtAu1uDUI" target="_blank" rel="noopener" aria-label="雨季涉水实测"></a><div class="vinfo"><div class="vkick">汽车广告 · 涉水测试 · 2026.08</div><h3 class="vtitle">雨季涉水实测</h3><p class="vdesc">通过对特殊路线的越野性能拍摄，展现品牌旗舰产品的越野性和通过性</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">策划</span><span class="dc">摄影师</span><span class="dc">剪辑师</span></div></div></article></div></div>
 <div class="grp" id="g1"><div class="grp-t"><h3>AIGC 作品</h3><span class="fl"></span><span class="n">GENERATIVE</span></div><p class="grp-sub">把 AI 生成的画面接进实拍里的几支片子。AI 出画面、实拍补质感，拼在同一条时间线上。</p><div class="flow"><article class="vcard fade star"><img src="assets/cover/ad_haoshi.jpg" alt="大广赛 · 豪士面包" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13830294" target="_blank" rel="noopener" aria-label="大广赛 · 豪士面包"></a><div class="vinfo"><div class="vkick">视频广告 · AIGC 动画 + 实拍</div><h3 class="vtitle">大广赛 · 豪士面包</h3><p class="vdesc">用 AIGC 卡通动画和丝滑转场包装实拍，讲述豪士面包的特点与魅力。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">导演</span><span class="dc">统筹</span><span class="dc">剪辑师</span><span class="dc">摄影师</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/大广赛省优-2.jpg" data-cap="省级优秀奖 · 第18届全国大学生广告艺术大赛" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级优秀奖</b><span class="al">第18届全国大学生广告艺术大赛</span></span></span></div></article><article class="vcard fade star"><img src="assets/cover/ad_adgai.jpg" alt="大广赛 · AD 钙奶" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13830299" target="_blank" rel="noopener" aria-label="大广赛 · AD 钙奶"></a><div class="vinfo"><div class="vkick">视频广告 · 实拍 + 动画</div><h3 class="vtitle">大广赛 · AD 钙奶</h3><p class="vdesc">通过实拍加动画，着手于AD 钙奶的酸甜口感和 30 年记忆，讲述它怎么陪着一代代人长大的故事。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span><span class="dc">导演</span><span class="dc">统筹</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/大广赛省三-2.jpg" data-cap="省级三等奖 · 第18届全国大学生广告艺术大赛" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级三等奖</b><span class="al">第18届全国大学生广告艺术大赛</span></span></span></div></article><article class="vcard fade"><img src="assets/cover/xpc_anhe.jpg" alt="地学 AIGC 科普" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13830337" target="_blank" rel="noopener" aria-label="地学 AIGC 科普"></a><div class="vinfo"><div class="vkick">AIGC 视频 · 地学科普</div><h3 class="vtitle">地学 AIGC 科普</h3><p class="vdesc">结合地大地学特色，用AIGC技术实现较难实拍的画面和讲解动画。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span></div></div></article></div></div>
 <div class="grp" id="g2"><div class="grp-t"><h3>AI 科普系列</h3><span class="fl"></span><span class="n">SCIENCE</span></div><p class="grp-sub">一期讲清一个概念。从手机像素到相机测光，都是平时真用得上的常识。</p><div class="serwall"><a class="sercard fade" href="https://www.xiaohongshu.com/discovery/item/6a92b60a0000000025018b4d?xsec_token=YB9HhDsEanILpmST_UtAv8iOXN8BU2CxxNd4PnWw6PSUc=&amp;xsec_source=pc_share" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 1 期</span><img src="assets/cover/图片(58).jpg" alt="两亿像素手机，被两千万像素微单吊打？" loading="lazy"></div><div class="serbody"><div class="serkick">AIGC 科普 · 2026.09</div><h4 class="serttl">两亿像素手机，被两千万像素微单吊打？</h4><p class="serdesc">手机像素越做越高，画质为什么没跟上。</p><div class="subduty"><span class="dc">策划</span><span class="dc">剪辑</span><span class="dc">AI 生图</span></div><span class="subgo">小红书 <span class="arr">↗</span></span></div></a><a class="sercard fade" href="https://www.xiaohongshu.com/discovery/item/6aa9080b000000002502fae1?source=webshare&amp;xhsshare=pc_web&amp;xsec_token=ABn0YDkrvEZi70qAZ4AQsyi4q7UHoIKmijndijR7aip7k=&amp;xsec_source=pc_share" target="_blank" rel="noopener"><div class="serimg"><span class="serep">第 2 期</span><img src="assets/cover/图片-2026-09-15T160942.923.jpg" alt="拍照总发灰？曝光补偿就四个字：白加黑减" loading="lazy"></div><div class="serbody"><div class="serkick">AIGC 科普 · 2026.09</div><h4 class="serttl">拍照总发灰？曝光补偿就四个字：白加黑减</h4><p class="serdesc">同一片雪，别人拍是奶油白，你拍是水泥灰。曝光补偿其实就四个字：白加黑减，拍完记得归零。</p><div class="subduty"><span class="dc">策划</span><span class="dc">剪辑</span><span class="dc">AI 生图</span></div><span class="subgo">小红书 <span class="arr">↗</span></span></div></a><article class="sercard fade"><div class="serimg"><span class="serep">第 3 期</span><img src="assets/cover/图片-2026-10-01T165901.403.jpg" alt="相机测光模式：2 分钟搞懂怎么用" loading="lazy"></div><div class="serbody"><div class="serkick">AIGC 科普 ·  2026.10</div><h4 class="serttl">相机测光模式：2 分钟搞懂怎么用</h4><p class="serdesc">测光模式选错了，曝光补偿也救不回来。评价测光、中央重点测光、点测光，三种模式分别适合什么场景，一支讲清楚。</p><div class="subduty"><span class="dc">策划</span><span class="dc">剪辑</span><span class="dc">AI 生图</span></div></div></article></div></div>
 <div class="grp" id="g3"><div class="grp-t"><h3>大广赛 · 品牌广告</h3><span class="fl"></span><span class="n">ADVERTISING</span></div><div class="flow"><article class="vcard fade star"><img src="assets/cover/ad_canva.jpg" alt="大广赛 · 可画 Canva" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13624804" target="_blank" rel="noopener" aria-label="大广赛 · 可画 Canva"></a><div class="vinfo"><div class="vkick">视频广告 · 品牌叙事</div><h3 class="vtitle">大广赛 · 可画 Canva</h3><p class="vdesc">把 Canva 可画画成一只小精灵，跟着一个自媒体博主从大一到大四，用 AI 化解做封面、做动效这些难题。</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">剪辑师</span><span class="dc">摄影师</span><span class="dc">策划</span><span class="dc">调色师</span><span class="dc">编导</span></div></div><div class="vawards"><span class="vaw" data-img="assets/award/aw_dgs17_you_keai.jpg" data-cap="省级优秀奖 · 第17届全国大学生广告艺术大赛（湖北赛区 · 微电影广告）" title="点击查看奖状"><i class="med">奖</i><span><b class="at">省级优秀奖</b><span class="al">第17届全国大学生广告艺术大赛（湖北赛区 · 微电影广告）</span></span></span></div></article><article class="vcard fade"><img src="assets/cover/ad_zhiyu.jpg" alt="大广赛 · 药膏光影" loading="lazy"><div class="vscrim"></div><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13713454" target="_blank" rel="noopener" aria-label="大广赛 · 药膏光影"></a><div class="vinfo"><div class="vkick">视频广告 · 布光实验</div><h3 class="vtitle">大广赛 · 药膏光影</h3><p class="vdesc">以创意光影语言重新诠释药膏的功效，打破常规视角，用镜头语言让产品&quot;说话&quot;</p><div class="vduty"><span class="dl">片中职务</span><span class="dc">摄影师</span><span class="dc">灯光师</span><span class="dc">剪辑师</span></div></div></article><article class="vcard fade star"><img src="assets/cover/图片00-2.jpg" alt="大广赛 · 汉口二厂" loading="lazy"><div class="vscrim"></div><span class="vstar">★ 代表作</span><span class="vgo">观看 <span class="arr">↗</span></span><a class="vhit" href="https://www.xinpianchang.com/a13497723" target="_blank" rel="noopener" aria-label="大广赛 · 汉口二厂"></a><div class="vinfo"><div class="vkick">视频广告 · 节奏剪辑</div><h3 class="vtitle">大广赛 · 汉口二厂</h3><p class="vdesc">以律动音乐驱动视觉叙事，通过多组质感镜头呈现汉口二厂汽水的多元风味，在节奏与画面的共振中传递品牌活力与产品个性。
@@ -1170,8 +1601,18 @@ footer .g{display:inline-block;padding:11px 24px;border-radius:999px;font-size:1
 </div>
 </div></div></section>
 <footer><div class="wrap"><span class="g">© 2026 王文坤 武汉 · 籍贯昆明 · 新媒体运营 / 内容运营</span></div></footer>
-<div id="lb"><img id="lbimg" src="" alt=""></div><div id="lbbar"><span class="lt" id="lbtxt"></span><button id="lbclose">关闭 ✕</button></div>
+<div id="lb" role="dialog" aria-modal="true" aria-label="图片预览"><img id="lbimg" src="" alt=""></div><div id="lbbar"><span class="lt" id="lbtxt"></span><span class="lbacts"><a id="lbfull" href="#" target="_blank" rel="noopener">原图 ↗</a><button id="lbclose" aria-label="关闭预览">关闭 ✕</button></span></div>
 <script>
+/* 高亮当前所在的分区。类名只管颜色，读屏软件看不见 —— 所以同时挂 aria-current，
+   否则键盘/读屏用户没有任何线索知道自己在第几屏。 */
+function markCur(list, cur){
+  list.forEach((a, i) => {
+    const on = (typeof cur === 'function') ? cur(a, i) : i === cur;
+    a.classList.toggle('on', on);
+    if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+  });
+}
+
 /* 分类导航：滚动高亮 + 点击居中 */
 document.querySelectorAll('[data-bar]').forEach(bar => {
   const links = [...bar.querySelectorAll('.cat')];
@@ -1179,7 +1620,7 @@ document.querySelectorAll('[data-bar]').forEach(bar => {
     a.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'})));
   const obs = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
-    links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    markCur(links, a => a.getAttribute('href') === '#' + e.target.id);
     const on = bar.querySelector('.cat.on');
     if (on) on.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
   }), {rootMargin:'-160px 0px -70% 0px', threshold:0});
@@ -1225,11 +1666,30 @@ addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', scrollY > 10);
   let cur = -1;
   secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= 200) cur = i; });
-  links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  markCur(links, cur);
   hnavFade();
 }, {passive:true});
 /* 等首屏入场淡入跑完（.7s）再接管，免得抢掉入场动画 */
 setTimeout(() => { if (hnav) { hnavOwn = true; hnav.style.transition = 'none'; hnavFade(); } }, 900);
+
+/* 导航横滑：项目多、宽度不够时这一排自己左右滚（滚动条隐藏）。
+   两侧渐隐只在「那边还有内容」时出现 —— 一直挂着渐隐的话，宽度够时最右边那项
+   看着像被裁掉了。遮罩的边距由 --fl / --fr 控制，0 就是完全不淡。 */
+const navLinks = document.getElementById('navLinks');
+if (navLinks){
+  const nfade = () => {
+    const max = navLinks.scrollWidth - navLinks.clientWidth;
+    const l = navLinks.scrollLeft > 2;
+    const r = max > 2 && navLinks.scrollLeft < max - 2;
+    navLinks.style.setProperty('--fl', l ? '26px' : '0px');
+    navLinks.style.setProperty('--fr', r ? '26px' : '0px');
+  };
+  navLinks.addEventListener('scroll', nfade, {passive:true});
+  addEventListener('resize', nfade, {passive:true});
+  addEventListener('load', nfade);
+  setTimeout(nfade, 600);            // 字体换完宽度会变，再量一次
+  nfade();
+}
 
 /* 正片墙：按真实宽高比分行，行高自适应 → 每张完整展示、不裁切、填满整行 */
 function layoutWall(){
@@ -1280,18 +1740,79 @@ if (pills) pills.addEventListener('click', e => {
 
 /* 灯箱 */
 const lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg'),
-      lbbar = document.getElementById('lbbar'), lbtxt = document.getElementById('lbtxt');
+      lbbar = document.getElementById('lbbar'), lbtxt = document.getElementById('lbtxt'),
+      lbfull = document.getElementById('lbfull');
 let curIdx = -1, curList = [];
+/* 放大状态：论文内页是 A4 正文，铺满 86vh 也只有半页看得清 —— 所以支持滚轮/双击放大、放大后拖着看。
+   每次都从 1 倍、居中开始，翻到下一张时不会顶着上一张的缩放。 */
+let zoom = 1, panX = 0, panY = 0;
+/* 灯箱标了 aria-modal，就得真的像个模态框：打开时把焦点收进来，关掉时还回去。
+   不然 Tab 会跑到背后那层看不见的页面上，焦点在哪完全没提示。 */
+let lastFocus = null;
+function applyZoom(){
+  if (!lbimg) return;
+  lbimg.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + zoom + ')';
+  lbimg.classList.toggle('zoomed', zoom > 1.01);
+}
+function resetZoom(){ zoom = 1; panX = panY = 0; if (lbimg) applyZoom(); }
 function show(){
   const it = curList[curIdx];
   lbimg.src = it.full; lbimg.alt = it.cap;
+  if (lbfull) lbfull.href = it.full;
   lbtxt.innerHTML = curList.length > 1
     ? '<b>' + (curIdx + 1) + '</b> / ' + curList.length + ' &nbsp;·&nbsp; ' + it.cap
     : it.cap;                                   /* 单张（奖状）就不显示 1/1 */
+  resetZoom();
+  const wasOn = lb.classList.contains('on');
   lb.classList.add('on'); lbbar.classList.add('on');
+  if (!wasOn){
+    /* 只在「打开」这一次记来源，翻页时别覆盖掉 —— 否则关掉后焦点回到翻页按钮上 */
+    lastFocus = document.activeElement;
+    const c = document.getElementById('lbclose');
+    if (c) c.focus({preventScroll: true});
+  }
 }
-function closeLB(){ lb.classList.remove('on'); lbbar.classList.remove('on'); lbimg.src = ''; }
+function closeLB(){
+  lb.classList.remove('on'); lbbar.classList.remove('on');
+  lbimg.src = ''; resetZoom();
+  if (lastFocus && lastFocus.focus){
+    lastFocus.focus({preventScroll: true});
+    lastFocus = null;
+  }
+}
 function step(d){ if (!curList.length) return; curIdx = (curIdx + d + curList.length) % curList.length; show(); }
+
+/* 滚轮缩放（触控板的捏合会以 ctrlKey 的 wheel 出现，一并接住） */
+lb.addEventListener('wheel', e => {
+  if (!lb.classList.contains('on')) return;
+  e.preventDefault();
+  const k = e.deltaY < 0 ? 1.15 : 0.87;
+  const next = Math.min(5, Math.max(1, zoom * k));
+  if (next <= 1.01){ panX = panY = 0; zoom = 1; }
+  else zoom = next;
+  applyZoom();
+}, {passive: false});
+/* 双击：1 倍 ↔ 2.4 倍 */
+lbimg.addEventListener('dblclick', e => {
+  e.preventDefault();
+  if (zoom > 1.01){ resetZoom(); } else { zoom = 2.4; applyZoom(); }
+});
+/* 放大后拖动看图（pointer 事件同时覆盖鼠标和手指） */
+let drag = null;
+lbimg.addEventListener('pointerdown', e => {
+  if (zoom <= 1.01) return;
+  drag = {x: e.clientX - panX, y: e.clientY - panY};
+  lbimg.classList.add('dragging');
+  try { lbimg.setPointerCapture(e.pointerId); } catch (err) {}
+});
+lbimg.addEventListener('pointermove', e => {
+  if (!drag) return;
+  panX = e.clientX - drag.x; panY = e.clientY - drag.y;
+  applyZoom();
+});
+['pointerup', 'pointercancel'].forEach(t => lbimg.addEventListener(t, () => {
+  drag = null; lbimg.classList.remove('dragging');
+}));
 document.addEventListener('click', e => {
   const aw = e.target.closest('.vaw[data-img]');        /* 奖状：单张进灯箱 */
   if (aw) {
@@ -1306,19 +1827,53 @@ document.addEventListener('click', e => {
     curIdx = [...box.querySelectorAll('.pjshot')].indexOf(pjf);
     show(); return;
   }
+  /* 论文（封面 + 内页）、设计物料（同组网格）、随笔缩略图：点开就能放大。
+     图集范围按「这张图所在的那一件作品」算 —— 论文里封面和内页能顺着翻，
+     设计只在本组内翻（跨组翻会让人搞不清自己在看哪一套）。
+     为什么用 closest 而不是判断 e.target：点到的往往是 img 或那行 <em> 图注，
+     判断 e.target 会在点文字时失效（见 pitfalls 39）。 */
+  const zi = e.target.closest('.pap-cv, .pap-pi, .dz-t, .opd-th');
+  if (zi) {
+    const scope = zi.closest('.pap') || zi.closest('.dz-grp') || zi;
+    const ims = [...scope.querySelectorAll('img')].filter(im => im.getAttribute('src'));
+    const me = zi.querySelector('img');
+    if (ims.length && me) {
+      curList = ims.map(im => ({full: im.dataset.full || im.getAttribute('src'),
+                                cap: im.alt || ''}));
+      curIdx = Math.max(0, ims.indexOf(me));
+      show(); return;
+    }
+  }
   const fig = e.target.closest('.pcat figure');   /* 主图 + 拼图格子统一走灯箱 */
   if (fig) {
     const cat = fig.closest('.pcat');
     curList = [...cat.querySelectorAll('figure img')].map(im => ({full: im.dataset.full, cap: im.alt}));
     curIdx = [...cat.querySelectorAll('figure')].indexOf(fig);
     show();
-  } else if (e.target === lb || e.target === lbimg || e.target.id === 'lbclose') { closeLB(); }
+  } else if (e.target === lb || e.target.id === 'lbclose') { closeLB(); }
+  /* ⚠️ 别把 e.target === lbimg 也算成「点空白关闭」：图上现在要双击放大、拖动看图，
+     点一下就把灯箱关掉的话，缩放根本没法用。 */
 });
 addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLB();
+  if (e.key === 'Escape'){
+    if (zoom > 1.01) resetZoom();      /* 先退回 1 倍，再按一次才关 */
+    else closeLB();
+    return;
+  }
   if (!lb.classList.contains('on')) return;
   if (e.key === 'ArrowRight') step(1);
   if (e.key === 'ArrowLeft') step(-1);
+  /* Tab 在灯箱里打转，别漏到背后那层页面上（aria-modal 的应有之义）。
+     ⚠️ #lbbar 是 #lb 的兄弟节点（一个装图、一个装工具条），所以不能从 lb 里找 ——
+     一开始写成 lb.querySelectorAll 就永远查不到，陷阱静默失效。 */
+  if (e.key === 'Tab'){
+    const f = ['lbfull', 'lbclose'].map(id => document.getElementById(id))
+                                   .filter(el => el && el.getClientRects().length);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
 });
 
 /* 项目档案：模糊底复用同一张图，不给 data URI 存两遍 */
@@ -1334,4 +1889,45 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 document.querySelectorAll('.fade').forEach((el, i) => {
   el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el);
 });
+
+/* ---------- 深浅色切换 ----------
+   data-theme 在 <head> 里已经算好了，这里只管「点一下」和「到点自动切」。
+   访客点过之后写 localStorage，从此不再自动切（否则他刚切成浅色，一分钟又被时间拽回深色）。 */
+(function(){
+  const root = document.documentElement;
+  const cfg = window.__TH || {mode:'time', darkAt:'19:00', lightAt:'07:00'};
+  const btn = document.getElementById('thBtn');
+  const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  const tmin = s => { const p = String(s || '').split(':'); return ((+p[0]) || 0) * 60 + ((+p[1]) || 0); };
+  function auto(){
+    if (cfg.mode === 'dark') return true;
+    if (cfg.mode === 'light') return false;
+    if (cfg.mode === 'time'){
+      const n = new Date(), m = n.getHours() * 60 + n.getMinutes();
+      const a = tmin(cfg.darkAt), b = tmin(cfg.lightAt);
+      return a <= b ? (m >= a && m < b) : (m >= a || m < b);
+    }
+    return !!(mq && mq.matches);
+  }
+  function paint(){
+    const d = root.dataset.theme === 'dark';
+    if (btn) btn.setAttribute('aria-label', d ? '切换到浅色' : '切换到深色');
+  }
+  if (btn) btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    root.dataset.manual = '1';
+    try { localStorage.setItem('pf-theme', next); } catch(e){}
+    paint();
+  });
+  // 跟随系统 / 按时间：过点了要自己换回来；访客手动选过的不动
+  function tick(){
+    if (root.dataset.manual === '1') return;
+    const d = auto();
+    if ((root.dataset.theme === 'dark') !== d){ root.dataset.theme = d ? 'dark' : 'light'; paint(); }
+  }
+  if (mq && mq.addEventListener) mq.addEventListener('change', tick);
+  setInterval(tick, 60000);
+  paint();
+})();
 </script></body></html>
